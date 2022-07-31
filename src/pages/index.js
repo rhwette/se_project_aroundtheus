@@ -31,18 +31,23 @@ const popupEditProfileAboutMe = document.querySelector(
 //  then use it here inside index.js instead of in PWF
 console.log("INDEX.JS popupEditProfileName=", popupEditProfileName);
 console.log("INDEX.JS popupEditProfileAboutMe", popupEditProfileAboutMe);
+
 //  FEEDBACK1 USERINFO line 9..use 'selectors' object from CONSTANTS
 //    as argument in new UserInfo(selectors) below
 // const userInfo = new UserInfo(popupEditProfileName, popupEditProfileAboutMe);
 const userInfo = new UserInfo(selectors);
-console.log("userInfo=", userInfo);
 
+// FB2 INDEX.JS line 21
+//   Variable names should be informative nouns.
+//   'userData' would be good for this variable
+const userData = userInfo.getUserInfo();
+popupEditProfileName.value = userData.userName;
+popupEditProfileAboutMe.value = userData.userJob;
 // FEEDBACK1 PWF line 41...fill .values in index.js
 //    before opening profile popup
-const saveVariableOriginal = userInfo.getUserInfo();
-popupEditProfileName.value = saveVariableOriginal.userName;
-popupEditProfileAboutMe.value = saveVariableOriginal.userJob;
-console.log("saveVariableOriginal =", saveVariableOriginal);
+// const saveVariableOriginal = userInfo.getUserInfo();
+// popupEditProfileName.value = saveVariableOriginal.userName;
+// popupEditProfileAboutMe.value = saveVariableOriginal.userJob;
 
 const popupNewPlaceLink = document.querySelector("#link-input");
 const popupNewPlaceTitle = document.querySelector("#place-input");
@@ -100,7 +105,6 @@ const cardsSection = new Section(
 );
 
 const imageZoomPopup = new PopupWithImage(selectors.previewPopup);
-console.log("imageZoomPopup=", imageZoomPopup);
 
 // FEEDBACK1 INDEX.JS line 32 use the function 'renderCard' here
 // FEEDBACK1 INDEX.JS line 53 handleFormSubmit should accept input values
@@ -112,10 +116,18 @@ const newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
   handleFormSubmit: () => {
     const newCardInfo = newPlacePopup._getInputValues();
+    // FB2 INDEX.JS line65
+    //  You should reset validation before opening the popup,
+    //    not here,
+    //    because you reset the form every time when popup is closed,
+    //    so it should not show errors when you open it,
+    //    even if it was not submitted
+    // formValidators["formNewPlace"].resetValidation();
+
     //FEEDBACK1 INDEX line 89... disable submit button
     //  before opening place popup.
     //  Use resetValidation method of the corresponding form validator to do that
-    formValidators["formNewPlace"].resetValidation();
+    // formValidators["formNewPlace"].resetValidation();
     // newCardInfo.name = popupNewPlaceTitle.value;
     // newCardInfo.link = popupNewPlaceLink.value;
     renderCard(newCardInfo);
@@ -156,12 +168,18 @@ const editProfilePopup = new PopupWithForm({
 // FEEDBACK1 PWF line 48 ..  move the button listeners over here
 //   instead of in PWF.....note that instead of "this"
 //   use the constant that is assigned to the new PWF object
-buttonPencil.addEventListener(
-  "click",
-  editProfilePopup.open.bind(editProfilePopup)
-);
 
-buttonPlus.addEventListener("click", newPlacePopup.open.bind(newPlacePopup));
+// FB2 INDEX.JS line 84
+// You should not bind methods here.
+//   Please, do that in. the constructor of 'Popup' class:
+buttonPencil.addEventListener("click", editProfilePopup.open);
+// buttonPencil.addEventListener(
+//   "click",
+//   editProfilePopup.open.bind(editProfilePopup)
+// );
+
+buttonPlus.addEventListener("click", newPlacePopup.open);
+// buttonPlus.addEventListener("click", newPlacePopup.open.bind(newPlacePopup));
 
 // const renderCard = (data, container) => {
 //   const cardElement = new Card(
@@ -193,7 +211,8 @@ const config = {
   errorClass: "popup__container-error-visible",
 };
 
-const formValidators = {};
+export const formValidators = {};
+console.log("formValidators =", formValidators);
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {

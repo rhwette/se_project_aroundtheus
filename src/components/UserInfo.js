@@ -1,4 +1,4 @@
-//FEEDBACK USERINFO line 1...remove lines below...pass selectors via arguments
+//FEEDBACK1 USERINFO line 1...remove lines below...pass selectors via arguments
 //  then find elements in the constructor
 //FEEDBCK USERINFO line 9..use the two class selectors below
 //     ".intro__name" and ".intro__occupation"
@@ -10,7 +10,7 @@
 //   'input[name = "aboutme"]'
 // );
 
-//FEEDBACK USERINFO line 9 ..UserInfo must take selectors as constructor arguments
+//FEEDBACK1 USERINFO line 9 ..UserInfo must take selectors as constructor arguments
 //  store elements, and use them in get and set
 export default class UserInfo {
   //   constructor(nameElement, aboutMeElement) {
@@ -18,13 +18,11 @@ export default class UserInfo {
   //     this.aboutMeElement = aboutMeElement;
   //   }
   constructor({ nameSelector, aboutMeSelector }) {
-    console.log("nameSelector=", nameSelector);
     this._nameElement = document.querySelector(nameSelector);
     this._aboutMeElement = document.querySelector(aboutMeSelector);
-    console.log("this._nameElement=", this._nameElement);
   }
 
-  //FEEDBACK USERINFO line 15...use a more informative name for this variable
+  //FEEDBACK1 USERINFO line 15...use a more informative name for this variable
   // getUserInfo() {
   //   const newObj = {
   //     userName: nameElement.textContent,
@@ -42,7 +40,7 @@ export default class UserInfo {
     return userInfo;
   }
 
-  //FEEDBACK USERINFO line 22... setters are functions
+  //FEEDBACK1 USERINFO line 22... setters are functions
   //  that accept new values as arguments and set them
   //    replace code below
   // setUserInfo() {

@@ -1,7 +1,12 @@
 // //  FEEDBACK1 CARDS.JS (line1) - files which contain class declarations should not import anything
 //    also, not that the import below wasnt being used anyway
 // import { openPopup, closePopup } from "./Utils.js";
-const containerElementImage = document.querySelector("#image-popup-container");
+
+//FB2 line 8
+//  Card is not responsible for preview image..
+//   remove this line and line  below
+// const containerElementImage = document.querySelector("#image-popup-container");
+
 // these two are not used
 // const imageZoom = document.getElementById("image-zoom");
 // const imageZoomText = document.querySelector(".image-popup__picture-text");
@@ -11,7 +16,12 @@ class Card {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
-    this._containerElementImage = containerElementImage;
+
+    //FB2 line 8
+    //  Card is not responsible for preview image..
+    //   remove this line and line 1
+    // this._containerElementImage = containerElementImage;
+
     // FEEDBACK1 CARDS.JS (line13) - good....passing the handler with the arguments (of the contstructor)
     //  is the right way....that way the Card is only responsible for card rendering
 
@@ -24,7 +34,9 @@ class Card {
     this._handleZoom = handleZoom.bind(this);
     // this._handleZoom = handleZoom;
 
-    this._handleZoom = handleZoom;
+    // FB2 CARD line 11 ..remove line,
+    //   it is handled by previous line
+    // this._handleZoom = handleZoom;
   }
 
   _getTemplate() {
@@ -40,9 +52,16 @@ class Card {
     // FEEDBACK1 -  not the parentElement
     // FEEDBACK1-  so include 'this._handleCan = this._handleCan.bind(this);'
     // FEEDBACK1 -  in the class constructor
-
     // this.parentElement.remove();
     this._element.remove();
+
+    // FB2 CARD line 24 (suggested)
+    //  The best thing to do after deleting a card
+    //    is to remove the link to the DOM element:
+    //    'this._element = null;'
+    //     It helps javascript garbage collector.
+    //  see >  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management
+    this._element = null;
   }
 
   //  FEEDBACK1 CARDS.JS (line 28) - good - each callback is a separate method

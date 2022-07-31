@@ -23,10 +23,13 @@ class Popup {
     //  bind the methods in the constructor and reuse them in both open() and close()
     this.close = this.close.bind(this);
     this._closePopupWithRemoteClick =
-      //5555555555555555555
       this._closePopupWithRemoteClick.bind(this);
-    //55555555555555555555555
     this._closePopupWithEscape = this._closePopupWithEscape.bind(this);
+
+    // FB2 INDEX.JS line 84
+    // You should not bind methods here.
+    //   Please, do that in. the constructor of 'Popup' class:
+    this.open = this.open.bind(this);
   }
 
   open() {
@@ -70,12 +73,13 @@ class Popup {
       this._closePopupWithRemoteClick
     );
     document.removeEventListener("keydown", this._closePopupWithEscape);
+
+    // FB POPUP line 32 (good)
+    //  All the listeners are working only when it's needed. Excellent!
     this.buttonClose.removeEventListener("click", this.close);
   }
 
   _closePopupWithEscape(event) {
-    //the preventDefault below prevents typing into the forms
-    // event.preventDefault();
     if (event.which === ESC_KEYCODE) {
       this.close(event.target);
     }
