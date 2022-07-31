@@ -3,14 +3,14 @@ import { ESC_KEYCODE } from "../utils/constants";
 // the line below is not used
 // import { initialCards, selectors } from "../utils/constants";
 
-//FEEDBACK POPUP (line 4) .. remove 3 unused declarations below
+//FEEDBACK1 POPUP (line 4) .. remove 3 unused declarations below
 //  POPUP is a 'general' class and should not use specific elements
 // const buttonPencil = document.querySelector(".intro__button-pencil");
 // const buttonPlus = document.querySelector(".intro__button-plus");
 // const popupElement = document.querySelector(".popup__container");
 class Popup {
   constructor(popupSelector) {
-    // FEEDBACK POPUP line 9.. best to not use templated strings without a reason
+    // FEEDBACK1 POPUP line 9.. best to not use templated strings without a reason
     this._popupElement = document.querySelector(popupSelector);
     // this._popupElement = document.querySelector(`${popupSelector}`);
     console.log("popupSelector=", popupSelector);
@@ -18,7 +18,7 @@ class Popup {
     this.buttonClose = this._popupElement.querySelector(
       ".popup__container-button-close"
     );
-    //FEEDBACK POPUP (line 17)...add and remove EventListeners should be called
+    //FEEDBACK1 POPUP (line 17)...add and remove EventListeners should be called
     //  with the same arguments compared by reference.
     //  bind the methods in the constructor and reuse them in both open() and close()
     this.close = this.close.bind(this);
@@ -32,7 +32,7 @@ class Popup {
   open() {
     console.log("open in popup");
     this._popupElement.classList.add("popup_visible");
-    // FEEDBACK POPUP.js ..line 14  use a better name,
+    // FEEDBACK1 POPUP.js ..line 14  use a better name,
     //    try buttonClose instead of buttonx
     //    also save elements in the constructor
     // this.buttonX = this._popupElement.querySelector(
@@ -40,7 +40,7 @@ class Popup {
     // );
     // this.buttonX.addEventListener("click", this.close.bind(this));
 
-    //FEEDBACK POPUP (line 17)..see constructor above
+    //FEEDBACK1 POPUP (line 17)..see constructor above
     // this.buttonClose.addEventListener("click", this.close.bind(this));
     this.buttonClose.addEventListener("click", this.close);
     // this._popupElement.addEventListener(
@@ -61,7 +61,7 @@ class Popup {
   //   document.addEventListener("keydown", this._closePopupWithEscape.bind(this));
   // }
 
-  // FEEDBACK POPUP line 32 .. remove all the added listeners here
+  // FEEDBACK1 POPUP line 32 .. remove all the added listeners here
   //   including the close button
   close() {
     this._popupElement.classList.remove("popup_visible");
@@ -83,13 +83,13 @@ class Popup {
 
   _closePopupWithRemoteClick(event) {
     if (event.target === event.currentTarget) {
-      // FEEDBACK POPUP line 43.  this.close has no arguments
+      // FEEDBACK1 POPUP line 43.  this.close has no arguments
       // this.close(event.target);
       this.close();
     }
   }
 
-  // FEEDBACK POPUP line 47 .. the setEventListener method is not needed here
+  // FEEDBACK1 POPUP line 47 .. the setEventListener method is not needed here
   //  all the listeners have been added when a popup was opened
   // setEventListeners() {
   //   this._popupElement.addEventListener("click", (event) => {
