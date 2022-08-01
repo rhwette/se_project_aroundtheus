@@ -1,4 +1,5 @@
 import Popup from "./Popup";
+
 // import { selectors } from "../components/Constants";
 //  the path changed to ../utils/constants.js
 
@@ -8,8 +9,11 @@ import Popup from "./Popup";
 
 // FB2 PWF line 32....seems like this import is not required
 // import { selectors } from "../utils/constants";
-import UserInfo from "../components/UserInfo";
-import { formValidators } from "../pages/index";
+
+//FBK3 PWF line 2 This file. should contain only Popup import.
+//Please, remove other imports
+// import UserInfo from "../components/UserInfo";
+// import { formValidators } from "../pages/index";
 
 //  according to FEEDBACK1 PWF line 11 these should be moved to index.js
 // const buttonPencil = document.querySelector(".intro__button-pencil");
@@ -51,6 +55,19 @@ export default class PopupWithForm extends Popup {
     // );
   }
 
+  // FBK3 INDEX.JS line 64
+  //   'handleFormSubmit' should have an argument values,
+  //    which will be used in 'index.js
+  //
+  //  create a new submit handler,
+  //  which will prevent default event behavior
+  //  and pass values to _handleFormSubmit
+  _handleSubmit = (event) => {
+    event.preventDefault();
+    const values = this._getInputValues();
+    this._handleFormSubmit(values);
+  };
+
   _getInputValues() {
     const inputs = this._popupForm.querySelectorAll(".popup__container-input");
     const inputObject = {};
@@ -62,7 +79,7 @@ export default class PopupWithForm extends Popup {
   }
 
   open(evt) {
-    console.log("FormValidaotrs inside open=", formValidators);
+    // console.log("FormValidaotrs inside open=", formValidators);
     console.log("open in PWF");
     console.log("evt", evt);
 
@@ -75,7 +92,11 @@ export default class PopupWithForm extends Popup {
     // FB2 PWF line 32
     //  You should add the listener to 'this._popupForm',
     //    don't use the specific elements in general classes.
-    this._popupForm.addEventListener("submit", this._handleFormSubmit);
+
+    // FBK3 INDEX.js line 64
+    //  change the addEVL function as shown using the _handleSubmit method
+    this._popupForm.addEventListener("submit", this._handleSubmit);
+    // this._popupForm.addEventListener("submit", this._handleFormSubmit);
     //  can omit lines below that use specific elements
     // if (this.popupSelector === selectors.profilePopup) {
     //   popupEditProfile.addEventListener(
@@ -145,7 +166,11 @@ export default class PopupWithForm extends Popup {
     // FB2 PWF line 41
     //  You should remove the listener from 'this._popupForm',
     //    don't use the specific elements in general classes.
-    this._popupForm.removeEventListener("submit", this._handleFormSubmit);
+
+    // FBK3 INDEX.js line 64
+    //  change the addEVL function as shown using the _handleSubmit method
+    this._popupForm.removeEventListener("submit", this._handleSubmit);
+    // this._popupForm.removeEventListener("submit", this._handleFormSubmit);
 
     // popupEditProfile.removeEventListener(
     //   "submit",
@@ -169,8 +194,15 @@ export default class PopupWithForm extends Popup {
     //    because you reset the form every time when popup is closed,
     //    so it should not show errors when you open it,
     //    even if it was not submitted
-    formValidators["formNewPlace"].resetValidation();
-    formValidators["formEditProfile"].resetValidation();
+
+    //
+    //FBK3 PWF line 37
+    //   Common classes should not contain any code related to specific elements,
+    //   because they should be able to work with any elements.
+    //   Reset validation before opening popups in 'index.js'
+    //
+    // formValidators["formNewPlace"].resetValidation();
+    // formValidators["formEditProfile"].resetValidation();
 
     // FEEDBACK1 PWF line 78  .. reset is needed, but not working like this
     this._popupForm.reset();

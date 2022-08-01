@@ -113,9 +113,16 @@ const imageZoomPopup = new PopupWithImage(selectors.previewPopup);
 //     as argument...check definition of arrow function, maybe the
 //     arguments are implied in the destructuring ??
 const newPlacePopup = new PopupWithForm({
+  // FBK3 INDEX.js line 64
+  //   1) You should not use private functions outside of a class
+  //   so that means dont use _getInputValues here
   popupSelector: selectors.placePopup,
-  handleFormSubmit: () => {
-    const newCardInfo = newPlacePopup._getInputValues();
+  // FBK3 INDEX.js line 64
+  //   'handleFormSubmit' should have an argument values, which will be used here
+  handleFormSubmit: (newCardInfo) => {
+    // handleFormSubmit: () => {
+    //   const newCardInfo = newPlacePopup._getInputValues();
+
     // FB2 INDEX.JS line65
     //  You should reset validation before opening the popup,
     //    not here,
@@ -137,8 +144,12 @@ const newPlacePopup = new PopupWithForm({
 
 const editProfilePopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
-  handleFormSubmit: () => {
-    console.log("newCardInfo=");
+  // FBK3 INDEX.js line 64
+  //   'handleFormSubmit' should have an argument values, which will be used here
+  handleFormSubmit: (newUserData) => {
+    // handleFormSubmit: () => {
+    //   console.log("newCardInfo=");
+
     // FEEDBACK1 INDEX.JS line 67 move the prevent.default
     //    to PWF before calling submit handler
     //  NOTE...preventDefault below does not allow editProfile to submit
@@ -157,8 +168,10 @@ const editProfilePopup = new PopupWithForm({
     //         assigned to the class 'new UserInfo'
     //
     userInfo.setUserInfo(
-      editProfilePopup.popupEditProfileName.value,
-      editProfilePopup.popupEditProfileAboutMe.value
+      newUserData.name,
+      newUserData.aboutMe
+      // editProfilePopup.popupEditProfileName.value,
+      // editProfilePopup.popupEditProfileAboutMe.value
     );
     editProfilePopup.close();
   },
@@ -172,15 +185,31 @@ const editProfilePopup = new PopupWithForm({
 // FB2 INDEX.JS line 84
 // You should not bind methods here.
 //   Please, do that in. the constructor of 'Popup' class:
-buttonPencil.addEventListener("click", editProfilePopup.open);
+// buttonPencil.addEventListener("click", editProfilePopup.open);
 // buttonPencil.addEventListener(
 //   "click",
 //   editProfilePopup.open.bind(editProfilePopup)
 // );
 
-buttonPlus.addEventListener("click", newPlacePopup.open);
+// buttonPlus.addEventListener("click", newPlacePopup.open);
 // buttonPlus.addEventListener("click", newPlacePopup.open.bind(newPlacePopup));
 
+//FBK3 PWF line 37
+//Common classes (like PWF) should not contain any code related to specific elements,
+//   because they should be able to work with any elements.
+//   Reset validation before opening popups in 'index.js'
+//   using the 'addEVLs' for buttonPlus and Button Pencil
+buttonPencil.addEventListener("click", () => {
+  formValidators["formEditProfile"].resetValidation();
+  editProfilePopup.open();
+});
+
+buttonPlus.addEventListener("click", () => {
+  formValidators["formNewPlace"].resetValidation();
+  newPlacePopup.open();
+});
+
+//
 // const renderCard = (data, container) => {
 //   const cardElement = new Card(
 //     {
