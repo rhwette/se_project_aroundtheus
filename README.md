@@ -1,6 +1,6 @@
 # Project Name: Around the U.S.
 
-        Practicum-Yandex, Web-Project 8, Sprint 7, July 16, 2022
+        Practicum-Yandex, Web-Project 8, Sprint 8, Aug 1, 2022
 
 ### Description
 
