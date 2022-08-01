@@ -145,7 +145,7 @@ const newPlacePopup = new PopupWithForm({
 const editProfilePopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
   // FBK3 INDEX.js line 64
-  //   'handleFormSubmit' should have an argument values, which will be used here
+  //   'handleFormSubmit' should have an argument 'values', which will be used here
   handleFormSubmit: (newUserData) => {
     // handleFormSubmit: () => {
     //   console.log("newCardInfo=");
@@ -167,9 +167,12 @@ const editProfilePopup = new PopupWithForm({
     //     NOTE..  'userInfo' variable is defined above when it is
     //         assigned to the class 'new UserInfo'
     //
+    console.log("newUserData.name=", newUserData.name);
+    console.log("newUserData.aboutme=", newUserData.aboutme);
     userInfo.setUserInfo(
       newUserData.name,
-      newUserData.aboutMe
+      // newUserData.aboutMe
+      newUserData.aboutme
       // editProfilePopup.popupEditProfileName.value,
       // editProfilePopup.popupEditProfileAboutMe.value
     );
