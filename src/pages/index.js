@@ -6,20 +6,9 @@ import PopupWithImage from "../components/PopupWithImage";
 import FormValidator from "../components/FormValidator";
 import PopupWithForm from "../components/PopupWithForm";
 import UserInfo from "../components/UserInfo";
-//444444444444444444444444
-//  these may need to be added later according to FEEDBACK1 PWF line 11
-//    but for now leave these active in PWF or it wont work
+
 const buttonPencil = document.querySelector(".intro__button-pencil");
 const buttonPlus = document.querySelector(".intro__button-plus");
-// const popupEditProfile = document.querySelector("#editProfileForm");
-
-// const nameElement = document.querySelector(".intro__name");
-// const aboutMeElement = document.querySelector(".intro__occupation");
-// const popupNewPlace = document.querySelector("#newPlaceForm");
-//4444444444444444444444
-// buttonPencil.addEventListener("click", open);
-// buttonPlus.addEventListener("click", open);
-
 const nameElement = document.querySelector(".intro__name");
 const aboutMeElement = document.querySelector(".intro__occupation");
 const popupEditProfileName = document.querySelector('input[name ="name"]');
@@ -27,27 +16,11 @@ const popupEditProfileAboutMe = document.querySelector(
   'input[name = "aboutme"]'
 );
 
-// FEEDBACK1 PWF line 24.. move class instance from PWF to index.js
-//  then use it here inside index.js instead of in PWF
-console.log("INDEX.JS popupEditProfileName=", popupEditProfileName);
-console.log("INDEX.JS popupEditProfileAboutMe", popupEditProfileAboutMe);
-
-//  FEEDBACK1 USERINFO line 9..use 'selectors' object from CONSTANTS
-//    as argument in new UserInfo(selectors) below
-// const userInfo = new UserInfo(popupEditProfileName, popupEditProfileAboutMe);
 const userInfo = new UserInfo(selectors);
 
-// FB2 INDEX.JS line 21
-//   Variable names should be informative nouns.
-//   'userData' would be good for this variable
 const userData = userInfo.getUserInfo();
 popupEditProfileName.value = userData.userName;
 popupEditProfileAboutMe.value = userData.userJob;
-// FEEDBACK1 PWF line 41...fill .values in index.js
-//    before opening profile popup
-// const saveVariableOriginal = userInfo.getUserInfo();
-// popupEditProfileName.value = saveVariableOriginal.userName;
-// popupEditProfileAboutMe.value = saveVariableOriginal.userJob;
 
 const popupNewPlaceLink = document.querySelector("#link-input");
 const popupNewPlaceTitle = document.querySelector("#place-input");
@@ -62,9 +35,6 @@ const containerForImages = document.querySelector(".card-grid__format");
 
 const newCardPopup = new PopupWithImage(selectors.previewPopup);
 
-//FEEDBACK1 INDEX.JS line 32
-// create a renderCard method and then use below
-// rewrite the call to SECTION below using a renderCard method
 const renderCard = (data) => {
   const cardElement = new Card(
     {
@@ -75,68 +45,23 @@ const renderCard = (data) => {
     },
     selectors.cardTemplate
   );
-  // FEEDBACK1 INDEX line 82 .. use Section class for adding new elements
-  //    'cardsSection' is defined below where it is set = new Section
-  //    also, dont use container.prepend
-  // container.prepend(cardElement.createCard());
+
   cardsSection.addItem(cardElement.createCard());
 };
-// FEEDBACK1 INDEX line 29...use better name like 'cardsSection'
-//   instead of cardNew
+
 const cardsSection = new Section(
   {
     data: initialCards,
-    //FEEDBACK1 INDEX.JS line 32..use the function 'renderCard' here
     renderer: renderCard,
-    // renderer: (data) => {
-    //   const cardElement = new Card(
-    //     {
-    //       data,
-    //       handleZoom: () => {
-    //         imageZoomPopup.open(data);
-    //       },
-    //     },
-    //     selectors.cardTemplate
-    //   );
-    //   cardsSection.addItem(cardElement.createCard());
-    // },
   },
   selectors.cardSection
 );
 
 const imageZoomPopup = new PopupWithImage(selectors.previewPopup);
 
-// FEEDBACK1 INDEX.JS line 32 use the function 'renderCard' here
-// FEEDBACK1 INDEX.JS line 53 handleFormSubmit should accept input values
-//   as an argument and use them to create new card
-//   ?????not sure this is right....i dont see where input values are used
-//     as argument...check definition of arrow function, maybe the
-//     arguments are implied in the destructuring ??
 const newPlacePopup = new PopupWithForm({
-  // FBK3 INDEX.js line 64
-  //   1) You should not use private functions outside of a class
-  //   so that means dont use _getInputValues here
   popupSelector: selectors.placePopup,
-  // FBK3 INDEX.js line 64
-  //   'handleFormSubmit' should have an argument values, which will be used here
   handleFormSubmit: (newCardInfo) => {
-    // handleFormSubmit: () => {
-    //   const newCardInfo = newPlacePopup._getInputValues();
-
-    // FB2 INDEX.JS line65
-    //  You should reset validation before opening the popup,
-    //    not here,
-    //    because you reset the form every time when popup is closed,
-    //    so it should not show errors when you open it,
-    //    even if it was not submitted
-    // formValidators["formNewPlace"].resetValidation();
-
-    //FEEDBACK1 INDEX line 89... disable submit button
-    //  before opening place popup.
-    //  Use resetValidation method of the corresponding form validator to do that
-    // formValidators["formNewPlace"].resetValidation();
-    // newCardInfo.name = popupNewPlaceTitle.value;
-    // newCardInfo.link = popupNewPlaceLink.value;
     renderCard(newCardInfo);
     newPlacePopup.close();
   },
@@ -144,64 +69,12 @@ const newPlacePopup = new PopupWithForm({
 
 const editProfilePopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
-  // FBK3 INDEX.js line 64
-  //   'handleFormSubmit' should have an argument 'values', which will be used here
   handleFormSubmit: (newUserData) => {
-    // handleFormSubmit: () => {
-    //   console.log("newCardInfo=");
-
-    // FEEDBACK1 INDEX.JS line 67 move the prevent.default
-    //    to PWF before calling submit handler
-    //  NOTE...preventDefault below does not allow editProfile to submit
-    // evtSave.preventDefault();
-    // FEEDBACK1 PWF line 67...fill profile info in
-    //   the handleFormSubmit for editProfile Popup
-    // const saveVariableNew = userInfo.setUserInfo();
-    // nameElement.textContent = saveVariableNew.userNameNew;
-    // aboutMeElement.textContent = saveVariableNew.userJobNew;
-    // FEEDBACK1 line 9 use userInfo.setUserInfo to populate profile form
-    //    'this.' will not work ??
-    //    instead use 'editProfilePopup'
-    //     NOTE.. 'popupEditProfileName' and 'popupEditProfileAboutMe'
-    //      are defined above here in INDEX
-    //     NOTE..  'userInfo' variable is defined above when it is
-    //         assigned to the class 'new UserInfo'
-    //
-    console.log("newUserData.name=", newUserData.name);
-    console.log("newUserData.aboutme=", newUserData.aboutme);
-    userInfo.setUserInfo(
-      newUserData.name,
-      // newUserData.aboutMe
-      newUserData.aboutme
-      // editProfilePopup.popupEditProfileName.value,
-      // editProfilePopup.popupEditProfileAboutMe.value
-    );
+    userInfo.setUserInfo(newUserData.name, newUserData.aboutme);
     editProfilePopup.close();
   },
 });
 
-// add button listeners here.
-// FEEDBACK1 PWF line 48 ..  move the button listeners over here
-//   instead of in PWF.....note that instead of "this"
-//   use the constant that is assigned to the new PWF object
-
-// FB2 INDEX.JS line 84
-// You should not bind methods here.
-//   Please, do that in. the constructor of 'Popup' class:
-// buttonPencil.addEventListener("click", editProfilePopup.open);
-// buttonPencil.addEventListener(
-//   "click",
-//   editProfilePopup.open.bind(editProfilePopup)
-// );
-
-// buttonPlus.addEventListener("click", newPlacePopup.open);
-// buttonPlus.addEventListener("click", newPlacePopup.open.bind(newPlacePopup));
-
-//FBK3 PWF line 37
-//Common classes (like PWF) should not contain any code related to specific elements,
-//   because they should be able to work with any elements.
-//   Reset validation before opening popups in 'index.js'
-//   using the 'addEVLs' for buttonPlus and Button Pencil
 buttonPencil.addEventListener("click", () => {
   formValidators["formEditProfile"].resetValidation();
   editProfilePopup.open();
@@ -212,24 +85,7 @@ buttonPlus.addEventListener("click", () => {
   newPlacePopup.open();
 });
 
-//
-// const renderCard = (data, container) => {
-//   const cardElement = new Card(
-//     {
-//       data,
-//       handleZoom: () => {
-//         newCardPopup.open(data);
-//       },
-//     },
-//     selectors.cardTemplate
-//   );
-//   container.prepend(cardElement.createCard());
-// };
-
 cardsSection.renderItems(initialCards);
-// imageZoomPopup.setEventListeners();
-// newPlacePopup.setEventListeners();
-// editProfilePopup.setEventListeners();
 
 //-----------------------------------------------
 //  VALIDATION
@@ -244,7 +100,6 @@ const config = {
 };
 
 export const formValidators = {};
-console.log("formValidators =", formValidators);
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
@@ -255,11 +110,3 @@ const enableValidation = (config) => {
   });
 };
 enableValidation(config);
-
-// if (this.popupSelector === selectors.profilePopup) {
-//   buttonPencil.addEventListener("click", this.open.bind(this));
-// } else {
-//   buttonPlus.addEventListener("click", this.open.bind(this));
-// }
-
-// buttonPencil.addEventListener("click", this.open.bind(this));

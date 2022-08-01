@@ -28,15 +28,11 @@ export const initialCards = [
 ];
 
 export const selectors = {
-  //FEEDBACK SECTION line 5...the cardSection should have '.'
-  // cardSection: "card-grid__format",
   cardSection: ".card-grid__format",
   cardTemplate: "myTemplate",
   previewPopup: "#image-popup-container",
   profilePopup: "#person-popup-container",
   placePopup: "#picture-popup-container",
-  //FEEDBACK USERINFO line 9  UserInfo must take selectors as constructor arguments
-  //  need to define the two selectors here
   nameSelector: ".intro__name",
   aboutMeSelector: ".intro__occupation",
 };
