@@ -3,16 +3,6 @@ import Popup from "./Popup";
 export default class PopupWithForm extends Popup {
   constructor({ popupSelector, handleFormSubmit }) {
     super(popupSelector);
-    // FEEDBACK4 PWF line 6
-    //  This file should not know anything about specific elements..
-    //  Please, remove their declarations from here (lines 6-12)
-    // this.popupEditProfile = document.querySelector("#editProfileForm");
-    // this.popupEditProfileName = document.querySelector('input[name ="name"]');
-    // this.popupEditProfileAboutMe = document.querySelector(
-    //   'input[name = "aboutme"]'
-    // );
-    // this.popupNewPlaceLink = document.querySelector("#link-input");
-    // this.popupNewPlaceTitle = document.querySelector("#place-input");
     this._popupForm = this._popupElement.querySelector(".popup__form");
     this._handleFormSubmit = handleFormSubmit.bind(this);
   }

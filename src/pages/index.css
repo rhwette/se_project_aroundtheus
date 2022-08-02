@@ -735,38 +735,15 @@
   background-color: #a8a8a8;
 }
 
-/* TEST */
-
-/* 
-.popup__button_disabled:hover {
-  opacity: 1;
-  cursor: default;
-} */
-
-/* .popup__container-button-disabled:hover {
-  opacity: 1;
-  cursor: default;
-} */
-
-/* .popup__container-button:hover:not(:disabled) {
-  opacity: 0.8;
-  cursor: url("../../../images/pointer.svg") 10 0, auto;
-} */
-
-/* TEST */
-
 .popup__container-button:hover {
   opacity: 0.8;
   cursor: url("../images/pointer.svg") 10 0, auto;
 }
 
-/* try this */
-/* note: this must be placed AFTER the non-disabled hover */
 .popup__container-button-disabled:hover {
   opacity: 1;
   cursor: default;
 }
-/* try this */
 
 @media screen and (max-width: 500px) {
   .popup__container-button {
