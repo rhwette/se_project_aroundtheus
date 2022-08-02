@@ -75,15 +75,8 @@ const editProfilePopup = new PopupWithForm({
   },
 });
 
-//FEEDBACK5 INDEX.js line 79
-// You should also fill profile form before opening it.
-// Now, when you reopen profile form the fields are empty..
-// Create a function 'fillProfileForm', which will set field values
-//  (it will contain lines 21-23) ad use it here:
-//   line 21      const userData = userInfo.getUserInfo();
-//   line 22      popupEditProfileName.value = userData.userName;
-//   line 23      popupEditProfileAboutMe.value = userData.userJob;
-
+// No Need to Apologize.....this is how I learn
+//  thank you !!
 function fillProfileForm() {
   const userData = userInfo.getUserInfo();
   popupEditProfileName.value = userData.userName;
@@ -91,8 +84,6 @@ function fillProfileForm() {
 }
 
 buttonPencil.addEventListener("click", () => {
-  //FEEDBACK5 INDEX.js line 79
-  //  add the newly created function here
   fillProfileForm();
   formValidators["formEditProfile"].resetValidation();
   editProfilePopup.open();
