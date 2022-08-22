@@ -36,9 +36,9 @@ const userInfo = new UserInfo(selectors);
   }
   );
 
-  const userData = userInfo.getUserInfo();
-  popupEditProfileName.value = userData.userName;
-  popupEditProfileAboutMe.value = userData.userJob;
+  // const userData = userInfo.getUserInfo();
+  // popupEditProfileName.value = userData.userName;
+  // popupEditProfileAboutMe.value = userData.userJob;
 
 
 const popupNewPlaceLink = document.querySelector("#link-input");
@@ -88,8 +88,10 @@ const imageZoomPopup = new PopupWithImage(selectors.previewPopup);
 const newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
   handleFormSubmit: (newCardInfo) => {
+    api.addCard(newCardInfo).then(res => {
     renderCard(newCardInfo);
     newPlacePopup.close();
+  })
   },
 });
 
