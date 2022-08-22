@@ -26,25 +26,19 @@ const popupEditProfileAboutMe = document.querySelector(
   'input[name = "aboutme"]'
   );
   
-  // const userInfo = new UserInfo(selectors);
-   const userInfo = new UserInfo(selectors);
-  console.log('0000a INDEX.JS selectors=', selectors);
-  console.log('0000b INDEX.JS nameSelector=', selectors.nameSelector);
-  console.log('0000c INDEX.JS aboutMeSelector=', selectors.aboutMeSelector);
-  
-  console.log('0001 INDEX.JS userInfo=', userInfo);
+const userInfo = new UserInfo(selectors);
   
   api.getUserInfo().then(userData => {
-    console.log('0002a INDEX.js userData', userData);
-    console.log('0002b INDEX.JS userData.name =', userData.name);
-    console.log('0002c INDEX.JS userData.about =', userData.about);
-    userInfo.setUserInfo({
-      name: userData.name,
-      about: userData.about,
-    })
-    console.log('0003 INDEX.js name=', name);
+    userInfo.setUserInfo(
+      userData.name,
+      userData.about,
+    )
   }
   );
+
+  const userData = userInfo.getUserInfo();
+  popupEditProfileName.value = userData.userName;
+  popupEditProfileAboutMe.value = userData.userJob;
 
 
 const popupNewPlaceLink = document.querySelector("#link-input");

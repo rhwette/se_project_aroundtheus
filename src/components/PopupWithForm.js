@@ -10,15 +10,12 @@ export default class PopupWithForm extends Popup {
   _handleSubmit = (event) => {
     event.preventDefault();
     const values = this._getInputValues();
-    console.log("values=", values);
     this._handleFormSubmit(values);
   };
 
   _getInputValues() {
     const inputs = this._popupForm.querySelectorAll(".popup__container-input");
     const inputObject = {};
-    console.log("inputs", inputs);
-    console.log("inputObject=", inputObject);
     inputs.forEach((input) => {
       inputObject[input.name] = input.value;
     });
@@ -26,9 +23,6 @@ export default class PopupWithForm extends Popup {
   }
 
   open(evt) {
-    console.log("open in PWF");
-    console.log("evt", evt);
-
     super.open();
     this._popupForm.addEventListener("submit", this._handleSubmit);
   }
