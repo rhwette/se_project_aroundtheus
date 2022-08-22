@@ -14,6 +14,9 @@ const api = new Api({
   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e"
 })
 
+
+
+
 const buttonPencil = document.querySelector(".intro__button-pencil");
 const buttonPlus = document.querySelector(".intro__button-plus");
 const nameElement = document.querySelector(".intro__name");
@@ -21,12 +24,28 @@ const aboutMeElement = document.querySelector(".intro__occupation");
 const popupEditProfileName = document.querySelector('input[name ="name"]');
 const popupEditProfileAboutMe = document.querySelector(
   'input[name = "aboutme"]'
-);
+  );
+  
+  // const userInfo = new UserInfo(selectors);
+   const userInfo = new UserInfo(selectors);
+  console.log('0000a INDEX.JS selectors=', selectors);
+  console.log('0000b INDEX.JS nameSelector=', selectors.nameSelector);
+  console.log('0000c INDEX.JS aboutMeSelector=', selectors.aboutMeSelector);
+  
+  console.log('0001 INDEX.JS userInfo=', userInfo);
+  
+  api.getUserInfo().then(userData => {
+    console.log('0002a INDEX.js userData', userData);
+    console.log('0002b INDEX.JS userData.name =', userData.name);
+    console.log('0002c INDEX.JS userData.about =', userData.about);
+    userInfo.setUserInfo({
+      name: userData.name,
+      about: userData.about,
+    })
+    console.log('0003 INDEX.js name=', name);
+  }
+  );
 
-const userInfo = new UserInfo(selectors);
-const userData = userInfo.getUserInfo();
-popupEditProfileName.value = userData.userName;
-popupEditProfileAboutMe.value = userData.userJob;
 
 const popupNewPlaceLink = document.querySelector("#link-input");
 const popupNewPlaceTitle = document.querySelector("#place-input");
