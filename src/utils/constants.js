@@ -8,5 +8,6 @@ export const selectors = {
   profilePopup: "#person-popup-container",
   placePopup: "#picture-popup-container",
   nameSelector: ".intro__name",
-  aboutMeSelector: ".intro__occupation",
+  aboutSelector: ".intro__occupation",
+  avatarSelector: ".intro__image"
 };

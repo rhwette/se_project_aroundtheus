@@ -98,6 +98,14 @@
   background-image: url("../images/Union.svg");
 }
 
+.card-grid__likes{
+  font-size: 12px;
+  text-align: left;
+  margin: 0;
+  padding-left: 7px;
+  padding-top: 3px;
+}
+
 .card-grid__info {
   display: flex;
   flex-direction: row;
@@ -506,7 +514,10 @@
   width: 127.5px;
   margin-right: 20.625px;
   grid-area: pic;
+  aspect-ratio: 1 / 1;
 }
+
+
 
 @media screen and (max-width: 980px) {
   .intro__image {

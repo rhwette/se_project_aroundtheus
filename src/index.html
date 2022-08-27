@@ -37,7 +37,10 @@
             <button type="button" class="card-grid__garbage" id="cardCan"></button>
             <div class="card-grid__info">
               <h2 class="card-grid__text block" id="cardName"></h2>
-              <button type="button" class="card-grid__icon" id="heartButton"></button>
+              <div>
+                <button type="button" class="card-grid__icon" id="heartButton"></button>
+                <h3 class="card-grid__likes block" id="cardLike">like#</h3>
+              </div>
             </div>
           </li>
         </template>
@@ -54,9 +57,9 @@
           <input name="name" class="popup__container-input popup__container-input-type-name " type="text"
             id="name-input" required minlength="2" maxlength="40" />
           <span id="name-input-error"></span>
-          <input name="aboutme" class="popup__container-input popup__container-input-type-description " type="text"
-            id="aboutme-input" required minlength="2" maxlength="200" />
-          <span id="aboutme-input-error"></span>
+          <input name="about" class="popup__container-input popup__container-input-type-description " type="text"
+            id="about-input" required minlength="2" maxlength="200" />
+          <span id="about-input-error"></span>
           <button type="submit" class="popup__container-button " id="buttonEditProfileSave">Save</button>
         </form>
       </div>

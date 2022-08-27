@@ -13,6 +13,10 @@ const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e"
 })
+// debugger;
+// const authToken = api._authToken;
+// console.log('authToken=', authToken);
+// console.log('api.authToken=', api._authToken);
 
 
 
@@ -20,25 +24,34 @@ const api = new Api({
 const buttonPencil = document.querySelector(".intro__button-pencil");
 const buttonPlus = document.querySelector(".intro__button-plus");
 const nameElement = document.querySelector(".intro__name");
-const aboutMeElement = document.querySelector(".intro__occupation");
+const aboutElementgetCardList = document.querySelector(".intro__occupation");
+const avatarElement = document.querySelector(".intro__image");
 const popupEditProfileName = document.querySelector('input[name ="name"]');
-const popupEditProfileAboutMe = document.querySelector(
-  'input[name = "aboutme"]'
+const popupEditProfileAbout = document.querySelector(
+  'input[name = "about"]'
   );
   
 const userInfo = new UserInfo(selectors);
+
+// use code below to test 'removeCard'
+// select an Id from the network panel
+// api.removeCard("6304c8a81f5d6a0d6f33c2b0").then(res => console.log(res));
   
   api.getUserInfo().then(userData => {
     userInfo.setUserInfo(
       userData.name,
       userData.about,
+      userData.avatar,
     )
+    console.log('userData=', userData);
   }
   );
 
+
+
   // const userData = userInfo.getUserInfo();
   // popupEditProfileName.value = userData.userName;
-  // popupEditProfileAboutMe.value = userData.userJob;
+  // popupEditProfileAbout.value = userData.userJob;
 
 
 const popupNewPlaceLink = document.querySelector("#link-input");
@@ -65,6 +78,7 @@ const renderCard = (data) => {
     },
     selectors.cardTemplate
   );
+  // console.log(cardElement._id);
   cardsSection.addItem(cardElement.createCard());
 };
 
@@ -77,7 +91,10 @@ let cardsSection;
     },
     selectors.cardSection
     );
-
+    console.log('cardsFromServer=',cardsFromServer);
+    // console.log(cardsFromServer[0]._id);
+    console.log('cardsSection=', cardsSection);
+    // console.log('api._authToken=', authToken);
     cardsSection.renderItems(cardsFromServer);
     }
   );
@@ -85,30 +102,36 @@ let cardsSection;
 
 const imageZoomPopup = new PopupWithImage(selectors.previewPopup);
 
+
+// add new card from server
 const newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
   handleFormSubmit: (newCardInfo) => {
     api.addCard(newCardInfo).then(res => {
     renderCard(newCardInfo);
     newPlacePopup.close();
-  })
-  },
-});
+    })
+  }
+})
+
 
 const editProfilePopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (newUserData) => {
-    userInfo.setUserInfo(newUserData.name, newUserData.aboutme);
-    editProfilePopup.close();
-  },
-});
-
+  userInfo.setUserInfo(newUserData.name, newUserData.about)
+  const name = newUserData.name;
+  const about = newUserData.about;
+  api.addUserInfo( {name, about})
+  editProfilePopup.close()
+   }
+  }
+  );
 
 function fillProfileForm() {
-  const userData = userInfo.getUserInfo();
-  popupEditProfileName.value = userData.userName;
-  popupEditProfileAboutMe.value = userData.userJob;
-}
+    const userData = userInfo.getUserInfo();
+    popupEditProfileName.value = userData.userName;
+    popupEditProfileAbout.value = userData.userJob;
+  }   
 
 buttonPencil.addEventListener("click", () => {
   fillProfileForm();
@@ -144,3 +167,6 @@ const enableValidation = (config) => {
   });
 };
 enableValidation(config);
+
+
+
