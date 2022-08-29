@@ -50,23 +50,24 @@ class Card {
 
     // this._element = null;
   };
+
+
+
   
   _handleHeart(event) {
     // debugger;
-      console.log('AAA000 event.target.classList.length=', event.target.classList.length);
+    const cardGridLikes = this._element.querySelector(".card-grid__likes");
     if(event.target.classList.length ===1) {
-      console.log('AAA001 event.target.classList.length=', event.target.classList.length);
       api.addLike(this._id);
-      console.log('AAA002 event.target.classList.length=', event.target.classList.length);
-      // return;
-       event.target.classList.add("card-grid__icon_active");
+      event.target.classList.add("card-grid__icon_active");
+      this._likes.length = this._likes.length + 1;
+      cardGridLikes.textContent = this._likes.length;
 
   } else{
-    console.log('BBB000 event.target.classList.length=', event.target.classList.length);
-    event.target.classList.toggle("card-grid__icon_active");
-    api.removeLike(this._id);
-    console.log('BBB001 event.target.classList.length=', event.target.classList.length);
-
+      event.target.classList.remove("card-grid__icon_active");
+      api.removeLike(this._id);
+      this._likes.length = this._likes.length - 1;
+      cardGridLikes.textContent = this._likes.length;
   };
 
   }
@@ -90,16 +91,18 @@ class Card {
 
   createCard() {
     this._element = this._getTemplate();
+    const cardHeart = this._element.querySelector(".card-grid__icon");
     const cardGridPicture = this._element.querySelector(".card-grid__picture");
     const cardGridText = this._element.querySelector(".card-grid__text");
-     const cardGridLikes = this._element.querySelector(".card-grid__likes");
+    const cardGridLikes = this._element.querySelector(".card-grid__likes");
     cardGridPicture.src = this._link;
     cardGridPicture.alt = this._name;
-    // add logic in here to show if a card has been liked by me
-    //  and if so make the heart colored black so it shows on my screen
-    //....then i can click on a 'liked card' and unlike it
-    //so down here is where the heart gets its color
-    // but above is where the api for remove would be activated
+    for(let i = 0; i < this._likes.length; i++) {
+      console.log('CCCC0001 this.likes._id =', this._likes[i]._id);
+      if(this._likes[i]._id === "3f769460ee50cd15e754d8b8") {
+        cardHeart.classList.add("card-grid__icon_active");
+      }
+    }
     cardGridText.textContent = this._name;
     cardGridLikes.textContent = this._likes.length;
     this._setEventListeners();
