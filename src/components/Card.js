@@ -91,7 +91,7 @@ class Card {
     }
     console.log('this =', this);
 console.log("CREATCARD this._likes =", this._likes);
-console.log("CREATCARD this._likes.lenght =", this._likes.length);
+console.log("CREATCARD this._likes.length =", this._likes.length);
     this._element = this._getTemplate();
     const cardHeart = this._element.querySelector(".card-grid__icon");
     const cardGridPicture = this._element.querySelector(".card-grid__picture");
@@ -105,6 +105,19 @@ console.log("CREATCARD this._likes.lenght =", this._likes.length);
         cardHeart.classList.add("card-grid__icon_active");
       }
     }
+    //
+    const cardCan = this._element.querySelector(".card-grid__garbage");
+    console.log('cardCan=', cardCan);
+    if (this._ownerId != this._myOwnerId) {
+      cardCan.classList.add("card-grid__garbage-invisible");
+    }
+
+   
+    // if (id is not mine){
+    //   make the can class the invisible class
+    //   else the can class is visible
+    // }
+    //
     cardGridText.textContent = this._name;
     cardGridLikes.textContent = this._likes.length;
     this._setEventListeners();
