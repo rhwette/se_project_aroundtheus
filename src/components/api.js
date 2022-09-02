@@ -126,7 +126,10 @@ addLike(_id) {
         // })
     })
     
-    .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`) 
+    .then(res =>  {
+        console.log('res=', res);
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`) 
+    }
     )
     .catch((err) => {
         console.log(err)
@@ -168,6 +171,29 @@ removeLike(_id, name) {
     .catch((err) => {
         console.log(err)
     })
+}
+
+// PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar 
+
+addAvatar( {avatarLink} ) {
+    //note: avatarLink comes from the data inserted into the popup form
+    // debugger;
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+        method: "PATCH",
+        headers: {
+            authorization: this._authToken,
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify( {
+            //note: 'avatar' is the object key inside the data array on the server
+            //note: avatarLink is the value assigned to avatar
+            avatar: avatarLink
+      })
+    })
+    .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    .catch((err) => {
+        console.log(err)
+    });
 }
 
 }

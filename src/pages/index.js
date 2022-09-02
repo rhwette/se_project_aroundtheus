@@ -11,7 +11,7 @@ import Api from "../components/api.js";
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
-  authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e"
+  authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e",
 })
 // debugger;
 // const authToken = api._authToken;
@@ -20,7 +20,7 @@ const api = new Api({
 
 
 
-
+const buttonAvatar = document.querySelector('.intro__image-overlay');
 const buttonPencil = document.querySelector(".intro__button-pencil");
 const buttonPlus = document.querySelector(".intro__button-plus");
 const nameElement = document.querySelector(".intro__name");
@@ -69,6 +69,7 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
 
 
 const renderCard = (data) => {
+  console.log("data = ", data);
   const cardElement = new Card(
     {
       data,
@@ -107,8 +108,10 @@ const imageZoomPopup = new PopupWithImage(selectors.previewPopup);
 const newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
   handleFormSubmit: (newCardInfo) => {
+    // debugger;
     api.addCard(newCardInfo).then(res => {
-    renderCard(newCardInfo);
+      console.log("res =", res);
+    renderCard(res);
     newPlacePopup.close();
     })
   }
@@ -127,6 +130,27 @@ const editProfilePopup = new PopupWithForm({
   }
   );
 
+  const editAvatarPopup = new PopupWithForm({
+
+    popupSelector: selectors.avatarPopup,
+      handleFormSubmit: ( avatarLink  ) => {
+      // debugger;
+      api.addAvatar(avatarLink).then(res => {
+      renderAvatar(avatarLink);
+      editAvatarPopup.close();
+      })
+    }
+  })
+
+  function renderAvatar( {avatarLink} ) {
+    // debugger;
+    // const newAvatar = document.createElement('img');
+    //note: don't need to create new img tag
+    //note: just point avatarNew to the id= introImage
+    const avatarNew = document.getElementById("introImage");
+    avatarNew.src = avatarLink;
+  }
+
 function fillProfileForm() {
     const userData = userInfo.getUserInfo();
     popupEditProfileName.value = userData.userName;
@@ -134,14 +158,22 @@ function fillProfileForm() {
   }   
 
 buttonPencil.addEventListener("click", () => {
+  // debugger;
   fillProfileForm();
   formValidators["formEditProfile"].resetValidation();
   editProfilePopup.open();
 });
 
 buttonPlus.addEventListener("click", () => {
-  formValidators["formNewPlace"].resetValidation();
+  // debugger;
+  // formValidators["formNewPlace"].resetValidation();
   newPlacePopup.open();
+});
+
+buttonAvatar.addEventListener("click", () => {
+  // debugger;
+  // formValidators["formEditAvatar"].resetValidation();
+  editAvatarPopup.open();
 });
 
 //-----------------------------------------------

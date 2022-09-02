@@ -18,8 +18,15 @@
   <main class="content">
     <!--INTRO-->
     <section class="intro">
-      <img class="intro__image" src="<%=require('./images/jacques-cousteau.jpg')%>" alt="jacques cousteau"
-        title="cousteau" />
+
+      <div>
+        <img class="intro__image" src="<%=require('./images/jacques-cousteau.jpg')%>" alt="jacques cousteau"
+        title="cousteau" id="introImage" />
+        <div>
+          <img class="intro__image-overlay" src="<%=require('./images/pencil.svg')%>" alt="pencil edit button" title="pencilEdit"/>
+          <!-- <img class="intro__image-overlay" src="(./images/pencil.svg)" alt="pencil edit button" title="pencilEdit"/> -->
+        </div>
+      </div>
       <div class="intro__description">
         <h1 class="intro__name">Jacques Cousteau</h1>
         <p class="intro__occupation">Explorer</p>
@@ -47,6 +54,22 @@
       </ul>
     </section>
 
+
+        <!--POPUP AND FORM for ADDING AVATAR-->
+        <div class="popup" id="avatar-popup-container">
+          <div class="popup__container" id="popupEditAvatar">
+            <h2 class="popup__container-title">Edit Avatar</h2>
+            <button type="button" class="popup__container-button-close" id="buttonEditAvatarClose"><img
+                src="<%=require('./images/close.svg')%>" alt="close symbol" /></button>
+            <form name="formEditAvatar" class="popup__form" id="editAvatarForm">
+              <input name="avatarLink" placeholder="Avatar URL" class="popup__container-input popup__container-input-type-link"
+              type="url" id="avatar-input" required />
+            <span id="avatar-input-error"></span>
+              <button type="submit" class="popup__container-button " id="buttonEditAvatarSave">Save</button>
+            </form>
+          </div>
+        </div>
+        
     <!--POPUP AND FORM for EDIT PROFILE-->
     <div class="popup" id="person-popup-container">
       <div class="popup__container" id="popupEditProfile">

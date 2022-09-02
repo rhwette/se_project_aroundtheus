@@ -7,6 +7,7 @@ export const selectors = {
   previewPopup: "#image-popup-container",
   profilePopup: "#person-popup-container",
   placePopup: "#picture-popup-container",
+  avatarPopup: "#avatar-popup-container",
   nameSelector: ".intro__name",
   aboutSelector: ".intro__occupation",
   avatarSelector: ".intro__image"

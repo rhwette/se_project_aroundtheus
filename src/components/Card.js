@@ -18,7 +18,6 @@ class Card {
     this._cardSelector = cardSelector;
     this._handleCan = this._handleCan.bind(this);
     this._handleZoom = handleZoom.bind(this);
-    // this._authToken = authToken;
   }
   
 
@@ -47,8 +46,6 @@ class Card {
         window.alert("sorry, but you are not authorized to delete this card");
     }
   
-
-    // this._element = null;
   };
 
 
@@ -74,7 +71,6 @@ class Card {
 
   _setEventListeners() {
     // set listener for Heart
-    // console.log('this._element=', this._element);
     this._element
       .querySelector(".card-grid__icon")
       .addEventListener("click", this._handleHeart.bind(this));
@@ -90,6 +86,12 @@ class Card {
   }
 
   createCard() {
+    if(this._likes === undefined){
+      this._likes = [];
+    }
+    console.log('this =', this);
+console.log("CREATCARD this._likes =", this._likes);
+console.log("CREATCARD this._likes.lenght =", this._likes.length);
     this._element = this._getTemplate();
     const cardHeart = this._element.querySelector(".card-grid__icon");
     const cardGridPicture = this._element.querySelector(".card-grid__picture");
@@ -97,8 +99,8 @@ class Card {
     const cardGridLikes = this._element.querySelector(".card-grid__likes");
     cardGridPicture.src = this._link;
     cardGridPicture.alt = this._name;
+    // debugger;
     for(let i = 0; i < this._likes.length; i++) {
-      console.log('CCCC0001 this.likes._id =', this._likes[i]._id);
       if(this._likes[i]._id === "3f769460ee50cd15e754d8b8") {
         cardHeart.classList.add("card-grid__icon_active");
       }
@@ -109,6 +111,5 @@ class Card {
     return this._element;
   }
 }
-
 
 export default Card;
