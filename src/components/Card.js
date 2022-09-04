@@ -41,9 +41,6 @@ class Card {
   _handleCan() {
   };
 
-
-
-  
   _handleHeart(event) {
     const cardGridLikes = this._element.querySelector(".card-grid__likes");
     if(event.target.classList.length ===1) {
@@ -60,8 +57,6 @@ class Card {
   };
 
   }
-
-
 
   _setEventListeners() {
     // set listener for Heart
@@ -91,9 +86,6 @@ class Card {
     if(this._likes === undefined){
       this._likes = [];
     }
-    console.log('this =', this);
-    console.log("CREATCARD this._likes =", this._likes);
-    console.log("CREATCARD this._likes.length =", this._likes.length);
     this._element = this._getTemplate();
     const cardHeart = this._element.querySelector(".card-grid__icon");
     const cardGridPicture = this._element.querySelector(".card-grid__picture");
@@ -108,7 +100,6 @@ class Card {
     }
     //
     const cardCan = this._element.querySelector(".card-grid__garbage");
-    console.log('cardCan=', cardCan);
     if (this._ownerId != this._myOwnerId) {
       cardCan.classList.add("card-grid__garbage-invisible");
     }

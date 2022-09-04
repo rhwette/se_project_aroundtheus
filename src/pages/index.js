@@ -23,19 +23,18 @@ const popupEditProfileAbout = document.querySelector(
   
 const userInfo = new UserInfo(selectors);
 
+//GET USER INFO from SERVER
 api.getUserInfo().then(userData => {
   userInfo.setUserInfo(
     userData.name,
     userData.about,
     userData.avatar,
   )
-  console.log('userData=', userData);
 }
 );
 
 const newCardPopup = new PopupWithImage(selectors.previewPopup);
 const renderCard = (data) => {
-  console.log("data = ", data);
   const cardElement = new Card(
     {
       data,
@@ -56,24 +55,22 @@ let cardsSection;
     },
     selectors.cardSection
     );
-    console.log('cardsFromServer=',cardsFromServer);
-    console.log('cardsSection=', cardsSection);
     cardsSection.renderItems(cardsFromServer);
     }
   );
 
-// add new card from server
+//NEW PLACE POPUP
 const  newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
   handleFormSubmit: (newCardInfo) => {
     api.addCard(newCardInfo).then(res => {
-      console.log("res =", res);
     renderCard(res);
     newPlacePopup.close();
     })
   }
 })
 
+//EDIT PROFILE POPUP
 const editProfilePopup = new PopupWithForm( {
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (newUserData) => {
@@ -86,6 +83,7 @@ const editProfilePopup = new PopupWithForm( {
   }
   );
 
+  //EDIT AVATAR POPUP
   const editAvatarPopup = new PopupWithForm({
     popupSelector: selectors.avatarPopup,
       handleFormSubmit: ( avatarLink  ) => {
@@ -96,17 +94,21 @@ const editProfilePopup = new PopupWithForm( {
     }
   })
 
-  function renderAvatar( {avatarLink} ) {
-    const avatarNew = document.getElementById("introImage");
-    avatarNew.src = avatarLink;
-  }
+function renderAvatar( {avatarLink} ) {
+  const avatarNew = document.getElementById("introImage");
+  avatarNew.src = avatarLink;
+}
 
 function fillProfileForm() {
     const userData = userInfo.getUserInfo();
     popupEditProfileName.value = userData.userName;
     popupEditProfileAbout.value = userData.userJob;
-  }   
+}   
 
+
+//EVENT LISTENERS -----------------------
+
+//EVENT LISTENER - PENCIL BUTTON
 buttonPencil.addEventListener("click", () => {
   fillProfileForm();
   // formValidators["formEditProfile"].resetValidation();
@@ -122,6 +124,7 @@ buttonPencil.addEventListener("click", () => {
   editProfilePopup.open();
 });
 
+//EVENT LISTENER - PLUS BUTTON
 buttonPlus.addEventListener("click", () => {
   // formValidators["formNewPlace"].resetValidation();
 
@@ -136,6 +139,7 @@ buttonPlus.addEventListener("click", () => {
   newPlacePopup.open();
 });
 
+//EVENT LISTENER - AVATAR PENCIL BUTTON
 buttonAvatar.addEventListener("click", () => {
   // formValidators["formEditAvatar"].resetValidation();
 
