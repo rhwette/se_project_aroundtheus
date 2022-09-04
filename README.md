@@ -1,7 +1,7 @@
 # Project Name: Around the U.S.
 
-        Practicum-Yandex, Web-Project 9, Sprint 9, Aug 8, 2022
-        Project 9 start === Project 8 end
+        Practicum-Yandex, Web-Project 9, Sprint 9, Sept 4, 2022
+        Project 9 final before submit
 
 ### Description
 
@@ -34,4 +34,5 @@
 -     add capability to change cousteau picture
 -     add capability to change page title
 - link to github page....
-  https://github.com/rhwette/web_project_4.git
+https://github.com/rhwette/se_project_aroundtheus.git
+
