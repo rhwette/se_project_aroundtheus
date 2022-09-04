@@ -1,5 +1,4 @@
 import "./index.css";
-// import { initialCards, selectors } from "../utils/constants";
 import { selectors } from "../utils/constants";
 import Card from "../components/Card";
 import Section from "../components/Section";
@@ -13,20 +12,14 @@ const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e",
 })
-// debugger;
-// const authToken = api._authToken;
-// console.log('authToken=', authToken);
-// console.log('api.authToken=', api._authToken);
 
-
-// const buttonConfirm = document.querySelector(".popup__container-button_confirm")
-const buttonCan = document.querySelector('.card-grid__garbage');
+// const buttonCan = document.querySelector('.card-grid__garbage');
 const buttonAvatar = document.querySelector('.intro__image-overlay');
 const buttonPencil = document.querySelector(".intro__button-pencil");
 const buttonPlus = document.querySelector(".intro__button-plus");
-const nameElement = document.querySelector(".intro__name");
-const aboutElementgetCardList = document.querySelector(".intro__occupation");
-const avatarElement = document.querySelector(".intro__image");
+// const nameElement = document.querySelector(".intro__name");
+// const aboutElementgetCardList = document.querySelector(".intro__occupation");
+// const avatarElement = document.querySelector(".intro__image");
 const popupEditProfileName = document.querySelector('input[name ="name"]');
 const popupEditProfileAbout = document.querySelector(
   'input[name = "about"]'
@@ -34,41 +27,27 @@ const popupEditProfileAbout = document.querySelector(
   
 const userInfo = new UserInfo(selectors);
 
-// use code below to test 'removeCard'
-// select an Id from the network panel
-// api.removeCard("6304c8a81f5d6a0d6f33c2b0").then(res => console.log(res));
-  
-  api.getUserInfo().then(userData => {
-    userInfo.setUserInfo(
-      userData.name,
-      userData.about,
-      userData.avatar,
-    )
-    console.log('userData=', userData);
-  }
-  );
-
-
-
-  // const userData = userInfo.getUserInfo();
-  // popupEditProfileName.value = userData.userName;
-  // popupEditProfileAbout.value = userData.userJob;
-
-
-const popupNewPlaceLink = document.querySelector("#link-input");
-const popupNewPlaceTitle = document.querySelector("#place-input");
-const containerElementPerson = document.querySelector(
-  "#person-popup-container"
+api.getUserInfo().then(userData => {
+  userInfo.setUserInfo(
+    userData.name,
+    userData.about,
+    userData.avatar,
+  )
+  console.log('userData=', userData);
+}
 );
-const containerElementPicture = document.querySelector(
-  "#picture-popup-container"
-);
-const popupElement = document.querySelector(".popup__container");
-const containerForImages = document.querySelector(".card-grid__format");
 
+// const popupNewPlaceLink = document.querySelector("#link-input");
+// const popupNewPlaceTitle = document.querySelector("#place-input");
+// const containerElementPerson = document.querySelector(
+  // "#person-popup-container"
+// );
+// const containerElementPicture = document.querySelector(
+  // "#picture-popup-container"
+// );
+// const popupElement = document.querySelector(".popup__container");
+// const containerForImages = document.querySelector(".card-grid__format");
 const newCardPopup = new PopupWithImage(selectors.previewPopup);
-
-
 const renderCard = (data) => {
   console.log("data = ", data);
   const cardElement = new Card(
@@ -80,10 +59,8 @@ const renderCard = (data) => {
     },
     selectors.cardTemplate
   );
-  // console.log(cardElement._id);
   cardsSection.addItem(cardElement.createCard());
 };
-
 
 let cardsSection;
   api.getCardList().then(cardsFromServer => {
@@ -94,22 +71,17 @@ let cardsSection;
     selectors.cardSection
     );
     console.log('cardsFromServer=',cardsFromServer);
-    // console.log(cardsFromServer[0]._id);
     console.log('cardsSection=', cardsSection);
-    // console.log('api._authToken=', authToken);
     cardsSection.renderItems(cardsFromServer);
     }
   );
 
-
-const imageZoomPopup = new PopupWithImage(selectors.previewPopup);
-
+// const imageZoomPopup = new PopupWithImage(selectors.previewPopup);
 
 // add new card from server
 const  newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
   handleFormSubmit: (newCardInfo) => {
-    // debugger;
     api.addCard(newCardInfo).then(res => {
       console.log("res =", res);
     renderCard(res);
@@ -118,7 +90,7 @@ const  newPlacePopup = new PopupWithForm({
   }
 })
 
-
+// 
 const editProfilePopup = new PopupWithForm( {
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (newUserData) => {
@@ -131,13 +103,9 @@ const editProfilePopup = new PopupWithForm( {
   }
   );
 
-
-
   const editAvatarPopup = new PopupWithForm({
-
     popupSelector: selectors.avatarPopup,
       handleFormSubmit: ( avatarLink  ) => {
-      // debugger;
       api.addAvatar(avatarLink).then(res => {
       renderAvatar(avatarLink);
       editAvatarPopup.close();
@@ -145,38 +113,7 @@ const editProfilePopup = new PopupWithForm( {
     }
   })
 
-  // const confirmDeletePopup = new PopupWithForm({
-    // popupSelector:selectors.confirmPopup,
-    // handleFormSubmit: (data) => {
-      //open the confirmDeletePopup
-      //if event = yes
-      // api
-      // remove
-      //otherwise return
-    // }
-  // })
-
-
-  //xxxxxxxxxxxxxxxxxxxxxxxxx
-// const editProfilePopup = new PopupWithForm({
-//   popupSelector: selectors.profilePopup,
-//   handleFormSubmit: (newUserData) => {
-//   userInfo.setUserInfo(newUserData.name, newUserData.about)
-//   const name = newUserData.name;
-//   const about = newUserData.about;
-//   api.addUserInfo( {name, about})
-//   editProfilePopup.close()
-//    }
-//   }
-//   );
-  //xxxxxxxxxxxxxxxxxxxxxxxxx
-  
-
   function renderAvatar( {avatarLink} ) {
-    // debugger;
-    // const newAvatar = document.createElement('img');
-    //note: don't need to create new img tag
-    //note: just point avatarNew to the id= introImage
     const avatarNew = document.getElementById("introImage");
     avatarNew.src = avatarLink;
   }
@@ -188,12 +125,11 @@ function fillProfileForm() {
   }   
 
 buttonPencil.addEventListener("click", () => {
-  // debugger;
   fillProfileForm();
   // formValidators["formEditProfile"].resetValidation();
 
-   //use this to change 'SAVE' to 'SAVING'
-     const btn = document.getElementById("buttonEditProfileSave");
+  //use code below to change 'SAVE' to 'SAVING'
+    const btn = document.getElementById("buttonEditProfileSave");
     btn.addEventListener('click', () => {
       if(btn.innerText === "Save") {
         btn.innerText = "Saving"
@@ -204,11 +140,10 @@ buttonPencil.addEventListener("click", () => {
 });
 
 buttonPlus.addEventListener("click", () => {
-  // debugger;
   // formValidators["formNewPlace"].resetValidation();
 
-     //use this to change 'CREATE' to 'SAVING'
-     const btn = document.getElementById("buttonNewPlaceCreate");
+  //use code below to change 'CREATE' to 'SAVING'
+    const btn = document.getElementById("buttonNewPlaceCreate");
     btn.addEventListener('click', () => {
       if(btn.innerText === "Create") {
         btn.innerText = "Saving"
@@ -219,34 +154,18 @@ buttonPlus.addEventListener("click", () => {
 });
 
 buttonAvatar.addEventListener("click", () => {
-  // debugger;
   // formValidators["formEditAvatar"].resetValidation();
 
-       //use this to change 'SAVE' to 'SAVING'
-       const btn = document.getElementById("buttonEditAvatarSave");
-       btn.addEventListener('click', () => {
-         if(btn.innerText === "Save") {
-           btn.innerText = "Saving"
-         }
-       })
+  //use code below to change 'SAVE' to 'SAVING'
+    const btn = document.getElementById("buttonEditAvatarSave");
+    btn.addEventListener('click', () => {
+      if(btn.innerText === "Save") {
+        btn.innerText = "Saving"
+      }
+    })
+
   editAvatarPopup.open();
 });
-
-// buttonConfirm.addEventListener("click", () => {
-//   confirmDeletePopup.close();
-// })
-
- // this._element
-    //   .querySelector(".card-grid__garbage")
-    //   .addEventListener("click", this._handleCan);
-
-    // buttonCan.addEventListener("click", () => {
-      // debugger;
-      // console.log('buttonCan=', buttonCan);
-      // debugger;
-      // formValidators["formEditAvatar"].resetValidation();
-      // confirmDeletePopup.open();
-    // });   
 
 //-----------------------------------------------
 //  VALIDATION
