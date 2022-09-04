@@ -516,9 +516,9 @@
 .intro__image {
   border-radius: 50%;
   width: 127.5px;
+  height: 127.5px;
   margin-right: 20.625px;
   grid-area: pic;
-  aspect-ratio: 1;
   position: absolute;
   z-index: 0;
 }
