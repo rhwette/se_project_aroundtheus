@@ -119,17 +119,19 @@ const  newPlacePopup = new PopupWithForm({
 })
 
 
-const editProfilePopup = new PopupWithForm({
+const editProfilePopup = new PopupWithForm( {
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (newUserData) => {
-  userInfo.setUserInfo(newUserData.name, newUserData.about)
-  const name = newUserData.name;
-  const about = newUserData.about;
-  api.addUserInfo( {name, about})
-  editProfilePopup.close()
+    userInfo.setUserInfo(newUserData.name, newUserData.about)
+    const name = newUserData.name;
+    const about = newUserData.about;
+    api.addUserInfo( {name, about})
+    editProfilePopup.close()
    }
   }
   );
+
+
 
   const editAvatarPopup = new PopupWithForm({
 
@@ -189,18 +191,44 @@ buttonPencil.addEventListener("click", () => {
   // debugger;
   fillProfileForm();
   // formValidators["formEditProfile"].resetValidation();
+
+   //use this to change 'SAVE' to 'SAVING'
+     const btn = document.getElementById("buttonEditProfileSave");
+    btn.addEventListener('click', () => {
+      if(btn.innerText === "Save") {
+        btn.innerText = "Saving"
+      }
+    })
+
   editProfilePopup.open();
 });
 
 buttonPlus.addEventListener("click", () => {
   // debugger;
   // formValidators["formNewPlace"].resetValidation();
+
+     //use this to change 'CREATE' to 'SAVING'
+     const btn = document.getElementById("buttonNewPlaceCreate");
+    btn.addEventListener('click', () => {
+      if(btn.innerText === "Create") {
+        btn.innerText = "Saving"
+      }
+    })
+
   newPlacePopup.open();
 });
 
 buttonAvatar.addEventListener("click", () => {
   // debugger;
   // formValidators["formEditAvatar"].resetValidation();
+
+       //use this to change 'SAVE' to 'SAVING'
+       const btn = document.getElementById("buttonEditAvatarSave");
+       btn.addEventListener('click', () => {
+         if(btn.innerText === "Save") {
+           btn.innerText = "Saving"
+         }
+       })
   editAvatarPopup.open();
 });
 
