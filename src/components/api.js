@@ -4,7 +4,7 @@ class Api {
         this._authToken = authToken;
     }
 
-// get all cards from server   
+// GET all cards from server   
 // GET //https://around.nomoreparties.co/v!/group-12/cards"
 getCardList() {
     return fetch(`${this._baseUrl}/cards`, {
@@ -20,7 +20,7 @@ getCardList() {
     });
 }
 
-// get user info from server
+// GET user info from server
 // GET //https://around.nomoreparties.co/v!/group-12/users/me"
 getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -36,7 +36,7 @@ getUserInfo() {
     });
 }
 
-// put new user info to the server
+// PATCH new user info to the server
 // PATCH //https://around.nomoreparties.co/v!/group-12/users/me"
 addUserInfo( {name, about }) {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -58,7 +58,7 @@ addUserInfo( {name, about }) {
     });
 }
 
-// add new card to display using 'new place' popup form
+// POST new card to display using 'new place' popup form
 // POST //https://around.nomoreparties.co/v!/group-12/cards"
 addCard( { name, link } ) {
     return fetch(`${this._baseUrl}/cards`, {
@@ -79,6 +79,7 @@ addCard( { name, link } ) {
 }
 
 // delete card from display using 'garbage can'
+// POST change to the server
 // POST //https://around.nomoreparties.co/v!/group-12/cards/cardId"
 removeCard( _id ) {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
@@ -110,20 +111,6 @@ addLike(_id) {
             authorization: this._authToken,
             "Content-type": "application/json",
         },
-    
-        // body: JSON.stringify({
-        //     name: "testName",
-        //     about: "testAbout",
-        //     avatar: "testAvatar",
-        //     cohort: "testCohort",
-        //     _id: "testOwnerId"
-
-            // name: myName,
-            // about: myAbout,
-            // avatar: myAvatar,
-            // cohort: myCohort,
-            // _id: myOwnerId
-        // })
     })
     
     .then(res =>  {
@@ -136,12 +123,9 @@ addLike(_id) {
     })
 }
 
+// remove a like from a card
+// DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId 
 removeLike(_id, name) {
-    const myName = document.querySelector('.intro__name');
-    const myAbout = document.querySelector('.intro__occupation');
-    const myAvatar = document.querySelector('.intro__image');
-    const myCohort = "12";
-    const myOwnerId = "3f769460ee50cd15e754d8b8";
     console.log('id=', _id);
     console.log('name=', name);
     return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
@@ -150,20 +134,6 @@ removeLike(_id, name) {
             authorization: this._authToken,
             "Content-type": "application/json",
         },
-    
-        // body: JSON.stringify({
-        //     name: "testName",
-        //     about: "testAbout",
-        //     avatar: "testAvatar",
-        //     cohort: "testCohort",
-        //     _id: "testOwnerId"
-
-            // name: myName,
-            // about: myAbout,
-            // avatar: myAvatar,
-            // cohort: myCohort,
-            // _id: myOwnerId
-        // })
     })
     
     .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`) 
@@ -173,11 +143,10 @@ removeLike(_id, name) {
     })
 }
 
+// add new avatar
 // PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar 
 
 addAvatar( {avatarLink} ) {
-    //note: avatarLink comes from the data inserted into the popup form
-    // debugger;
     return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: "PATCH",
         headers: {
@@ -185,8 +154,6 @@ addAvatar( {avatarLink} ) {
             "Content-type": "application/json",
         },
         body: JSON.stringify( {
-            //note: 'avatar' is the object key inside the data array on the server
-            //note: avatarLink is the value assigned to avatar
             avatar: avatarLink
       })
     })
@@ -195,10 +162,6 @@ addAvatar( {avatarLink} ) {
         console.log(err)
     });
 }
-
 }
-
-
-
 export default Api;
 
