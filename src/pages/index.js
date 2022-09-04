@@ -13,13 +13,9 @@ const api = new Api({
   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e",
 })
 
-// const buttonCan = document.querySelector('.card-grid__garbage');
 const buttonAvatar = document.querySelector('.intro__image-overlay');
 const buttonPencil = document.querySelector(".intro__button-pencil");
 const buttonPlus = document.querySelector(".intro__button-plus");
-// const nameElement = document.querySelector(".intro__name");
-// const aboutElementgetCardList = document.querySelector(".intro__occupation");
-// const avatarElement = document.querySelector(".intro__image");
 const popupEditProfileName = document.querySelector('input[name ="name"]');
 const popupEditProfileAbout = document.querySelector(
   'input[name = "about"]'
@@ -37,16 +33,6 @@ api.getUserInfo().then(userData => {
 }
 );
 
-// const popupNewPlaceLink = document.querySelector("#link-input");
-// const popupNewPlaceTitle = document.querySelector("#place-input");
-// const containerElementPerson = document.querySelector(
-  // "#person-popup-container"
-// );
-// const containerElementPicture = document.querySelector(
-  // "#picture-popup-container"
-// );
-// const popupElement = document.querySelector(".popup__container");
-// const containerForImages = document.querySelector(".card-grid__format");
 const newCardPopup = new PopupWithImage(selectors.previewPopup);
 const renderCard = (data) => {
   console.log("data = ", data);
@@ -76,8 +62,6 @@ let cardsSection;
     }
   );
 
-// const imageZoomPopup = new PopupWithImage(selectors.previewPopup);
-
 // add new card from server
 const  newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
@@ -90,7 +74,6 @@ const  newPlacePopup = new PopupWithForm({
   }
 })
 
-// 
 const editProfilePopup = new PopupWithForm( {
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (newUserData) => {
