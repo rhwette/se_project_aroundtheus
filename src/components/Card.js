@@ -1,11 +1,26 @@
 // import { getCacheDir } from "gh-pages";
 import Api from "../components/api.js";
+import PopupWithForm from "../components/PopupWithForm";
+import { selectors } from "../utils/constants";
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e"
 })
-// debugger
+
+const confirmDeletePopup = new PopupWithForm({
+  popupSelector:selectors.confirmPopup,
+  handleFormSubmit: (data) => {
+    //open the confirmDeletePopup
+    //if event = yes
+    // api
+    // remove
+    //otherwise return
+  }
+})
+
+const buttonConfirm = document.querySelector(".popup__container-button_confirm");
+
 class Card {
   constructor({ data, handleZoom }, cardSelector) {
     this._name = data.name;
@@ -32,19 +47,19 @@ class Card {
   _handleCan() {
     // debugger;
 
-    console.log('owner id =',this._ownerId);
-    console.log('this._myOwnerId=', this._myOwnerId);
-    if(this._ownerId === this._myOwnerId) {
-      console.log('this._element=', this._element);
-      console.log('ids are equal, ok to delete');
-      console.log('this._id=', this._id);
-      api.removeCard(this._id);
-      this._element.remove();
-    }
-    else {
-      console.log('not the same id,,,dont delete');
-        window.alert("sorry, but you are not authorized to delete this card");
-    }
+    // console.log('owner id =',this._ownerId);
+    // console.log('this._myOwnerId=', this._myOwnerId);
+    // if(this._ownerId === this._myOwnerId) {
+    //   console.log('this._element=', this._element);
+    //   console.log('ids are equal, ok to delete');
+    //   console.log('this._id=', this._id);
+    //   api.removeCard(this._id);
+    //   this._element.remove();
+    // }
+    // else {
+    //   console.log('not the same id,,,dont delete');
+    //     window.alert("sorry, but you are not authorized to delete this card");
+    // }
   
   };
 
@@ -69,6 +84,8 @@ class Card {
 
   }
 
+
+
   _setEventListeners() {
     // set listener for Heart
     this._element
@@ -78,7 +95,26 @@ class Card {
     // set listener for Garbage Can
     this._element
       .querySelector(".card-grid__garbage")
-      .addEventListener("click", this._handleCan);
+      .addEventListener("click", () => {
+    confirmDeletePopup.open();
+
+    buttonConfirm.addEventListener("click", () => {
+      api.removeCard(this._id);
+    confirmDeletePopup.close();
+    // location.reload();
+this._element.remove();
+      })
+      });
+
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    //   console.log('this._element=', this._element);
+    //   console.log('ids are equal, ok to delete');
+    //   console.log('this._id=', this._id);
+    //   api.removeCard(this._id);
+    //   this._element.remove();
+    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
 
     this._element
       .querySelector("img")

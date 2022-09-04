@@ -19,7 +19,8 @@ const api = new Api({
 // console.log('api.authToken=', api._authToken);
 
 
-
+// const buttonConfirm = document.querySelector(".popup__container-button_confirm")
+const buttonCan = document.querySelector('.card-grid__garbage');
 const buttonAvatar = document.querySelector('.intro__image-overlay');
 const buttonPencil = document.querySelector(".intro__button-pencil");
 const buttonPlus = document.querySelector(".intro__button-plus");
@@ -105,7 +106,7 @@ const imageZoomPopup = new PopupWithImage(selectors.previewPopup);
 
 
 // add new card from server
-const newPlacePopup = new PopupWithForm({
+const  newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
   handleFormSubmit: (newCardInfo) => {
     // debugger;
@@ -142,6 +143,33 @@ const editProfilePopup = new PopupWithForm({
     }
   })
 
+  // const confirmDeletePopup = new PopupWithForm({
+    // popupSelector:selectors.confirmPopup,
+    // handleFormSubmit: (data) => {
+      //open the confirmDeletePopup
+      //if event = yes
+      // api
+      // remove
+      //otherwise return
+    // }
+  // })
+
+
+  //xxxxxxxxxxxxxxxxxxxxxxxxx
+// const editProfilePopup = new PopupWithForm({
+//   popupSelector: selectors.profilePopup,
+//   handleFormSubmit: (newUserData) => {
+//   userInfo.setUserInfo(newUserData.name, newUserData.about)
+//   const name = newUserData.name;
+//   const about = newUserData.about;
+//   api.addUserInfo( {name, about})
+//   editProfilePopup.close()
+//    }
+//   }
+//   );
+  //xxxxxxxxxxxxxxxxxxxxxxxxx
+  
+
   function renderAvatar( {avatarLink} ) {
     // debugger;
     // const newAvatar = document.createElement('img');
@@ -160,7 +188,7 @@ function fillProfileForm() {
 buttonPencil.addEventListener("click", () => {
   // debugger;
   fillProfileForm();
-  formValidators["formEditProfile"].resetValidation();
+  // formValidators["formEditProfile"].resetValidation();
   editProfilePopup.open();
 });
 
@@ -175,6 +203,22 @@ buttonAvatar.addEventListener("click", () => {
   // formValidators["formEditAvatar"].resetValidation();
   editAvatarPopup.open();
 });
+
+// buttonConfirm.addEventListener("click", () => {
+//   confirmDeletePopup.close();
+// })
+
+ // this._element
+    //   .querySelector(".card-grid__garbage")
+    //   .addEventListener("click", this._handleCan);
+
+    // buttonCan.addEventListener("click", () => {
+      // debugger;
+      // console.log('buttonCan=', buttonCan);
+      // debugger;
+      // formValidators["formEditAvatar"].resetValidation();
+      // confirmDeletePopup.open();
+    // });   
 
 //-----------------------------------------------
 //  VALIDATION

@@ -55,9 +55,26 @@
     </section>
 
 
+
+            <!--POPUP AND FORM for CONFIRM DELETE-->
+            <div class="popup" id="confirm-popup-container">
+              <div class="popup__container popup__container_confirm" id="popupConfirmDelete">
+                <h2 class="popup__container-title">Are you sure?</h2>
+                <button type="button" class="popup__container-button-close" id="buttonConfirmDeleteClose"><img
+                    src="<%=require('./images/close.svg')%>" alt="close symbol" /></button>
+                <form name="formConfirmDelete" class="popup__form" id="confirmDeleteForm">
+                  <!-- <input name="avatarLink" placeholder="Avatar URL" class="popup__container-input popup__container-input-type-link" -->
+                  <!-- type="url" id="avatar-input" required /> -->
+                <!-- <span id="avatar-input-error"></span> -->
+                  <button type="click" class="popup__container-button popup__container-button_confirm " id="buttonConfirmDeleteYes">Yes</button>
+                </form>
+              </div>
+            </div>
+
+
         <!--POPUP AND FORM for ADDING AVATAR-->
         <div class="popup" id="avatar-popup-container">
-          <div class="popup__container-avatar" id="popupEditAvatar">
+          <div class="popup__container popup__container_avatar" id="popupEditAvatar">
             <h2 class="popup__container-title">Change profile picture</h2>
             <button type="button" class="popup__container-button-close" id="buttonEditAvatarClose"><img
                 src="<%=require('./images/close.svg')%>" alt="close symbol" /></button>
@@ -65,7 +82,7 @@
               <input name="avatarLink" placeholder="Avatar URL" class="popup__container-input popup__container-input-type-link"
               type="url" id="avatar-input" required />
             <span id="avatar-input-error"></span>
-              <button type="submit" class="popup__container-button popup__container-button-avatar " id="buttonEditAvatarSave">Save</button>
+              <button type="submit" class="popup__container-button popup__container-button_avatar " id="buttonEditAvatarSave">Save</button>
             </form>
           </div>
         </div>
