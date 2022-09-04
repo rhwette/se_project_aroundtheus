@@ -8,7 +8,6 @@ class FormValidator {
     this._form = formElement;
   }
   _showInputError(inputElement, errorMessage) {
-    // debugger;
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
@@ -16,7 +15,6 @@ class FormValidator {
   }
 
   _hideInputError(inputElement) {
-    // debugger;
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.textContent = "";
@@ -24,7 +22,6 @@ class FormValidator {
   }
 
   resetValidation() {
-    // debugger;
     this._toggleButtonState();
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
@@ -32,7 +29,6 @@ class FormValidator {
   }
 
   _toggleButtonState() {
-    // debugger;
     if (this._hasValidInputs(this._inputList)) {
       this._buttonElement.classList.add(this._inactiveButtonClass);
       this._buttonElement.disabled = true;
@@ -43,14 +39,12 @@ class FormValidator {
   }
 
   _hasValidInputs(inputList) {
-    // debugger;
     return inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
   _checkInputValidity(formElement, inputElement) {
-    // debugger;
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
     } else {
@@ -59,7 +53,6 @@ class FormValidator {
   }
 
   _setEventListeners() {
-    // debugger;
     this._inputList = Array.from(
       this._form.querySelectorAll(this._inputSelector)
     );
@@ -73,7 +66,6 @@ class FormValidator {
   }
 
   enableValidation() {
-    // debugger;
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });

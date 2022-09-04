@@ -1,4 +1,3 @@
-// import { getCacheDir } from "gh-pages";
 import Api from "../components/api.js";
 import PopupWithForm from "../components/PopupWithForm";
 import { selectors } from "../utils/constants";
@@ -11,11 +10,6 @@ const api = new Api({
 const confirmDeletePopup = new PopupWithForm({
   popupSelector:selectors.confirmPopup,
   handleFormSubmit: (data) => {
-    //open the confirmDeletePopup
-    //if event = yes
-    // api
-    // remove
-    //otherwise return
   }
 })
 
@@ -45,29 +39,12 @@ class Card {
   }
 
   _handleCan() {
-    // debugger;
-
-    // console.log('owner id =',this._ownerId);
-    // console.log('this._myOwnerId=', this._myOwnerId);
-    // if(this._ownerId === this._myOwnerId) {
-    //   console.log('this._element=', this._element);
-    //   console.log('ids are equal, ok to delete');
-    //   console.log('this._id=', this._id);
-    //   api.removeCard(this._id);
-    //   this._element.remove();
-    // }
-    // else {
-    //   console.log('not the same id,,,dont delete');
-    //     window.alert("sorry, but you are not authorized to delete this card");
-    // }
-  
   };
 
 
 
   
   _handleHeart(event) {
-    // debugger;
     const cardGridLikes = this._element.querySelector(".card-grid__likes");
     if(event.target.classList.length ===1) {
       api.addLike(this._id);
@@ -101,20 +78,9 @@ class Card {
     buttonConfirm.addEventListener("click", () => {
       api.removeCard(this._id);
     confirmDeletePopup.close();
-    // location.reload();
-this._element.remove();
+    this._element.remove();
       })
       });
-
-//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    //   console.log('this._element=', this._element);
-    //   console.log('ids are equal, ok to delete');
-    //   console.log('this._id=', this._id);
-    //   api.removeCard(this._id);
-    //   this._element.remove();
-    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-
 
     this._element
       .querySelector("img")
@@ -126,8 +92,8 @@ this._element.remove();
       this._likes = [];
     }
     console.log('this =', this);
-console.log("CREATCARD this._likes =", this._likes);
-console.log("CREATCARD this._likes.length =", this._likes.length);
+    console.log("CREATCARD this._likes =", this._likes);
+    console.log("CREATCARD this._likes.length =", this._likes.length);
     this._element = this._getTemplate();
     const cardHeart = this._element.querySelector(".card-grid__icon");
     const cardGridPicture = this._element.querySelector(".card-grid__picture");
@@ -135,7 +101,6 @@ console.log("CREATCARD this._likes.length =", this._likes.length);
     const cardGridLikes = this._element.querySelector(".card-grid__likes");
     cardGridPicture.src = this._link;
     cardGridPicture.alt = this._name;
-    // debugger;
     for(let i = 0; i < this._likes.length; i++) {
       if(this._likes[i]._id === "3f769460ee50cd15e754d8b8") {
         cardHeart.classList.add("card-grid__icon_active");
@@ -148,12 +113,6 @@ console.log("CREATCARD this._likes.length =", this._likes.length);
       cardCan.classList.add("card-grid__garbage-invisible");
     }
 
-   
-    // if (id is not mine){
-    //   make the can class the invisible class
-    //   else the can class is visible
-    // }
-    //
     cardGridText.textContent = this._name;
     cardGridLikes.textContent = this._likes.length;
     this._setEventListeners();

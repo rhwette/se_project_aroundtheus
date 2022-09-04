@@ -13,26 +13,25 @@
 
 - utilizes Webpack
 - utilizes OOP
-- utilizes additional listeners with 'click', 'mousedown' and 'keydown'
+- utilizes additional listeners with 'click', 'mousedown', 'keydown', and submit
 - utilizes Javascript to add interactivity to website
 - utilizes Javascript to add form validation
 - utilizes Javascript to control Card display & remove
+- utilizes Javascript to add and remove 'Likes"
 - utilizes Templates
 - utilizes flat BEM file structure
+- UX includes delete confirmations, avatar and user profile adds
 - media at-rules at several breakpoints facilitate responsiveness
 - flexbox assist with positioning
 - images compressed using https://tinypng.com/
 - the "Inter" font is included (style:normal at weights: 400, 500, and 900)
-- the project repository is located at https://github.com/rhwette/web_project_4.git
+- the project repository is located at https://github.com/rhwette/se_project_aroundtheus.git
 
 ### Plans for Future Updates
 
 - change grid photos
 - add hyperlinks to photos to describe locations
 - privacy statement and "contact us" button in footer
-- to make the page more general purpose....
--     add capability to change cousteau picture
--     add capability to change page title
 - link to github page....
 https://github.com/rhwette/se_project_aroundtheus.git
 
