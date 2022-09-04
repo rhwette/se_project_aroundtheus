@@ -99,12 +99,6 @@ removeCard( _id ) {
 // add a like to a card
 // PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId 
 addLike(_id) {
-    const myName = document.querySelector('.intro__name');
-    const myAbout = document.querySelector('.intro__occupation');
-    const myAvatar = document.querySelector('.intro__image');
-    const myCohort = "12";
-    const myOwnerId = "3f769460ee50cd15e754d8b8";
-    console.log('id=', _id);
     return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
         method: "PUT",
         headers: {
@@ -126,8 +120,6 @@ addLike(_id) {
 // remove a like from a card
 // DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId 
 removeLike(_id, name) {
-    console.log('id=', _id);
-    console.log('name=', name);
     return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
         method: "DELETE",
         headers: {
