@@ -12,7 +12,10 @@ const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e",
 })
-
+// const cardCan = document.querySelector('.card-grid__garbage');
+// console.log('cardCan', cardCan);
+const buttonConfirm = document.querySelector(".popup__container-button_confirm");
+console.log("buttonConfirm =" , buttonConfirm);
 const buttonAvatar = document.querySelector('.intro__image-overlay');
 const buttonPencil = document.querySelector(".intro__button-pencil");
 const buttonPlus = document.querySelector(".intro__button-plus");
@@ -59,6 +62,8 @@ let cardsSection;
     }
   );
 
+
+
 //NEW PLACE POPUP
 const  newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
@@ -93,6 +98,18 @@ const editProfilePopup = new PopupWithForm( {
       })
     }
   })
+
+  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  //CONFIRM DELETE POPUP
+  // const confirmDeletePopup = new PopupWithForm({
+  //   popupSelector: selectors.confirmPopup,
+  //   handleFormSubmit: () => {
+  //     console.log('test');
+
+  //   }
+  // })
+
+  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 function renderAvatar( {avatarLink} ) {
   const avatarNew = document.getElementById("introImage");
@@ -153,6 +170,26 @@ buttonAvatar.addEventListener("click", () => {
 
   editAvatarPopup.open();
 });
+
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+//EVENT LISTENER - CONFIRM DELETE POPUP
+// console.log('cardCan=', cardCan);
+// cardCan.addEventListener("click", () => {
+
+//   confirmDeletePopup.open();
+// })
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+
+
+//EVENT LISTENER - CONFIRM DELETE YES BUTTON
+// buttonConfirm.addEventListener("click", () => {
+
+// });
+
+
 
 //-----------------------------------------------
 //  VALIDATION

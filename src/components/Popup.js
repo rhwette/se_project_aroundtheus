@@ -1,5 +1,7 @@
 import { ESC_KEYCODE } from "../utils/constants";
 
+const buttonConfirm = document.querySelector(".popup__container-button_confirm");
+
 class Popup {
   constructor(popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
@@ -14,8 +16,11 @@ class Popup {
   }
 
   open() {
+    console.log('open the popup...inside popup.js open');
     this._popupElement.classList.add("popup_visible");
+    console.log('add classList to show popup');
     this.buttonClose.addEventListener("click", this.close);
+    console.log('set the addeventlistener for big X');
     this._popupElement.addEventListener(
       "mousedown",
       this._closePopupWithRemoteClick
@@ -24,13 +29,31 @@ class Popup {
   }
 
   close() {
-    this._popupElement.classList.remove("popup_visible");
+    // debugger;
+    console.log('inside close');
+    buttonConfirm.removeEventListener("click", () => {
+    console.log('remove listener for buttonConfirm');
+    // api.removeCard(this._id);
+    confirmDeletePopup.close();
+    // this._element.remove();
+  })
+
+//   this._element
+//   .querySelector(".card-grid__garbage")
+//   .removeEventListener("click", () => {
+// console.log('remove AAAAA');
+//   });
+
+this._popupElement.classList.remove("popup_visible");
+console.log('after remove listener for buttonConfirm');
     this._popupElement.removeEventListener(
       "mousedown",
       this._closePopupWithRemoteClick
-    );
-    document.removeEventListener("keydown", this._closePopupWithEscape);
-    this.buttonClose.removeEventListener("click", this.close);
+      );
+      document.removeEventListener("keydown", this._closePopupWithEscape);
+      this.buttonClose.removeEventListener("click", this.close);
+      console.log('leave popup.js close');
+      
   }
 
   _closePopupWithEscape(event) {

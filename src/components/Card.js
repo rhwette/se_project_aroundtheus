@@ -13,6 +13,10 @@ const confirmDeletePopup = new PopupWithForm({
   }
 })
 
+
+
+
+
 const buttonConfirm = document.querySelector(".popup__container-button_confirm");
 
 class Card {
@@ -39,7 +43,42 @@ class Card {
   }
 
   _handleCan() {
-  };
+    console.log("this._id=", this._id);
+    // debugger;
+    // const buttonConfirm = this._element.querySelector(".popup__container-button_confirm");
+    console.log('clicked on can...buttonConfirm=', buttonConfirm);
+    console.log('clicked on can...stop here then open the confirm popup');
+    confirmDeletePopup.open();
+    // debugger;
+    console.log('after opening the popup...print this after opening popup');
+    buttonConfirm.addEventListener("click", () => {
+    
+      console.log ('buttonConfirm listener');
+      console.log("this._id = ", this._id);
+          api.removeCard(this._id);
+      confirmDeletePopup.close();
+      this._element.remove();
+  })
+  }
+  
+  
+  //xxxxxxxxxxxxxxxxxxxxxxx
+  // EVENT LISTENER - GARBAGE CAN
+    // this._element
+    //   .querySelector(".card-grid__garbage")
+    //   .addEventListener("click", () => {
+    //     // debugger
+    //     console.log('stop here then open the confirm popup');
+    //     confirmDeletePopup.open();
+    //     console.log('print this after opening popup');
+
+    //     buttonConfirm.addEventListener("click", () => {
+    //     api.removeCard(this._id);
+    // confirmDeletePopup.close();
+    // this._element.remove();
+    //   })
+    //   });
+  //xxxxxxxxxxxxxxxxxxxxxxx
 
   _handleHeart(event) {
     const cardGridLikes = this._element.querySelector(".card-grid__likes");
@@ -58,30 +97,41 @@ class Card {
 
   }
 
+
   _setEventListeners() {
-    // set listener for Heart
+    // EVENT LISTENER - HEART
     this._element
       .querySelector(".card-grid__icon")
       .addEventListener("click", this._handleHeart.bind(this));
 
-    // set listener for Garbage Can
+    // EVENT LISTENER - GARBAGE CAN
     this._element
       .querySelector(".card-grid__garbage")
-      .addEventListener("click", () => {
-    confirmDeletePopup.open();
+      .addEventListener("click", this._handleCan.bind(this));
 
-    buttonConfirm.addEventListener("click", () => {
-      api.removeCard(this._id);
-    confirmDeletePopup.close();
-    this._element.remove();
-      })
-      });
+    // EVENT LISTENER - GARBAGE CAN
+    // this._element
+    //   .querySelector(".card-grid__garbage")
+    //   .addEventListener("click", () => {
+    //     // debugger
+    //     console.log('stop here then open the confirm popup');
+    //     confirmDeletePopup.open();
+    //     console.log('print this after opening popup');
 
+    //     buttonConfirm.addEventListener("click", () => {
+    //     api.removeCard(this._id);
+    // confirmDeletePopup.close();
+    // this._element.remove();
+    //   })
+    //   });
+
+    // EVENT LISTENER - IMG TAG
     this._element
       .querySelector("img")
       .addEventListener("click", this._handleZoom);
   }
 
+  //CREATE CARD
   createCard() {
     if(this._likes === undefined){
       this._likes = [];
@@ -100,6 +150,7 @@ class Card {
     }
     //
     const cardCan = this._element.querySelector(".card-grid__garbage");
+    // console.log('cardCan=', cardCan);
     if (this._ownerId != this._myOwnerId) {
       cardCan.classList.add("card-grid__garbage-invisible");
     }
