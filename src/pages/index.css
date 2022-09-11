@@ -26,7 +26,7 @@
 }
 @media screen and (max-width: 320px) {
   .card-grid {
-    /* max-width: 282px; */
+    max-width: 282px;
     margin-top: 36px;
   }
 }
@@ -202,8 +202,6 @@
 
 @media screen and (max-width: 320px) {
   .footer {
-    /* width: 100%; */
-    /* max-width: 282px; */
     margin: 50px 19px 0;
   }
 }
@@ -447,11 +445,9 @@
 
 @media screen and (max-width: 320px) {
   .intro__button-pencil {
-    /* margin-top: 30px; */
     width: 18px;
     height: 18px;
     padding: 4.25px;
-    /* margin-left: 10px; */
   }
 }
 
@@ -610,9 +606,7 @@
     padding: 0;
     margin-left: 15vw;
     margin-bottom: 14px;
-    /* font-size: 22px; */
     line-height: 27px;
-    /* max-width: 200px; */
   }
 }
 
@@ -739,19 +733,11 @@
   height: 175px;
 }
 
-
-
 @media screen and (max-width: 650px) {
   .popup__container {
     max-width: 282px;
   }
 }
-
-/* @media screen and (max-width: 500px) {
-  .popup__container {
-    max-width: 282px;
-  }
-} */
 
 @media screen and (max-width: 320px) {
   .popup__container {
@@ -875,28 +861,6 @@
   }
 }
 
-/* @media screen and (max-width: 500px) { */
-  /* .popup__form { */
-    /* width: 238px; */
-    /* margin-top: 0px; */
-    /* margin-bottom: 0; */
-    /* margin-left: 22px; */
-    /* margin-right: 22px; */
-    /* padding: 0; */
-  /* } */
-/* } */
-
-/* @media screen and (max-width: 320px) {
-  .popup__form {
-    width: 238px;
-    margin-top: 0px;
-    margin-bottom: 0;
-    margin-left: 22px;
-    margin-right: 22px;
-    padding: 0;
-  }
-} */
-
 .popup__container-input {
   width: 350px;
   max-width: 358px;
@@ -979,19 +943,12 @@
   }
 }
 
-/* @media screen and (max-width: 500px) {
-  .popup__container-title {
-    margin-left: 22px;
-  }
-} */
-
 @media screen and (max-width: 320px) {
   .popup__container-title {
     width: 238px;
     font-size: 18px;
     line-height: 21.78px;
     margin-bottom: 46px;
-    /* margin-left: 22px; */
     margin-right: 22px;
     margin-top: 25px;
   }

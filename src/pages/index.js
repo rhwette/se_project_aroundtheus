@@ -13,9 +13,6 @@ const api = new Api({
   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e",
 })
 const buttonCan = document.querySelector('.card-grid__garbage');
-console.log('buttonCan=', buttonCan);
-// const buttonConfirm = document.querySelector(".popup__container-button_confirm");
-// console.log("buttonConfirm =" , buttonConfirm);
 const buttonAvatar = document.querySelector('.intro__image-overlay');
 const buttonPencil = document.querySelector(".intro__button-pencil");
 const buttonPlus = document.querySelector(".intro__button-plus");
@@ -25,6 +22,11 @@ const popupEditProfileAbout = document.querySelector(
   );
   
 const userInfo = new UserInfo(selectors);
+
+//SHOW LIST OF CARDS FROM SERVER
+api.getCardList().then(res => {
+  console.log(res);
+});
 
 //GET USER INFO from SERVER
 api.getUserInfo().then(userData => {
@@ -62,8 +64,6 @@ let cardsSection;
     }
   );
 
-
-
 //NEW PLACE POPUP
 const  newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
@@ -92,25 +92,12 @@ const editProfilePopup = new PopupWithForm( {
   const editAvatarPopup = new PopupWithForm({
     popupSelector: selectors.avatarPopup,
       handleFormSubmit: ( avatarLink  ) => {
-        // debugger;
       api.addAvatar(avatarLink).then(res => {
       renderAvatar(avatarLink);
       editAvatarPopup.close();
       })
     }
   })
-
-  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  //CONFIRM DELETE POPUP
-  // const confirmDeletePopup = new PopupWithForm({
-  //   popupSelector: selectors.confirmPopup,
-  //   handleFormSubmit: () => {
-  //     console.log('test');
-
-  //   }
-  // })
-
-  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 function renderAvatar( {avatarLink} ) {
   const avatarNew = document.getElementById("introImage");
@@ -129,9 +116,9 @@ function fillProfileForm() {
 //EVENT LISTENER - PENCIL BUTTON
 buttonPencil.addEventListener("click", () => {
   fillProfileForm();
-  // formValidators["formEditProfile"].resetValidation();
+  formValidators["formEditProfile"].resetValidation();
 
-  //use code below to change 'SAVE' to 'SAVING'
+  // CHANGE 'SAVE' to 'SAVING'
     const btn = document.getElementById("buttonEditProfileSave");
     btn.addEventListener('click', () => {
       if(btn.innerText === "Save") {
@@ -144,9 +131,9 @@ buttonPencil.addEventListener("click", () => {
 
 //EVENT LISTENER - PLUS BUTTON
 buttonPlus.addEventListener("click", () => {
-  // formValidators["formNewPlace"].resetValidation();
+  formValidators["formNewPlace"].resetValidation();
 
-  //use code below to change 'CREATE' to 'SAVING'
+  // CHANGE 'SAVE' to 'SAVING'
     const btn = document.getElementById("buttonNewPlaceCreate");
     btn.addEventListener('click', () => {
       if(btn.innerText === "Create") {
@@ -159,9 +146,9 @@ buttonPlus.addEventListener("click", () => {
 
 //EVENT LISTENER - AVATAR PENCIL BUTTON
 buttonAvatar.addEventListener("click", () => {
-  // formValidators["formEditAvatar"].resetValidation();
+  formValidators["formEditAvatar"].resetValidation();
 
-  //use code below to change 'SAVE' to 'SAVING'
+  // CHANGE 'SAVE' to 'SAVING'
     const btn = document.getElementById("buttonEditAvatarSave");
     btn.addEventListener('click', () => {
       if(btn.innerText === "Save") {
@@ -171,22 +158,6 @@ buttonAvatar.addEventListener("click", () => {
 
   editAvatarPopup.open();
 });
-
-//EVENT LISTENER - CONFIRM DELETE POPUP
-// this._element
-// .querySelector(".card-grid__garbage")
-// .addEventListener("click", this._handleCan.bind(this));
-// console.log('cardCan=', cardCan);
-// buttonCan.addEventListener("click", () => {
-
-// confirmDeletePopup.open();
-// })
-
-
-
-
-
-
 
 //-----------------------------------------------
 //  VALIDATION
