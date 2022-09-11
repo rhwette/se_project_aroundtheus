@@ -12,10 +12,10 @@ const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e",
 })
-// const cardCan = document.querySelector('.card-grid__garbage');
-// console.log('cardCan', cardCan);
-const buttonConfirm = document.querySelector(".popup__container-button_confirm");
-console.log("buttonConfirm =" , buttonConfirm);
+const buttonCan = document.querySelector('.card-grid__garbage');
+console.log('buttonCan=', buttonCan);
+// const buttonConfirm = document.querySelector(".popup__container-button_confirm");
+// console.log("buttonConfirm =" , buttonConfirm);
 const buttonAvatar = document.querySelector('.intro__image-overlay');
 const buttonPencil = document.querySelector(".intro__button-pencil");
 const buttonPlus = document.querySelector(".intro__button-plus");
@@ -92,6 +92,7 @@ const editProfilePopup = new PopupWithForm( {
   const editAvatarPopup = new PopupWithForm({
     popupSelector: selectors.avatarPopup,
       handleFormSubmit: ( avatarLink  ) => {
+        // debugger;
       api.addAvatar(avatarLink).then(res => {
       renderAvatar(avatarLink);
       editAvatarPopup.close();
@@ -171,23 +172,19 @@ buttonAvatar.addEventListener("click", () => {
   editAvatarPopup.open();
 });
 
-//xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 //EVENT LISTENER - CONFIRM DELETE POPUP
+// this._element
+// .querySelector(".card-grid__garbage")
+// .addEventListener("click", this._handleCan.bind(this));
 // console.log('cardCan=', cardCan);
-// cardCan.addEventListener("click", () => {
+// buttonCan.addEventListener("click", () => {
 
-//   confirmDeletePopup.open();
+// confirmDeletePopup.open();
 // })
-//xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
 
 
-
-//EVENT LISTENER - CONFIRM DELETE YES BUTTON
-// buttonConfirm.addEventListener("click", () => {
-
-// });
 
 
 

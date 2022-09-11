@@ -7,11 +7,8 @@ const api = new Api({
   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e"
 })
 
-const confirmDeletePopup = new PopupWithForm({
-  popupSelector:selectors.confirmPopup,
-  handleFormSubmit: (data) => {
-  }
-})
+
+
 
 
 
@@ -32,6 +29,18 @@ class Card {
     this._handleCan = this._handleCan.bind(this);
     this._handleZoom = handleZoom.bind(this);
   }
+
+   //CONFIRM DELETE POPUP
+// const confirmDeletePopup = new PopupWithForm({
+  // popupSelector:selectors.confirmPopup,
+  // handleFormSubmit: () => {
+    // console.log('AAAAAAA');
+          // console.log('clicked yes');
+      // api.removeCard(this._id);
+      // confirmDeletePopup.close();
+      // this._element.remove();
+  // }
+// })
   
 
   _getTemplate() {
@@ -42,43 +51,42 @@ class Card {
     return cardElement;
   }
 
-  _handleCan() {
-    console.log("this._id=", this._id);
-    // debugger;
-    // const buttonConfirm = this._element.querySelector(".popup__container-button_confirm");
-    console.log('clicked on can...buttonConfirm=', buttonConfirm);
-    console.log('clicked on can...stop here then open the confirm popup');
-    confirmDeletePopup.open();
-    // debugger;
-    console.log('after opening the popup...print this after opening popup');
-    buttonConfirm.addEventListener("click", () => {
-    
-      console.log ('buttonConfirm listener');
-      console.log("this._id = ", this._id);
-          api.removeCard(this._id);
-      confirmDeletePopup.close();
-      this._element.remove();
+_handleCan() {
+  console.log("this._id=", this._id);
+  const confirmDeletePopup = new PopupWithForm({
+    popupSelector:selectors.confirmPopup,
+    handleFormSubmit: () => {
+      console.log('AAAAAAA');
+            console.log('clicked yes');
+        api.removeCard(this._id);
+        confirmDeletePopup.close();
+        this._element.remove();
+    }
   })
-  }
-  
-  
-  //xxxxxxxxxxxxxxxxxxxxxxx
-  // EVENT LISTENER - GARBAGE CAN
-    // this._element
-    //   .querySelector(".card-grid__garbage")
-    //   .addEventListener("click", () => {
-    //     // debugger
-    //     console.log('stop here then open the confirm popup');
-    //     confirmDeletePopup.open();
-    //     console.log('print this after opening popup');
+  confirmDeletePopup.open();
+}
 
-    //     buttonConfirm.addEventListener("click", () => {
-    //     api.removeCard(this._id);
-    // confirmDeletePopup.close();
-    // this._element.remove();
-    //   })
-    //   });
-  //xxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+
+
+
+  // _handleCan() {
+    // debugger;
+    // console.log("this._id=", this._id);
+    // confirmDeletePopup.open();
+    
+    // console.log('just before addEVL on yes button');
+    // buttonConfirm.addEventListener("click", function7);
+    
+  //   const function7 = () => {
+  //     console.log('clicked yes');
+  //     api.removeCard(this._id);
+  //     confirmDeletePopup.close();
+  //     this._element.remove();
+  // }
+// };
 
   _handleHeart(event) {
     const cardGridLikes = this._element.querySelector(".card-grid__likes");
@@ -96,7 +104,6 @@ class Card {
   };
 
   }
-
 
   _setEventListeners() {
     // EVENT LISTENER - HEART
