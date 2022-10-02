@@ -79,12 +79,23 @@ const  newPlacePopup = new PopupWithForm({
 const editProfilePopup = new PopupWithForm( {
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (newUserData) => {
-    userInfo.setUserInfo(newUserData.name, newUserData.about)
+    console.log('newUserData=', newUserData);
+    console.log('newUserData.name=', newUserData.name);
+    console.log('newUserData.about=', newUserData.about);
+    // console.log('newUserData.avatar=', avatar);
+    userInfo.setUserInfo(newUserData.name, newUserData.about, newUserData.avatar)
     const name = newUserData.name;
     const about = newUserData.about;
+    const avatar = newUserData.avatar;
+    console.log('name=', name);
+    console.log('about=', about);
+    // console.log('avatar=', avatar);
     api.addUserInfo( {name, about})
+    // renderAvatar(avatar);
+    // console.log('avatarLink=', avatar.Link);
     editProfilePopup.close()
-   }
+    window.location.reload();
+  }
   }
   );
 
@@ -99,9 +110,9 @@ const editProfilePopup = new PopupWithForm( {
     }
   })
 
-function renderAvatar( {avatarLink} ) {
+function renderAvatar( {avatar} ) {
   const avatarNew = document.getElementById("introImage");
-  avatarNew.src = avatarLink;
+  avatarNew.src = avatar;
 }
 
 function fillProfileForm() {
@@ -115,16 +126,17 @@ function fillProfileForm() {
 
 //EVENT LISTENER - PENCIL BUTTON
 buttonPencil.addEventListener("click", () => {
+  // debugger;
   fillProfileForm();
   formValidators["formEditProfile"].resetValidation();
 
   // CHANGE 'SAVE' to 'SAVING'
-    const btn = document.getElementById("buttonEditProfileSave");
-    btn.addEventListener('click', () => {
-      if(btn.innerText === "Save") {
-        btn.innerText = "Saving"
-      }
-    })
+    // const btn = document.getElementById("buttonEditProfileSave");
+    // btn.addEventListener('click', () => {
+    //   if(btn.innerText === "Save") {
+    //     btn.innerText = "Saving"
+    //   }
+    // })
 
   editProfilePopup.open();
 });
