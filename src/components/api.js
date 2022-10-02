@@ -38,7 +38,9 @@ getUserInfo() {
 
 // PATCH new user info to the server
 // PATCH //https://around.nomoreparties.co/v!/group-12/users/me"
-addUserInfo( {name, about }) {
+async addUserInfo( {name, about }) {
+    console.log('name=', name);
+    console.log('about=', about);
     return fetch(`${this._baseUrl}/users/me`, {
         method: "PATCH",
         headers: {
@@ -139,6 +141,7 @@ removeLike(_id, name) {
 // PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar 
 
 addAvatar( {avatarLink} ) {
+    console.log('avatarLink=', avatarLink);
     return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: "PATCH",
         headers: {
