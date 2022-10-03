@@ -2,6 +2,11 @@ class Api {
     constructor({ baseUrl, authToken}) {
         this._baseUrl = baseUrl;
         this._authToken = authToken;
+        //add definition of headers in the constructor
+        this._headers = {
+            authorization: this._authToken,
+            "Content-type": "application/json"
+        }
     }
 
 // GET all cards from server   
@@ -9,10 +14,12 @@ class Api {
 getCardList() {
     return fetch(`${this._baseUrl}/cards`, {
         method: "GET",
-        headers: {
-            authorization: this._authToken,
-            "Content-type": "application/json",
-        }
+        // headers: {
+        //     authorization: this._authToken,
+        //     "Content-type": "application/json",
+        // }
+        //use the definition of headers from the constructor
+        headers: this._headers
     })
     .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
     .catch((err) => {
@@ -25,10 +32,12 @@ getCardList() {
 getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
         method: "GET",
-        headers: {
-            authorization: this._authToken,
-            "Content-type": "application/json",
-        }
+        // headers: {
+        //     authorization: this._authToken,
+        //     "Content-type": "application/json",
+        // }
+        //use the definition of headers from the constructor
+        headers: this._headers
     })
     .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
     .catch((err) => {
@@ -39,14 +48,17 @@ getUserInfo() {
 // PATCH new user info to the server
 // PATCH //https://around.nomoreparties.co/v!/group-12/users/me"
 async addUserInfo( {name, about }) {
+    //  addUserInfo( {name, about }) {
     console.log('name=', name);
     console.log('about=', about);
     return fetch(`${this._baseUrl}/users/me`, {
         method: "PATCH",
-        headers: {
-            authorization: this._authToken,
-            "Content-type": "application/json",
-        },
+        // headers: {
+        //     authorization: this._authToken,
+        //     "Content-type": "application/json",
+        // }
+        //use the definition of headers from the constructor
+        headers: this._headers,
         body: JSON.stringify({
             name,
             about
@@ -65,10 +77,12 @@ async addUserInfo( {name, about }) {
 addCard( { name, link } ) {
     return fetch(`${this._baseUrl}/cards`, {
         method: "POST",
-        headers: {
-            authorization: this._authToken,
-            "Content-type": "application/json",
-        },
+        // headers: {
+        //     authorization: this._authToken,
+        //     "Content-type": "application/json",
+        // }
+        //use the definition of headers from the constructor
+        headers: this._headers,
         body: JSON.stringify( {
             name,
             link
@@ -86,11 +100,12 @@ addCard( { name, link } ) {
 removeCard( _id ) {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
         method: "DELETE",
-        headers: {
-            authorization: this._authToken,
-            "Content-type": "application/json",
-        },
-
+        // headers: {
+        //     authorization: this._authToken,
+        //     "Content-type": "application/json",
+        // }
+        //use the definition of headers from the constructor
+        headers: this._headers
     })
     .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
     .catch((err) => {
@@ -103,10 +118,12 @@ removeCard( _id ) {
 addLike(_id) {
     return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
         method: "PUT",
-        headers: {
-            authorization: this._authToken,
-            "Content-type": "application/json",
-        },
+        // headers: {
+        //     authorization: this._authToken,
+        //     "Content-type": "application/json",
+        // }
+        //use the definition of headers from the constructor
+        headers: this._headers
     })
     
     .then(res =>  {
@@ -124,10 +141,12 @@ addLike(_id) {
 removeLike(_id, name) {
     return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
         method: "DELETE",
-        headers: {
-            authorization: this._authToken,
-            "Content-type": "application/json",
-        },
+        // headers: {
+        //     authorization: this._authToken,
+        //     "Content-type": "application/json",
+        // }
+        //use the definition of headers from the constructor
+        headers: this._headers
     })
     
     .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`) 
@@ -144,10 +163,12 @@ addAvatar( {avatarLink} ) {
     console.log('avatarLink=', avatarLink);
     return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: "PATCH",
-        headers: {
-            authorization: this._authToken,
-            "Content-type": "application/json",
-        },
+        // headers: {
+        //     authorization: this._authToken,
+        //     "Content-type": "application/json",
+        // }
+        //use the definition of headers from the constructor
+        headers: this._headers,
         body: JSON.stringify( {
             avatar: avatarLink
       })

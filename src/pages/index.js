@@ -79,21 +79,18 @@ const  newPlacePopup = new PopupWithForm({
 const editProfilePopup = new PopupWithForm( {
   popupSelector: selectors.profilePopup,
   handleFormSubmit: async (newUserData) => {
+      // handleFormSubmit:  (newUserData) => {
     console.log('newUserData=', newUserData);
     console.log('newUserData.name=', newUserData.name);
     console.log('newUserData.about=', newUserData.about);
-    // console.log('newUserData.avatar=', avatar);
-    // userInfo.setUserInfo(newUserData.name, newUserData.about, newUserData.avatar)
     userInfo.setUserInfo(newUserData.name, newUserData.about)
     const name = newUserData.name;
     const about = newUserData.about;
     const avatar = newUserData.avatar;
     console.log('name=', name);
     console.log('about=', about);
-    // console.log('avatar=', avatar);
-    await api.addUserInfo( {name, about})
-    // renderAvatar(avatar);
-    // console.log('avatarLink=', avatar.Link);
+     await api.addUserInfo( {name, about})
+      //  api.addUserInfo( {name, about})
     editProfilePopup.close()
     // window.location.reload();
   }
