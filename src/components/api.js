@@ -38,9 +38,9 @@ getCardList() {
     })
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
     .then(checkResponse)
-    .catch((err) => {
-        console.log(err)
-    });
+    // .catch((err) => {
+    //     console.log(err)
+    // });
 }
 
 // GET user info from server
@@ -196,9 +196,12 @@ addAvatar( {avatarLink} ) {
     })
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
     .then(checkResponse)
-    .catch((err) => {
-        console.log(err)
-    });
+    // .catch((err) => {
+    //     console.log(err)
+    // });
+    // .catch((err) => {
+    //     console.log(err)
+    // });
 }
 }
 export default Api;

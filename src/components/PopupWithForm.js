@@ -22,14 +22,32 @@ export default class PopupWithForm extends Popup {
     return inputObject;
   }
 
-  open(evt) {
+  open(btn) {
     super.open();
+    //for Pencil Button, at open, the label is set to "Save"
+    if(btn.innerText === "Saving") {
+      btn.innerText = "Save"
+    }
+    if(btn.innerText === "Creating") {
+      btn.innerText = "Create"
+    }
+    // if(btn.innerText === "Yes") {
+    //   btn.innerText = "Yes"
+    // }
+
+
     this._popupForm.addEventListener("submit", this._handleSubmit);
   
 };
 
   close() {
     super.close();
+      // CHANGE 'SAVE' to 'SAVING'
+      // const btn = document.getElementById("buttonEditProfileSave");
+        // if(btn.innerText === "Saving") {
+        //   btn.innerText = "Save"
+        // }
+      // })
     this._popupForm.removeEventListener("submit", this._handleSubmit);
     this._popupForm.reset();
   }

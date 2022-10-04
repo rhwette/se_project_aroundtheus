@@ -105,6 +105,10 @@ const editProfilePopup = new PopupWithForm( {
       renderAvatar(avatarLink);
       editAvatarPopup.close();
       })
+      //use catch here instead of in api.js
+      .catch((err) => {
+      console.log(err)
+  });
     }
   })
 
@@ -126,33 +130,34 @@ function fillProfileForm() {
 //EVENT LISTENER - PENCIL BUTTON
 buttonPencil.addEventListener("click", () => {
   // debugger;
+  
   fillProfileForm();
   formValidators["formEditProfile"].resetValidation();
-
+  
   // CHANGE 'SAVE' to 'SAVING'
-    // const btn = document.getElementById("buttonEditProfileSave");
-    // btn.addEventListener('click', () => {
-    //   if(btn.innerText === "Save") {
-    //     btn.innerText = "Saving"
-    //   }
-    // })
+  const btn = document.getElementById("buttonEditProfileSave");
+    btn.addEventListener('click', () => {
+      if(btn.innerText === "Save") {
+        btn.innerText = "Saving"
+      }
+    })
 
-  editProfilePopup.open();
+  editProfilePopup.open(btn);
 });
 
 //EVENT LISTENER - PLUS BUTTON
 buttonPlus.addEventListener("click", () => {
   formValidators["formNewPlace"].resetValidation();
 
-  // CHANGE 'SAVE' to 'SAVING'
+  // CHANGE 'Create' to 'Creating'
     const btn = document.getElementById("buttonNewPlaceCreate");
     btn.addEventListener('click', () => {
       if(btn.innerText === "Create") {
-        btn.innerText = "Saving"
+        btn.innerText = "Creating"
       }
     })
 
-  newPlacePopup.open();
+  newPlacePopup.open(btn);
 });
 
 //EVENT LISTENER - AVATAR PENCIL BUTTON
@@ -167,7 +172,7 @@ buttonAvatar.addEventListener("click", () => {
       }
     })
 
-  editAvatarPopup.open();
+  editAvatarPopup.open(btn);
 });
 
 //-----------------------------------------------
