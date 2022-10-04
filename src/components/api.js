@@ -1,3 +1,16 @@
+
+function checkResponse(res) {
+    if(res.ok) {
+        return res.json();
+    }
+    return Promise.reject(`Error ${res.status}`);
+    }
+
+
+
+
+
+
 class Api {
     constructor({ baseUrl, authToken}) {
         this._baseUrl = baseUrl;
@@ -8,6 +21,8 @@ class Api {
             "Content-type": "application/json"
         }
     }
+
+
 
 // GET all cards from server   
 // GET //https://around.nomoreparties.co/v!/group-12/cards"
@@ -21,7 +36,8 @@ getCardList() {
         //use the definition of headers from the constructor
         headers: this._headers
     })
-    .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    .then(checkResponse)
     .catch((err) => {
         console.log(err)
     });
@@ -39,7 +55,8 @@ getUserInfo() {
         //use the definition of headers from the constructor
         headers: this._headers
     })
-    .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    .then(checkResponse)
     .catch((err) => {
         console.log(err)
     });
@@ -65,8 +82,8 @@ async addUserInfo( {name, about }) {
         })
     })
     
-    .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`) 
-    )
+    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    .then(checkResponse)
     .catch((err) => {
         console.log(err)
     });
@@ -88,7 +105,8 @@ addCard( { name, link } ) {
             link
       } )
     })
-    .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    .then(checkResponse)
     .catch((err) => {
         console.log(err)
     });
@@ -107,7 +125,8 @@ removeCard( _id ) {
         //use the definition of headers from the constructor
         headers: this._headers
     })
-    .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    .then(checkResponse)
     .catch((err) => {
         console.log(err) // log the error to the console
     });
@@ -126,11 +145,13 @@ addLike(_id) {
         headers: this._headers
     })
     
-    .then(res =>  {
-        console.log('res=', res);
-        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`) 
-    }
-    )
+    // .then(res =>  {
+    //     console.log('res=', res);
+    //     res.ok ? res.json() : Promise.reject(`Error: ${res.status}`) 
+    // }
+    // )
+
+    // .then(checkResponse)
     .catch((err) => {
         console.log(err)
     })
@@ -149,8 +170,8 @@ removeLike(_id, name) {
         headers: this._headers
     })
     
-    .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`) 
-    )
+    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    .then(checkResponse)
     .catch((err) => {
         console.log(err)
     })
@@ -173,7 +194,8 @@ addAvatar( {avatarLink} ) {
             avatar: avatarLink
       })
     })
-    .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    .then(checkResponse)
     .catch((err) => {
         console.log(err)
     });
