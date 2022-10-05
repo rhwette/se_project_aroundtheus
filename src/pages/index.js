@@ -27,6 +27,7 @@ const userInfo = new UserInfo(selectors);
 api.getCardList().then(res => {
   console.log(res);
 })
+  //use catch here instead of in api.js
 .catch((err) => {
   console.log(err)
 });
@@ -38,12 +39,12 @@ api.getUserInfo().then(userData => {
     userData.about,
     userData.avatar,
   )
-  //use catch here instead of in api.js
-  .catch((err) => {
-    console.log(err)
-  });
 }
-);
+)
+//use catch here instead of in api.js
+.catch((err) => {
+  console.log(err)
+});
 
 const newCardPopup = new PopupWithImage(selectors.previewPopup);
 const renderCard = (data) => {
@@ -70,6 +71,7 @@ let cardsSection;
     cardsSection.renderItems(cardsFromServer);
     }
   )
+    //use catch here instead of in api.js
   .catch((err) => {
     console.log(err)
   });
@@ -82,6 +84,7 @@ const  newPlacePopup = new PopupWithForm({
     renderCard(res);
     newPlacePopup.close();
     })
+      //use catch here instead of in api.js
         .catch((err) => {
         console.log(err)
     });

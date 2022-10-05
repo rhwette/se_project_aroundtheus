@@ -6,16 +6,12 @@ function checkResponse(res) {
     return Promise.reject(`Error ${res.status}`);
     }
 
-
-
-
-
-
 class Api {
     constructor({ baseUrl, authToken}) {
         this._baseUrl = baseUrl;
         this._authToken = authToken;
         //add definition of headers in the constructor
+        //instead of repeating inside each method
         this._headers = {
             authorization: this._authToken,
             "Content-type": "application/json"
@@ -37,7 +33,9 @@ getCardList() {
         headers: this._headers
     })
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    // use checkResponse function from above instead of expanding the function inside each method
     .then(checkResponse)
+    //move catch to index.js
     // .catch((err) => {
     //     console.log(err)
     // });
@@ -56,7 +54,9 @@ getUserInfo() {
         headers: this._headers
     })
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    // use checkResponse function from above instead of expanding the function inside each method
     .then(checkResponse)
+     //move catch to index.js
     // .catch((err) => {
     //     console.log(err)
     // });
@@ -83,7 +83,9 @@ async addUserInfo( {name, about }) {
     })
     
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+       // use checkResponse function from above instead of expanding the function inside each method
     .then(checkResponse)
+    //NEED TO MOVE CATCH - how to handle async and await?
     .catch((err) => {
         console.log(err)
     });
@@ -106,7 +108,9 @@ addCard( { name, link } ) {
       } )
     })
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+          // use checkResponse function from above instead of expanding the function inside each method
     .then(checkResponse)
+    //move catch to index.js
     // .catch((err) => {
     //     console.log(err)
     // });
@@ -126,7 +130,9 @@ removeCard( _id ) {
         headers: this._headers
     })
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    // use checkResponse function from above instead of expanding the function inside each method
     .then(checkResponse)
+    //move catch to card.js using 'try...catch'
     // .catch((err) => {
     //     console.log(err) // log the error to the console
     // });
@@ -150,8 +156,9 @@ addLike(_id) {
     //     res.ok ? res.json() : Promise.reject(`Error: ${res.status}`) 
     // }
     // )
-
+    // use checkResponse function from above instead of expanding the function inside each method
     .then(checkResponse)
+    //move catch to card.js using 'try...catch'
     // .catch((err) => {
     //     console.log(err)
     // })
@@ -171,7 +178,9 @@ removeLike(_id, name) {
     })
     
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    // use checkResponse function from above instead of expanding the function inside each method
     .then(checkResponse)
+    //move catch to card.js using 'try...catch'
     // .catch((err) => {
     //     console.log(err)
     // })
@@ -195,10 +204,9 @@ addAvatar( {avatarLink} ) {
       })
     })
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
+    // use checkResponse function from above instead of expanding the function inside each method
     .then(checkResponse)
-    // .catch((err) => {
-    //     console.log(err)
-    // });
+        //move catch to index.js
     // .catch((err) => {
     //     console.log(err)
     // });

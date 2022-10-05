@@ -28,26 +28,19 @@ export default class PopupWithForm extends Popup {
     if(btn.innerText === "Saving") {
       btn.innerText = "Save"
     }
+    //for Plus Button, at open, the label is set to "Create"
     if(btn.innerText === "Creating") {
       btn.innerText = "Create"
     }
-    // if(btn.innerText === "Yes") {
-    //   btn.innerText = "Yes"
-    // }
-
-
+    //for 'do you really want to delete" button
+    //the label is always 'YES'
+  
     this._popupForm.addEventListener("submit", this._handleSubmit);
   
 };
 
   close() {
     super.close();
-      // CHANGE 'SAVE' to 'SAVING'
-      // const btn = document.getElementById("buttonEditProfileSave");
-        // if(btn.innerText === "Saving") {
-        //   btn.innerText = "Save"
-        // }
-      // })
     this._popupForm.removeEventListener("submit", this._handleSubmit);
     this._popupForm.reset();
   }

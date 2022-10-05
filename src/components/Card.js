@@ -133,7 +133,7 @@ _handleCan() {
         cardHeart.classList.add("card-grid__icon_active");
       }
     }
-    //
+    
     const cardCan = this._element.querySelector(".card-grid__garbage");
     if (this._ownerId != this._myOwnerId) {
       cardCan.classList.add("card-grid__garbage-invisible");
