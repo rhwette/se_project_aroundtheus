@@ -95,15 +95,10 @@ const  newPlacePopup = new PopupWithForm({
 const editProfilePopup = new PopupWithForm( {
   popupSelector: selectors.profilePopup,
   handleFormSubmit: async (newUserData) => {
-    console.log('newUserData=', newUserData);
-    console.log('newUserData.name=', newUserData.name);
-    console.log('newUserData.about=', newUserData.about);
     userInfo.setUserInfo(newUserData.name, newUserData.about)
     const name = newUserData.name;
     const about = newUserData.about;
     const avatar = newUserData.avatar;
-    console.log('name=', name);
-    console.log('about=', about);
      await api.addUserInfo( {name, about})
     editProfilePopup.close()
   }
@@ -126,7 +121,6 @@ const editProfilePopup = new PopupWithForm( {
   })
 
 function renderAvatar( {avatarLink} ) {
-  console.log('avatarLink=', avatarLink);
   const avatarNew = document.getElementById("introImage");
   avatarNew.src = avatarLink;
 }
