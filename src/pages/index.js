@@ -26,6 +26,9 @@ const userInfo = new UserInfo(selectors);
 //SHOW LIST OF CARDS FROM SERVER
 api.getCardList().then(res => {
   console.log(res);
+})
+.catch((err) => {
+  console.log(err)
 });
 
 //GET USER INFO from SERVER
@@ -35,6 +38,10 @@ api.getUserInfo().then(userData => {
     userData.about,
     userData.avatar,
   )
+  //use catch here instead of in api.js
+  .catch((err) => {
+    console.log(err)
+  });
 }
 );
 
@@ -62,7 +69,10 @@ let cardsSection;
     );
     cardsSection.renderItems(cardsFromServer);
     }
-  );
+  )
+  .catch((err) => {
+    console.log(err)
+  });
 
 //NEW PLACE POPUP
 const  newPlacePopup = new PopupWithForm({
@@ -72,6 +82,9 @@ const  newPlacePopup = new PopupWithForm({
     renderCard(res);
     newPlacePopup.close();
     })
+        .catch((err) => {
+        console.log(err)
+    });
   }
 })
 

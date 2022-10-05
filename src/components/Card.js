@@ -32,7 +32,9 @@ class Card {
   }
 
 _handleCan() {
-  const confirmDeletePopup = new PopupWithForm({
+      // use try..catch for api's without ".then"
+  try {
+    const confirmDeletePopup = new PopupWithForm({
     popupSelector:selectors.confirmPopup,
     handleFormSubmit: () => {
         api.removeCard(this._id);
@@ -42,31 +44,26 @@ _handleCan() {
   })
   const btn = document.getElementById("buttonConfirmDeleteYes");
   confirmDeletePopup.open(btn);
+  } catch( Error) {
+    console.log('error=', Error);
+  }
+
+  //original code
+  // const confirmDeletePopup = new PopupWithForm({
+  //   popupSelector:selectors.confirmPopup,
+  //   handleFormSubmit: () => {
+  //       api.removeCard(this._id);
+  //       confirmDeletePopup.close();
+  //       this._element.remove();
+  //   }
+  // })
+  // const btn = document.getElementById("buttonConfirmDeleteYes");
+  // confirmDeletePopup.open(btn);
 }
 
   _handleHeart(event) {
-    // try{
-    //   const cardGridLikes = this._element.querySelector(".card-grid__likes");
-    //   if(event.target.classList.length ===1) {
-    //     api.addLike(this._id);
-    //     event.target.classList.add("card-grid__icon_active");
-    //     this._likes.length = this._likes.length + 1;
-    //     cardGridLikes.textContent = this._likes.length;
-  
-    // } else{
-    //     event.target.classList.remove("card-grid__icon_active");
-    //     api.removeLike(this._id);
-    //     this._likes.length = this._likes.length - 1;
-    //     cardGridLikes.textContent = this._likes.length;
-    // };
-
-    // } catch( Error) {
-    //   console.log('error=', Error);
-    // }
-
-
-    //////////////////////////////////
-
+    // use try..catch for api's without ".then"
+    try{
       const cardGridLikes = this._element.querySelector(".card-grid__likes");
       if(event.target.classList.length ===1) {
         api.addLike(this._id);
@@ -80,8 +77,26 @@ _handleCan() {
         this._likes.length = this._likes.length - 1;
         cardGridLikes.textContent = this._likes.length;
     };
-    
 
+    } catch( Error) {
+      console.log('error=', Error);
+    }
+
+//Original code below
+    //   const cardGridLikes = this._element.querySelector(".card-grid__likes");
+    //   if(event.target.classList.length ===1) {
+    //     api.addLike(this._id);
+    //     event.target.classList.add("card-grid__icon_active");
+    //     this._likes.length = this._likes.length + 1;
+    //     cardGridLikes.textContent = this._likes.length;
+  
+    // } else{
+    //     event.target.classList.remove("card-grid__icon_active");
+    //     api.removeLike(this._id);
+    //     this._likes.length = this._likes.length - 1;
+    //     cardGridLikes.textContent = this._likes.length;
+    // };
+    
   }
 
   _setEventListeners() {

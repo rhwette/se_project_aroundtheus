@@ -57,9 +57,9 @@ getUserInfo() {
     })
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
     .then(checkResponse)
-    .catch((err) => {
-        console.log(err)
-    });
+    // .catch((err) => {
+    //     console.log(err)
+    // });
 }
 
 // PATCH new user info to the server
@@ -107,9 +107,9 @@ addCard( { name, link } ) {
     })
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
     .then(checkResponse)
-    .catch((err) => {
-        console.log(err)
-    });
+    // .catch((err) => {
+    //     console.log(err)
+    // });
 }
 
 // delete card from display using 'garbage can'
@@ -127,9 +127,9 @@ removeCard( _id ) {
     })
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
     .then(checkResponse)
-    .catch((err) => {
-        console.log(err) // log the error to the console
-    });
+    // .catch((err) => {
+    //     console.log(err) // log the error to the console
+    // });
 }
 
 // add a like to a card
@@ -151,10 +151,10 @@ addLike(_id) {
     // }
     // )
 
-    // .then(checkResponse)
-    .catch((err) => {
-        console.log(err)
-    })
+    .then(checkResponse)
+    // .catch((err) => {
+    //     console.log(err)
+    // })
 }
 
 // remove a like from a card
@@ -172,9 +172,9 @@ removeLike(_id, name) {
     
     // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
     .then(checkResponse)
-    .catch((err) => {
-        console.log(err)
-    })
+    // .catch((err) => {
+    //     console.log(err)
+    // })
 }
 
 // add new avatar
