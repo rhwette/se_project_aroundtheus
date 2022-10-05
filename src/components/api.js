@@ -25,20 +25,11 @@ class Api {
 getCardList() {
     return fetch(`${this._baseUrl}/cards`, {
         method: "GET",
-        // headers: {
-        //     authorization: this._authToken,
-        //     "Content-type": "application/json",
-        // }
         //use the definition of headers from the constructor
         headers: this._headers
     })
-    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
-    // use checkResponse function from above instead of expanding the function inside each method
-    .then(checkResponse)
+       .then(checkResponse)
     //move catch to index.js
-    // .catch((err) => {
-    //     console.log(err)
-    // });
 }
 
 // GET user info from server
@@ -46,34 +37,20 @@ getCardList() {
 getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
         method: "GET",
-        // headers: {
-        //     authorization: this._authToken,
-        //     "Content-type": "application/json",
-        // }
         //use the definition of headers from the constructor
         headers: this._headers
     })
-    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
-    // use checkResponse function from above instead of expanding the function inside each method
-    .then(checkResponse)
+       .then(checkResponse)
      //move catch to index.js
-    // .catch((err) => {
-    //     console.log(err)
-    // });
 }
 
 // PATCH new user info to the server
 // PATCH //https://around.nomoreparties.co/v!/group-12/users/me"
 async addUserInfo( {name, about }) {
-    //  addUserInfo( {name, about }) {
     console.log('name=', name);
     console.log('about=', about);
     return fetch(`${this._baseUrl}/users/me`, {
         method: "PATCH",
-        // headers: {
-        //     authorization: this._authToken,
-        //     "Content-type": "application/json",
-        // }
         //use the definition of headers from the constructor
         headers: this._headers,
         body: JSON.stringify({
@@ -82,10 +59,7 @@ async addUserInfo( {name, about }) {
         })
     })
     
-    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
-       // use checkResponse function from above instead of expanding the function inside each method
     .then(checkResponse)
-    //NEED TO MOVE CATCH - how to handle async and await?
     .catch((err) => {
         console.log(err)
     });
@@ -96,10 +70,6 @@ async addUserInfo( {name, about }) {
 addCard( { name, link } ) {
     return fetch(`${this._baseUrl}/cards`, {
         method: "POST",
-        // headers: {
-        //     authorization: this._authToken,
-        //     "Content-type": "application/json",
-        // }
         //use the definition of headers from the constructor
         headers: this._headers,
         body: JSON.stringify( {
@@ -107,13 +77,8 @@ addCard( { name, link } ) {
             link
       } )
     })
-    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
-          // use checkResponse function from above instead of expanding the function inside each method
-    .then(checkResponse)
+     .then(checkResponse)
     //move catch to index.js
-    // .catch((err) => {
-    //     console.log(err)
-    // });
 }
 
 // delete card from display using 'garbage can'
@@ -122,20 +87,11 @@ addCard( { name, link } ) {
 removeCard( _id ) {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
         method: "DELETE",
-        // headers: {
-        //     authorization: this._authToken,
-        //     "Content-type": "application/json",
-        // }
         //use the definition of headers from the constructor
         headers: this._headers
     })
-    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
-    // use checkResponse function from above instead of expanding the function inside each method
-    .then(checkResponse)
+     .then(checkResponse)
     //move catch to card.js using 'try...catch'
-    // .catch((err) => {
-    //     console.log(err) // log the error to the console
-    // });
 }
 
 // add a like to a card
@@ -143,25 +99,12 @@ removeCard( _id ) {
 addLike(_id) {
     return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
         method: "PUT",
-        // headers: {
-        //     authorization: this._authToken,
-        //     "Content-type": "application/json",
-        // }
         //use the definition of headers from the constructor
         headers: this._headers
     })
     
-    // .then(res =>  {
-    //     console.log('res=', res);
-    //     res.ok ? res.json() : Promise.reject(`Error: ${res.status}`) 
-    // }
-    // )
-    // use checkResponse function from above instead of expanding the function inside each method
-    .then(checkResponse)
+      .then(checkResponse)
     //move catch to card.js using 'try...catch'
-    // .catch((err) => {
-    //     console.log(err)
-    // })
 }
 
 // remove a like from a card
@@ -169,21 +112,12 @@ addLike(_id) {
 removeLike(_id, name) {
     return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
         method: "DELETE",
-        // headers: {
-        //     authorization: this._authToken,
-        //     "Content-type": "application/json",
-        // }
         //use the definition of headers from the constructor
         headers: this._headers
     })
-    
-    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
-    // use checkResponse function from above instead of expanding the function inside each method
     .then(checkResponse)
     //move catch to card.js using 'try...catch'
-    // .catch((err) => {
-    //     console.log(err)
-    // })
+
 }
 
 // add new avatar
@@ -193,23 +127,14 @@ addAvatar( {avatarLink} ) {
     console.log('avatarLink=', avatarLink);
     return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: "PATCH",
-        // headers: {
-        //     authorization: this._authToken,
-        //     "Content-type": "application/json",
-        // }
         //use the definition of headers from the constructor
         headers: this._headers,
         body: JSON.stringify( {
             avatar: avatarLink
       })
     })
-    // .then(res =>  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)  )
-    // use checkResponse function from above instead of expanding the function inside each method
-    .then(checkResponse)
+     .then(checkResponse)
         //move catch to index.js
-    // .catch((err) => {
-    //     console.log(err)
-    // });
 }
 }
 export default Api;

@@ -95,7 +95,6 @@ const  newPlacePopup = new PopupWithForm({
 const editProfilePopup = new PopupWithForm( {
   popupSelector: selectors.profilePopup,
   handleFormSubmit: async (newUserData) => {
-      // handleFormSubmit:  (newUserData) => {
     console.log('newUserData=', newUserData);
     console.log('newUserData.name=', newUserData.name);
     console.log('newUserData.about=', newUserData.about);
@@ -106,9 +105,7 @@ const editProfilePopup = new PopupWithForm( {
     console.log('name=', name);
     console.log('about=', about);
      await api.addUserInfo( {name, about})
-      //  api.addUserInfo( {name, about})
     editProfilePopup.close()
-    // window.location.reload();
   }
   }
   );
@@ -145,8 +142,6 @@ function fillProfileForm() {
 
 //EVENT LISTENER - PENCIL BUTTON
 buttonPencil.addEventListener("click", () => {
-  // debugger;
-  
   fillProfileForm();
   formValidators["formEditProfile"].resetValidation();
   

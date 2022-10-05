@@ -47,18 +47,6 @@ _handleCan() {
   } catch( Error) {
     console.log('error=', Error);
   }
-
-  //original code
-  // const confirmDeletePopup = new PopupWithForm({
-  //   popupSelector:selectors.confirmPopup,
-  //   handleFormSubmit: () => {
-  //       api.removeCard(this._id);
-  //       confirmDeletePopup.close();
-  //       this._element.remove();
-  //   }
-  // })
-  // const btn = document.getElementById("buttonConfirmDeleteYes");
-  // confirmDeletePopup.open(btn);
 }
 
   _handleHeart(event) {
@@ -81,23 +69,7 @@ _handleCan() {
     } catch( Error) {
       console.log('error=', Error);
     }
-
-//Original code below
-    //   const cardGridLikes = this._element.querySelector(".card-grid__likes");
-    //   if(event.target.classList.length ===1) {
-    //     api.addLike(this._id);
-    //     event.target.classList.add("card-grid__icon_active");
-    //     this._likes.length = this._likes.length + 1;
-    //     cardGridLikes.textContent = this._likes.length;
-  
-    // } else{
-    //     event.target.classList.remove("card-grid__icon_active");
-    //     api.removeLike(this._id);
-    //     this._likes.length = this._likes.length - 1;
-    //     cardGridLikes.textContent = this._likes.length;
-    // };
-    
-  }
+   }
 
   _setEventListeners() {
     // EVENT LISTENER - HEART
