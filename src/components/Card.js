@@ -1,17 +1,17 @@
-import Api from "./Api.js";
+// import Api from "./Api.js";
 import PopupWithForm from "../components/PopupWithForm";
 import { selectors } from "../utils/constants";
 
-const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-12",
-  authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e"
-})
+// const api = new Api({
+//   baseUrl: "https://around.nomoreparties.co/v1/group-12",
+//   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e"
+// })
 
 const buttonConfirm = document.querySelector(".popup__container-button_confirm");
 
 class Card {
-  constructor({ data, handleZoom }, cardSelector) {
-    // this._api = api;
+  constructor({ data, handleZoom }, cardSelector, api) {
+    this._api = api;
     this._name = data.name;
     this._about = data.about;
     this._link = data.link;
@@ -38,7 +38,8 @@ _handleCan() {
     const confirmDeletePopup = new PopupWithForm({
     popupSelector:selectors.confirmPopup,
     handleFormSubmit: () => {
-        api.removeCard(this._id);
+        // api.removeCard(this._id);
+        this._api.removeCard(this._id);
         confirmDeletePopup.close();
         this._element.remove();
     }
@@ -55,14 +56,16 @@ _handleCan() {
     try{
       const cardGridLikes = this._element.querySelector(".card-grid__likes");
       if(event.target.classList.length ===1) {
-        api.addLike(this._id);
+        // api.addLike(this._id);
+        this._api.addLike(this._id);
         event.target.classList.add("card-grid__icon_active");
         this._likes.length = this._likes.length + 1;
         cardGridLikes.textContent = this._likes.length;
   
     } else{
         event.target.classList.remove("card-grid__icon_active");
-        api.removeLike(this._id);
+        // api.removeLike(this._id);
+        this._api.removeLike(this._id);
         this._likes.length = this._likes.length - 1;
         cardGridLikes.textContent = this._likes.length;
     };

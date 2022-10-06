@@ -55,7 +55,8 @@ const renderCard = (data) => {
         newCardPopup.open(data);
       },
     },
-    selectors.cardTemplate
+    selectors.cardTemplate,
+    api
   );
   cardsSection.addItem(cardElement.createCard());
 };
