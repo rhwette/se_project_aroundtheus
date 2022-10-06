@@ -1,4 +1,4 @@
-import Api from "../components/api.js";
+import Api from "./Api.js";
 import PopupWithForm from "../components/PopupWithForm";
 import { selectors } from "../utils/constants";
 
@@ -11,6 +11,7 @@ const buttonConfirm = document.querySelector(".popup__container-button_confirm")
 
 class Card {
   constructor({ data, handleZoom }, cardSelector) {
+    // this._api = api;
     this._name = data.name;
     this._about = data.about;
     this._link = data.link;

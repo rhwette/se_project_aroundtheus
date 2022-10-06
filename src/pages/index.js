@@ -6,7 +6,7 @@ import PopupWithImage from "../components/PopupWithImage";
 import FormValidator from "../components/FormValidator";
 import PopupWithForm from "../components/PopupWithForm";
 import UserInfo from "../components/UserInfo";
-import Api from "../components/api.js";
+import Api from "../components/Api.js";
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
@@ -202,6 +202,7 @@ const enableValidation = (config) => {
     validator.enableValidation();
   });
 };
+
 enableValidation(config);
 
 
