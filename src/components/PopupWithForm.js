@@ -26,13 +26,13 @@ export default class PopupWithForm extends Popup {
   open(btn) {
     super.open();
     //for Pencil Button, at open, the label is set to "Save"
-    if(btn.innerText === "Saving") {
+    // if(btn.innerText === "Saving") {
       btn.innerText = "Save"
-    }
+    // }
     //for Plus Button, at open, the label is set to "Create"
-    if(btn.innerText === "Creating") {
+    // if(btn.innerText === "Creating") {
       btn.innerText = "Create"
-    }
+    // }
     //for 'do you really want to delete" button
     //the label is always 'YES'
   
