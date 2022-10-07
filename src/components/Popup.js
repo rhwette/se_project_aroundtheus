@@ -13,13 +13,23 @@ class Popup {
     this.open = this.open.bind(this);
   }
 
-  open() {
-    this._popupElement.classList.add("popup_visible");
+  setEventListeners() {
     this.buttonClose.addEventListener("click", this.close);
     this._popupElement.addEventListener(
       "mousedown",
       this._closePopupWithRemoteClick
     );
+    // document.addEventListener("keydown", this._closePopupWithEscape);
+  }
+
+  open() {
+    this._popupElement.classList.add("popup_visible");
+    this.setEventListeners();
+    // this.buttonClose.addEventListener("click", this.close);
+    // this._popupElement.addEventListener(
+    //   "mousedown",
+    //   this._closePopupWithRemoteClick
+    // );
     document.addEventListener("keydown", this._closePopupWithEscape);
   }
 
@@ -27,11 +37,11 @@ class Popup {
 
 
 this._popupElement.classList.remove("popup_visible");
-    this.buttonClose.removeEventListener("click", this.close);
-    this._popupElement.removeEventListener(
-      "mousedown",
-      this._closePopupWithRemoteClick
-      );
+    // this.buttonClose.removeEventListener("click", this.close);
+    // this._popupElement.removeEventListener(
+    //   "mousedown",
+    //   this._closePopupWithRemoteClick
+    //   );
       document.removeEventListener("keydown", this._closePopupWithEscape);
       
   }

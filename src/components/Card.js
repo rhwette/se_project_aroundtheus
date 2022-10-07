@@ -8,21 +8,27 @@ import { selectors } from "../utils/constants";
 // })
 
 const buttonConfirm = document.querySelector(".popup__container-button_confirm");
+const btn = document.getElementById("buttonConfirmDeleteYes");
+
 
 class Card {
-  constructor({ data, handleZoom }, cardSelector, api) {
+  constructor({ data, handleZoom }, cardSelector, api, myOwnerId) {
     this._api = api;
     this._name = data.name;
+    this._btn = btn;
     this._about = data.about;
     this._link = data.link;
     this._likes = data.likes;
     this._ownerId = data.owner._id;
-    this._myOwnerId = "3f769460ee50cd15e754d8b8";
+    // this._myOwnerId = "3f769460ee50cd15e754d8b8";
+    // pass myOwerId from index.js
+    this._myOwnerId = myOwnerId;
     this._id = data._id;
     this._cardSelector = cardSelector;
     this._handleCan = this._handleCan.bind(this);
     this._handleZoom = handleZoom.bind(this);
   }
+ 
 
   _getTemplate() {
     const cardElement = document
@@ -44,8 +50,8 @@ _handleCan() {
         this._element.remove();
     }
   })
-  const btn = document.getElementById("buttonConfirmDeleteYes");
-  confirmDeletePopup.open(btn);
+  // const btn = document.getElementById("buttonConfirmDeleteYes");
+  confirmDeletePopup.open(this._btn);
   } catch( Error) {
     console.log('error=', Error);
   }
@@ -105,13 +111,18 @@ _handleCan() {
     cardGridPicture.src = this._link;
     cardGridPicture.alt = this._name;
     for(let i = 0; i < this._likes.length; i++) {
-      if(this._likes[i]._id === "3f769460ee50cd15e754d8b8") {
+
+
+      // if(this._likes[i]._id === "3f769460ee50cd15e754d8b8") {
+        if(this._likes[i]._id === this._myOwnerId) { 
         cardHeart.classList.add("card-grid__icon_active");
       }
     }
     
     const cardCan = this._element.querySelector(".card-grid__garbage");
     if (this._ownerId != this._myOwnerId) {
+      console.log('this._ownerId=', this._ownerId);
+      // console.log('test=', data.owner._id);
       cardCan.classList.add("card-grid__garbage-invisible");
     }
 

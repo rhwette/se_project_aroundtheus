@@ -30,6 +30,7 @@ getCardList() {
     })
        .then(checkResponse)
     //move catch to index.js
+    // console.log('this._headers=', this._headers);
 }
 
 // GET user info from server

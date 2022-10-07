@@ -8,6 +8,7 @@ import PopupWithForm from "../components/PopupWithForm";
 import UserInfo from "../components/UserInfo";
 import Api from "../components/Api.js";
 
+
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e",
@@ -22,10 +23,13 @@ const popupEditProfileAbout = document.querySelector(
   );
   
 const userInfo = new UserInfo(selectors);
+//should be some way to download myOwnerId from server
+//but instead found value of myOwnerId by creating a new card 
+const myOwnerId = "3f769460ee50cd15e754d8b8";
 
 //SHOW LIST OF CARDS FROM SERVER
 api.getCardList().then(res => {
-  console.log(res);
+  console.log("result=",res);
 })
   //use catch here instead of in api.js
 .catch((err) => {
@@ -48,6 +52,7 @@ api.getUserInfo().then(userData => {
 
 const newCardPopup = new PopupWithImage(selectors.previewPopup);
 const renderCard = (data) => {
+  //include api and myOwnerId in arguments of Card
   const cardElement = new Card(
     {
       data,
@@ -56,7 +61,8 @@ const renderCard = (data) => {
       },
     },
     selectors.cardTemplate,
-    api
+    api,
+    myOwnerId
   );
   cardsSection.addItem(cardElement.createCard());
 };
