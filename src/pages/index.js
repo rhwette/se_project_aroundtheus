@@ -143,15 +143,14 @@ function fillProfileForm() {
 
 //EVENT LISTENER - PENCIL BUTTON
 buttonPencil.addEventListener("click", () => {
+  const btn = document.getElementById("buttonEditProfileSave");
+       btn.innerText = "Save"
   fillProfileForm();
   formValidators["formEditProfile"].resetValidation();
   
-  // CHANGE 'SAVE' to 'SAVING'
-  const btn = document.getElementById("buttonEditProfileSave");
+  // Listen for click on save button then CHANGE 'SAVE' to 'SAVING'
     btn.addEventListener('click', () => {
-      if(btn.innerText === "Save") {
         btn.innerText = "Saving"
-      }
     })
 
   editProfilePopup.open(btn);
@@ -159,14 +158,14 @@ buttonPencil.addEventListener("click", () => {
 
 //EVENT LISTENER - PLUS BUTTON
 buttonPlus.addEventListener("click", () => {
+  const btn = document.getElementById("buttonNewPlaceCreate");
+        btn.innerText = "Create"
+        fillProfileForm();
   formValidators["formNewPlace"].resetValidation();
 
-  // CHANGE 'Create' to 'Creating'
-    const btn = document.getElementById("buttonNewPlaceCreate");
+  // Listen for click on create button then CHANGE 'Create' to 'Creating'
     btn.addEventListener('click', () => {
-      if(btn.innerText === "Create") {
         btn.innerText = "Creating"
-      }
     })
 
   newPlacePopup.open(btn);
