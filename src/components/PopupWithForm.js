@@ -23,10 +23,16 @@ export default class PopupWithForm extends Popup {
     return inputObject;
   }
 
-
+  setEventListeners() {
+    super.setEventListeners()
+    this._popupForm.addEventListener("submit", this._handleSubmit); 
+  }
+  
+ 
   
   open(btn) {
     super.open();
+    this.setEventListeners();
     //for Pencil Button, at open, the label is set to "Save"
     // if(btn.innerText === "Saving") {
       // btn.innerText = "Save"
@@ -38,13 +44,13 @@ export default class PopupWithForm extends Popup {
     //for 'do you really want to delete" button
     //the label is always 'YES'
   
-    this._popupForm.addEventListener("submit", this._handleSubmit);
+    // this._popupForm.addEventListener("submit", this._handleSubmit);
   
 };
 
   close() {
     super.close();
-    this._popupForm.removeEventListener("submit", this._handleSubmit);
+    // this._popupForm.removeEventListener("submit", this._handleSubmit);
     this._popupForm.reset();
   }
 }
