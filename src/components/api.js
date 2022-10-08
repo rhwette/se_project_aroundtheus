@@ -35,7 +35,7 @@ getCardList() {
         //use the definition of headers from the constructor
         headers: this._headers
     })
-       .then(_checkResponse)
+       .then(this._checkResponse)
     //move catch to index.js
     // console.log('this._headers=', this._headers);
 }
@@ -48,7 +48,7 @@ getUserInfo() {
         //use the definition of headers from the constructor
         headers: this._headers
     })
-       .then(_checkResponse)
+       .then(this._checkResponse)
      //move catch to index.js
 }
 
@@ -65,7 +65,7 @@ async addUserInfo( {name, about }) {
         })
     })
     
-    .then(_checkResponse)
+    .then(this._checkResponse)
     .catch((err) => {
         console.log(err)
     });
@@ -83,7 +83,7 @@ addCard( { name, link } ) {
             link
       } )
     })
-     .then(_checkResponse)
+     .then(this._checkResponse)
     //move catch to index.js
 }
 
@@ -96,7 +96,7 @@ removeCard( _id ) {
         //use the definition of headers from the constructor
         headers: this._headers
     })
-     .then(_checkResponse)
+     .then(this._checkResponse)
     //move catch to card.js using 'try...catch'
 }
 
@@ -109,7 +109,7 @@ addLike(_id) {
         headers: this._headers
     })
     
-      .then(_checkResponse)
+      .then(this._checkResponse)
     //move catch to card.js using 'try...catch'
 }
 
@@ -121,7 +121,7 @@ removeLike(_id, name) {
         //use the definition of headers from the constructor
         headers: this._headers
     })
-    .then(_checkResponse)
+    .then(this._checkResponse)
     //move catch to card.js using 'try...catch'
 
 }
@@ -138,7 +138,7 @@ addAvatar( {avatarLink} ) {
             avatar: avatarLink
       })
     })
-     .then(checkResponse)
+     .then(this._checkResponse)
         //move catch to index.js
 }
 }
