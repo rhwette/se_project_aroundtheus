@@ -1,10 +1,10 @@
 
-function checkResponse(res) {
-    if(res.ok) {
-        return res.json();
-    }
-    return Promise.reject(`Error ${res.status}`);
-    }
+// function checkResponse(res) {
+//     if(res.ok) {
+//         return res.json();
+//     }
+//     return Promise.reject(`Error ${res.status}`);
+//     }
 
 class Api {
     constructor({ baseUrl, authToken}) {
@@ -19,6 +19,13 @@ class Api {
     }
 
 
+_checkResponse(res) {
+    console.log('checkResponse function here');
+    if(res.ok) {
+      return res.json();
+    }
+      return Promise.reject(`Error ${res.status}`);
+    }
 
 // GET all cards from server   
 // GET //https://around.nomoreparties.co/v!/group-12/cards"
@@ -28,7 +35,7 @@ getCardList() {
         //use the definition of headers from the constructor
         headers: this._headers
     })
-       .then(checkResponse)
+       .then(_checkResponse)
     //move catch to index.js
     // console.log('this._headers=', this._headers);
 }
@@ -41,7 +48,7 @@ getUserInfo() {
         //use the definition of headers from the constructor
         headers: this._headers
     })
-       .then(checkResponse)
+       .then(_checkResponse)
      //move catch to index.js
 }
 
@@ -58,7 +65,7 @@ async addUserInfo( {name, about }) {
         })
     })
     
-    .then(checkResponse)
+    .then(_checkResponse)
     .catch((err) => {
         console.log(err)
     });
@@ -76,7 +83,7 @@ addCard( { name, link } ) {
             link
       } )
     })
-     .then(checkResponse)
+     .then(_checkResponse)
     //move catch to index.js
 }
 
@@ -89,7 +96,7 @@ removeCard( _id ) {
         //use the definition of headers from the constructor
         headers: this._headers
     })
-     .then(checkResponse)
+     .then(_checkResponse)
     //move catch to card.js using 'try...catch'
 }
 
@@ -102,7 +109,7 @@ addLike(_id) {
         headers: this._headers
     })
     
-      .then(checkResponse)
+      .then(_checkResponse)
     //move catch to card.js using 'try...catch'
 }
 
@@ -114,7 +121,7 @@ removeLike(_id, name) {
         //use the definition of headers from the constructor
         headers: this._headers
     })
-    .then(checkResponse)
+    .then(_checkResponse)
     //move catch to card.js using 'try...catch'
 
 }
@@ -135,5 +142,7 @@ addAvatar( {avatarLink} ) {
         //move catch to index.js
 }
 }
+
+
 export default Api;
 
