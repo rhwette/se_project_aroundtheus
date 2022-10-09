@@ -28,13 +28,6 @@ const userInfo = new UserInfo(selectors);
 const myOwnerId = "3f769460ee50cd15e754d8b8";
 
 //SHOW LIST OF CARDS FROM SERVER
-api.getCardList().then(res => {
-  console.log("result=",res);
-})
-  //use catch here instead of in api.js
-.catch((err) => {
-  console.log(err)
-});
 
 //GET USER INFO from SERVER
 api.getUserInfo().then(userData => {
@@ -51,8 +44,9 @@ api.getUserInfo().then(userData => {
 });
 
 const newCardPopup = new PopupWithImage(selectors.previewPopup);
+
 const renderCard = (data) => {
-  //include api and myOwnerId in arguments of Card
+  //include api, myOwnerId, and handleCan in arguments of Card
   const cardElement = new Card(
     {
       data,
@@ -62,8 +56,29 @@ const renderCard = (data) => {
     },
     selectors.cardTemplate,
     api,
-    myOwnerId
-  );
+    myOwnerId,
+    //put anon function from handle can
+    //note: if use "function" instead of '=>', then 
+    //   this._api and thi._element are available from card.js
+    {handleCan: function() {
+//       // use try..catch for api's without ".then"
+       try {
+         const confirmDeletePopup = new PopupWithForm({
+         popupSelector:selectors.confirmPopup,
+         handleFormSubmit: () => {
+         this._api.removeCard(this._id);
+         confirmDeletePopup.close();
+         this._element.remove();
+       } 
+     })
+       confirmDeletePopup.open(this._btn);
+       } catch( Error) {
+        console.log('error=getCardList', Error);
+       }
+     }
+    }
+  )
+
   cardsSection.addItem(cardElement.createCard());
 };
 
@@ -173,14 +188,14 @@ buttonPlus.addEventListener("click", () => {
 
 //EVENT LISTENER - AVATAR PENCIL BUTTON
 buttonAvatar.addEventListener("click", () => {
+  const btn = document.getElementById("buttonEditAvatarSave");
+      btn.innerText = "Save"
+  fillProfileForm();
   formValidators["formEditAvatar"].resetValidation();
 
-  // CHANGE 'SAVE' to 'SAVING'
-    const btn = document.getElementById("buttonEditAvatarSave");
+  // Listen for click on save button then CHANGE 'SAVE' to 'SAVING'
     btn.addEventListener('click', () => {
-      if(btn.innerText === "Save") {
         btn.innerText = "Saving"
-      }
     })
 
   editAvatarPopup.open(btn);

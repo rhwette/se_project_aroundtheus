@@ -1,7 +1,9 @@
+//remove all the imports
 // import Api from "./Api.js";
-import PopupWithForm from "../components/PopupWithForm";
-import { selectors } from "../utils/constants";
+// import PopupWithForm from "../components/PopupWithForm";
+// import { selectors } from "../utils/constants";
 
+// get const api from index.js
 // const api = new Api({
 //   baseUrl: "https://around.nomoreparties.co/v1/group-12",
 //   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e"
@@ -12,7 +14,7 @@ const btn = document.getElementById("buttonConfirmDeleteYes");
 
 
 class Card {
-  constructor({ data, handleZoom }, cardSelector, api, myOwnerId) {
+  constructor({ data, handleZoom }, cardSelector, api, myOwnerId, {handleCan}) {
     this._api = api;
     this._name = data.name;
     this._btn = btn;
@@ -25,7 +27,8 @@ class Card {
     this._myOwnerId = myOwnerId;
     this._id = data._id;
     this._cardSelector = cardSelector;
-    this._handleCan = this._handleCan.bind(this);
+    this._handleCan = handleCan.bind(this);
+    // this._handleCan = handleCan;
     this._handleZoom = handleZoom.bind(this);
   }
  
@@ -38,24 +41,25 @@ class Card {
     return cardElement;
   }
 
-_handleCan() {
-      // use try..catch for api's without ".then"
-  try {
-    const confirmDeletePopup = new PopupWithForm({
-    popupSelector:selectors.confirmPopup,
-    handleFormSubmit: () => {
-        // api.removeCard(this._id);
-        this._api.removeCard(this._id);
-        confirmDeletePopup.close();
-        this._element.remove();
-    }
-  })
-  // const btn = document.getElementById("buttonConfirmDeleteYes");
-  confirmDeletePopup.open(this._btn);
-  } catch( Error) {
-    console.log('error=', Error);
-  }
-}
+  //move this to index.js
+// _handleCan() {
+//       // use try..catch for api's without ".then"
+//   try {
+//     const confirmDeletePopup = new PopupWithForm({
+//     popupSelector:selectors.confirmPopup,
+//     handleFormSubmit: () => {
+//         // api.removeCard(this._id);
+//         this._api.removeCard(this._id);
+//         confirmDeletePopup.close();
+//         this._element.remove();
+//     }
+//   })
+//   // const btn = document.getElementById("buttonConfirmDeleteYes");
+//   confirmDeletePopup.open(this._btn);
+//   } catch( Error) {
+//     console.log('error=', Error);
+//   }
+// }
 
   _handleHeart(event) {
     // use try..catch for api's without ".then"
