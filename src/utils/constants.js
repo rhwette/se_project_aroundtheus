@@ -13,3 +13,12 @@ export const selectors = {
   aboutSelector: ".intro__occupation",
   avatarSelector: ".intro__image"
 };
+
+export const config = {
+    formSelector: ".popup__form",
+    inputSelector: ".popup__container-input",
+    submitButtonSelector: ".popup__container-button",
+    inactiveButtonClass: "popup__container-button-disabled",
+    inputErrorClass: "popup__container-input-type-error",
+    errorClass: "popup__container-error-visible",
+  };

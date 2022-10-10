@@ -1,5 +1,5 @@
 import "./index.css";
-import { selectors } from "../utils/constants";
+import { selectors, config } from "../utils/constants";
 import Card from "../components/Card";
 import Section from "../components/Section";
 import PopupWithImage from "../components/PopupWithImage";
@@ -104,6 +104,7 @@ const  newPlacePopup = new PopupWithForm({
   handleFormSubmit: (newCardInfo) => {
     api.addCard(newCardInfo).then(res => {
     renderCard(res);
+
     newPlacePopup.close();
     })
       //use catch here instead of in api.js
@@ -204,14 +205,14 @@ buttonAvatar.addEventListener("click", () => {
 //-----------------------------------------------
 //  VALIDATION
 //-----------------------------------------------
-const config = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__container-input",
-  submitButtonSelector: ".popup__container-button",
-  inactiveButtonClass: "popup__container-button-disabled",
-  inputErrorClass: "popup__container-input-type-error",
-  errorClass: "popup__container-error-visible",
-};
+// const config = {
+//   formSelector: ".popup__form",
+//   inputSelector: ".popup__container-input",
+//   submitButtonSelector: ".popup__container-button",
+//   inactiveButtonClass: "popup__container-button-disabled",
+//   inputErrorClass: "popup__container-input-type-error",
+//   errorClass: "popup__container-error-visible",
+// };
 
 export const formValidators = {};
 const enableValidation = (config) => {
