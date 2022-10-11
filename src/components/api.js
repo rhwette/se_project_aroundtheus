@@ -66,9 +66,9 @@ async addUserInfo( {name, about }) {
     })
     
     .then(this._checkResponse)
-    .catch((err) => {
-        console.log(err)
-    });
+    // .catch((err) => {
+    //     console.log(err)
+    // });
 }
 
 // POST new card to display using 'new place' popup form

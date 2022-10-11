@@ -8,7 +8,9 @@ import PopupWithForm from "../components/PopupWithForm";
 import UserInfo from "../components/UserInfo";
 import Api from "../components/Api.js";
 
-
+const btnEditProfileSave = document.getElementById("buttonEditProfileSave");
+const btnNewPlaceCreate = document.getElementById("buttonNewPlaceCreate");
+const btnEditAvatarSave = document.getElementById("buttonEditAvatarSave");
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "e81f67bc-340b-41c4-ba13-967f5deca81e",
@@ -101,50 +103,87 @@ let cardsSection;
 //NEW PLACE POPUP
 const  newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
-  handleFormSubmit: (newCardInfo) => {
-    api.addCard(newCardInfo).then(res => {
-    renderCard(res);
-
-    newPlacePopup.close();
-    })
+    handleFormSubmit: (newCardInfo) => {
+      btnNewPlaceCreate.innerText = "Creating"
+      api.addCard(newCardInfo)
+      .then(res => {
+        renderCard(res);
+        newPlacePopup.close();
+      })
       //use catch here instead of in api.js
-        .catch((err) => {
+      .catch((err) => {
         console.log(err)
-    });
-  }
-})
+      })
+      .finally( () => {
+        btnNewPlaceCreate.innerText = "Create"
+      })
+    }
+  })
 
 //EDIT PROFILE POPUP
-const editProfilePopup = new PopupWithForm( {
-  popupSelector: selectors.profilePopup,
-  handleFormSubmit: async (newUserData) => {
-    userInfo.setUserInfo(newUserData.name, newUserData.about)
-    const name = newUserData.name;
-    const about = newUserData.about;
-    const avatar = newUserData.avatar;
-     await api.addUserInfo( {name, about})
-    editProfilePopup.close()
-  }
-  }
-  );
+// const editProfilePopup = new PopupWithForm( {
+//   popupSelector: selectors.profilePopup,
+//   handleFormSubmit: async (newUserData) => {
+//     // handleFormSubmit:  (newUserData) => {
+//       btnEditProfileSave.innerText = "Saving"
+//       console.log('newUserData1=', newUserData);
+      
+//       userInfo.setUserInfo(newUserData.name, newUserData.about)
+//       const name = newUserData.name;
+//       const about = newUserData.about;
+//       const avatar = newUserData.avatar;
+//     await api.addUserInfo( {name, about})
+//     //  api.addUserInfo( {name, about})
+//          editProfilePopup.close()
+//   }
+//   }
+//   );
+  const editProfilePopup = new PopupWithForm( {
+    popupSelector: selectors.profilePopup,
+    handleFormSubmit: (newUserData) => {
+      btnEditProfileSave.innerText = "Saving"
+      console.log('newUserData-', newUserData);
+      userInfo.setUserInfo(newUserData.name, newUserData.about)
+      const name = newUserData.name;
+      const about = newUserData.about;
+      const avatar = newUserData.avatar;
+      api.addUserInfo( {name, about} )
+      .then(res => {
+        editProfilePopup.close();
+      })
+      .catch( (err) => {
+        console.log(err)
+      })
+      .finally( () => {
+        btnEditProfileSave.innerText = "Save"
+      })
+    }
+  })
 
   //EDIT AVATAR POPUP
   const editAvatarPopup = new PopupWithForm({
     popupSelector: selectors.avatarPopup,
-      handleFormSubmit: ( avatarLink  ) => {
-      api.addAvatar(avatarLink).then(res => {
+    handleFormSubmit: ( avatarLink  ) => {
+      btnEditAvatarSave.innerText = "Saving"
+      api.addAvatar(avatarLink)
+      .then(res => {
+          // avatarNew.src = avatarLink;
       renderAvatar(avatarLink);
-      editAvatarPopup.close();
+        editAvatarPopup.close();
       })
       //use catch here instead of in api.js
       .catch((err) => {
-      console.log(err)
-  });
+        console.log(err)
+      })
+      .finally( () => {
+        btnEditAvatarSave.innerText = "Save"
+      })
     }
   })
 
 function renderAvatar( {avatarLink} ) {
   const avatarNew = document.getElementById("introImage");
+  console.log('avatarNew.src=', avatarNew.src);
   avatarNew.src = avatarLink;
 }
 
@@ -159,47 +198,44 @@ function fillProfileForm() {
 
 //EVENT LISTENER - PENCIL BUTTON
 buttonPencil.addEventListener("click", () => {
-  const btn = document.getElementById("buttonEditProfileSave");
-       btn.innerText = "Save"
+  // btnEditProfileSave.innerText = "Save"
   fillProfileForm();
   formValidators["formEditProfile"].resetValidation();
   
   // Listen for click on save button then CHANGE 'SAVE' to 'SAVING'
-    btn.addEventListener('click', () => {
-        btn.innerText = "Saving"
-    })
+    // btn.addEventListener('click', () => {
+    //     btn.innerText = "Saving"
+    // })
 
-  editProfilePopup.open(btn);
+  editProfilePopup.open();
 });
 
 //EVENT LISTENER - PLUS BUTTON
 buttonPlus.addEventListener("click", () => {
-  const btn = document.getElementById("buttonNewPlaceCreate");
-        btn.innerText = "Create"
-        fillProfileForm();
+  //  btnNewPlaceCreate.innerText = "Create"
+   fillProfileForm();
   formValidators["formNewPlace"].resetValidation();
 
   // Listen for click on create button then CHANGE 'Create' to 'Creating'
-    btn.addEventListener('click', () => {
-        btn.innerText = "Creating"
-    })
+    // btn.addEventListener('click', () => {
+    //     btn.innerText = "Creating"
+    // })
 
-  newPlacePopup.open(btn);
+  newPlacePopup.open();
 });
 
 //EVENT LISTENER - AVATAR PENCIL BUTTON
 buttonAvatar.addEventListener("click", () => {
-  const btn = document.getElementById("buttonEditAvatarSave");
-      btn.innerText = "Save"
+  btnEditAvatarSave.innerText = "Save"
   fillProfileForm();
   formValidators["formEditAvatar"].resetValidation();
 
   // Listen for click on save button then CHANGE 'SAVE' to 'SAVING'
-    btn.addEventListener('click', () => {
-        btn.innerText = "Saving"
-    })
+    // btn.addEventListener('click', () => {
+    //     btn.innerText = "Saving"
+    // })
 
-  editAvatarPopup.open(btn);
+  editAvatarPopup.open();
 });
 
 //-----------------------------------------------
@@ -224,7 +260,7 @@ const enableValidation = (config) => {
     validator.enableValidation();
   });
 };
-
+console.log('test');
 enableValidation(config);
 
 

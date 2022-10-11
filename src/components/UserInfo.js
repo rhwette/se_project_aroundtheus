@@ -21,6 +21,7 @@ export default class UserInfo {
     this._aboutElement.textContent = about;
     if(avatar !== undefined) {
       this._avatarElement.src = avatar;
+      console.log('avatar=', avatar);
     }
     
   }

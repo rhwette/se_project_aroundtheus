@@ -11,7 +11,6 @@
 
 const buttonConfirm = document.querySelector(".popup__container-button_confirm");
 const btn = document.getElementById("buttonConfirmDeleteYes");
-// const cardGridLikes = this._element.querySelector(".card-grid__likes");
 
 
 class Card {
@@ -31,7 +30,6 @@ class Card {
     this._handleCan = handleCan.bind(this);
     // this._handleCan = handleCan;
     this._handleZoom = handleZoom.bind(this);
-    // this._cardGridLikes = cardGridLikes;
   }
  
 
