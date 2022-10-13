@@ -31,16 +31,26 @@ const myOwnerId = "3f769460ee50cd15e754d8b8";
 
 //SHOW LIST OF CARDS FROM SERVER
 
-//GET USER INFO from SERVER
-api.getUserInfo().then(userData => {
+//GET USER INFO and CARDS from SERVER using Promis.all
+
+//CODE 30
+
+Promise.all([api.getUserInfo(), api.getCardList()])
+.then(([userData, cardsFromServer]) => {
   userInfo.setUserInfo(
     userData.name,
     userData.about,
     userData.avatar,
-  )
-}
-)
-//use catch here instead of in api.js
+  );
+  cardsSection = new Section(
+  {
+    data : cardsFromServer,
+    renderer : renderCard,
+  },
+  selectors.cardSection
+  );
+  cardsSection.renderItems(cardsFromServer);
+  })
 .catch((err) => {
   console.log(err)
 });
@@ -62,6 +72,7 @@ const renderCard = (data) => {
     //put anon function from handle can
     //note: if use "function" instead of '=>', then 
     //   this._api and thi._element are available from card.js
+
     {handleCan: function() {
 //       // use try..catch for api's without ".then"
        try {
@@ -79,6 +90,27 @@ const renderCard = (data) => {
        }
      }
     },
+    //99999999999999999999999999999999999999999999999999999
+    //see CODE06  ....the below does not work....use 'try..catch' above instead
+    // {handleCan: function() {
+    //   const confirmDeletePopup = new PopupWithForm({
+    //     popupSelector:selectors.confirmPopup,
+    //     handleFormSubmit: () => {
+    //       this._api.removeCard(this._id)
+    //       .then(res => {
+    //         confirmDeletePopup.close();
+    //         this._element.remove();
+    //         confirmDeletePopup.open(this._btn)
+    //       }
+    //   )
+    //      .catch( (err) => {
+    //        console.log('error=getCardList', err);
+    //      })
+    //     }
+    //   })
+    //  }
+    // },
+    //99999999999999999999999999999999999999999999999999999
 
 {
   _handleHeart(event) {
@@ -103,28 +135,25 @@ const renderCard = (data) => {
     }
    }
 }
-
-
-
   )
   cardsSection.addItem(cardElement.createCard());
 };
 
 let cardsSection;
-  api.getCardList().then(cardsFromServer => {
-    cardsSection = new Section({
-      data : cardsFromServer,
-      renderer : renderCard,
-    },
-    selectors.cardSection
-    );
-    cardsSection.renderItems(cardsFromServer);
-    }
-  )
+  // api.getCardList().then(cardsFromServer => {
+  //   cardsSection = new Section({
+  //     data : cardsFromServer,
+  //     renderer : renderCard,
+  //   },
+  //   selectors.cardSection
+  //   );
+  //   cardsSection.renderItems(cardsFromServer);
+  //   }
+  // )
     //use catch here instead of in api.js
-  .catch((err) => {
-    console.log(err)
-  });
+  // .catch((err) => {
+  //   console.log(err)
+  // });
 
 //NEW PLACE POPUP
 const  newPlacePopup = new PopupWithForm({
