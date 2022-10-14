@@ -1,8 +1,9 @@
-export default class UserInfo {
+export default class UserInfo {a
   constructor({ nameSelector, aboutSelector, avatarSelector }) {
     this._nameElement = document.querySelector(nameSelector);
     this._aboutElement = document.querySelector(aboutSelector);
     this._avatarElement = document.querySelector(avatarSelector);
+    // this._avatarNew = document.getElementById("introImage");
   }
 
   getUserInfo() {
@@ -21,6 +22,7 @@ export default class UserInfo {
     this._aboutElement.textContent = about;
     if(avatar !== undefined) {
       this._avatarElement.src = avatar;
+      // this._avatarElement.src = avatarLink;
       console.log('avatar=', avatar);
     }
     

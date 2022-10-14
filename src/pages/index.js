@@ -231,13 +231,15 @@ const  newPlacePopup = new PopupWithForm({
 
   //EDIT AVATAR POPUP
   const editAvatarPopup = new PopupWithForm({
+    // debugger;
     popupSelector: selectors.avatarPopup,
     handleFormSubmit: ( avatarLink  ) => {
       btnEditAvatarSave.innerText = "Saving"
       api.addAvatar(avatarLink)
       .then(res => {
+        // debugger
           // avatarNew.src = avatarLink;
-      renderAvatar(avatarLink);
+        renderAvatar(avatarLink);
         editAvatarPopup.close();
       })
       //use catch here instead of in api.js
@@ -252,7 +254,7 @@ const  newPlacePopup = new PopupWithForm({
 
 function renderAvatar( {avatarLink} ) {
   const avatarNew = document.getElementById("introImage");
-  console.log('avatarNew.src=', avatarNew.src);
+  // console.log('avatarNew.src=', avatarNew.src);
   avatarNew.src = avatarLink;
 }
 
