@@ -58,7 +58,7 @@ Promise.all([api.getUserInfo(), api.getCardList()])
 const newCardPopup = new PopupWithImage(selectors.previewPopup);
 
 const renderCard = (data) => {
-  //include api, myOwnerId, and handleCan in arguments of Card
+  //include api, myOwnerId,handleCan, and handleHeart in arguments of Card
   const cardElement = new Card(
     {
       data,
@@ -69,27 +69,59 @@ const renderCard = (data) => {
     selectors.cardTemplate,
     api,
     myOwnerId,
-    //put anon function from handle can
-    //note: if use "function" instead of '=>', then 
-    //   this._api and thi._element are available from card.js
-
-    {handleCan: function() {
+  {handleCan:  () => {
 //       // use try..catch for api's without ".then"
-       try {
-         const confirmDeletePopup = new PopupWithForm({
-         popupSelector:selectors.confirmPopup,
-         handleFormSubmit: () => {
-         this._api.removeCard(this._id);
-         confirmDeletePopup.close();
-         this._element.remove();
-       } 
-     })
-       confirmDeletePopup.open(this._btn);
-       } catch( Error) {
-        console.log('error=getCardList', Error);
-       }
-     }
+      //  try {
+      const confirmDeletePopup = new PopupWithForm({
+      popupSelector:selectors.confirmPopup,
+        handleFormSubmit: () => {
+          this._api.removeCard(this._id)
+            .then(res=> {
+              confirmDeletePopup.close();
+              this._element.remove();
+              confirmDeletePopup.open(this._btn);
+            })
+            .catch( (err) => {
+              console.log('error=getCardList', err);
+            })
+         }
+        })
+      }
     },
+   {handleHeart:(event)  => {
+      // use try..catch for api's without ".then"
+      // try{
+        const cardGridLikes = this._element.querySelector(".card-grid__likes");
+        if(event.target.classList.length ===1) {
+          // api.addLike(this._id);
+          this._api.addLike(this._id)
+            .then(res=> {
+              event.target.classList.add("card-grid__icon_active");
+              this._likes.length = this._likes.length + 1;
+              cardGridLikes.textContent = this._likes.length
+            })
+            .catch((err) => {
+              console.log('error=', err);
+            });
+        } else{
+          event.target.classList.remove("card-grid__icon_active");
+          // api.removeLike(this._id);
+          this._api.removeLike(this._id)
+            .then(res=> {
+              this._likes.length = this._likes.length - 1;
+              cardGridLikes.textContent = this._likes.length;
+            })
+            .catch( (err) => {
+              console.log('error=', err);
+            })
+        }
+    }
+  }
+  )
+    
+        //put anon function from handle can
+    //note: if use "function" instead of '=>', then 
+    //   this._api and this._element are available from card.js
     //99999999999999999999999999999999999999999999999999999
     //see CODE06  ....the below does not work....use 'try..catch' above instead
     // {handleCan: function() {
@@ -112,32 +144,12 @@ const renderCard = (data) => {
     // },
     //99999999999999999999999999999999999999999999999999999
 
-{
-  _handleHeart(event) {
-    // use try..catch for api's without ".then"
-    try{
-      const cardGridLikes = this._element.querySelector(".card-grid__likes");
-      if(event.target.classList.length ===1) {
-        // api.addLike(this._id);
-        this._api.addLike(this._id);
-        event.target.classList.add("card-grid__icon_active");
-        this._likes.length = this._likes.length + 1;
-        cardGridLikes.textContent = this._likes.length;
-    } else{
-        event.target.classList.remove("card-grid__icon_active");
-        // api.removeLike(this._id);
-        this._api.removeLike(this._id);
-        this._likes.length = this._likes.length - 1;
-        cardGridLikes.textContent = this._likes.length;
-    };
-    } catch( Error) {
-      console.log('error=', Error);
-    }
-   }
+
+
+
+    cardsSection.addItem(cardElement.createCard());
 }
-  )
-  cardsSection.addItem(cardElement.createCard());
-};
+
 
 let cardsSection;
   // api.getCardList().then(cardsFromServer => {
@@ -315,7 +327,7 @@ const enableValidation = (config) => {
     validator.enableValidation();
   });
 };
-console.log('test');
+// console.log('test');
 enableValidation(config);
 
 
