@@ -25,15 +25,11 @@ const popupEditProfileAbout = document.querySelector(
   );
   
 const userInfo = new UserInfo(selectors);
-//should be some way to download myOwnerId from server
-//but instead found value of myOwnerId by creating a new card 
 const myOwnerId = "3f769460ee50cd15e754d8b8";
 
 //SHOW LIST OF CARDS FROM SERVER
 
 //GET USER INFO and CARDS from SERVER using Promis.all
-
-//CODE 30
 
 Promise.all([api.getUserInfo(), api.getCardList()])
 .then(([userData, cardsFromServer]) => {
@@ -58,7 +54,6 @@ Promise.all([api.getUserInfo(), api.getCardList()])
 const newCardPopup = new PopupWithImage(selectors.previewPopup);
 
 const renderCard = (data) => {
-  //include api, myOwnerId,handleCan, and handleHeart in arguments of Card
   const cardElement = new Card(
     {
       data,
@@ -70,10 +65,6 @@ const renderCard = (data) => {
     api,
     myOwnerId,
   {handleCan: function() {
-//       // use try..catch for api's without ".then"
-      //  try {
-        // debugger
-        // console.log('handlecan running')
       const confirmDeletePopup = new PopupWithForm({
       popupSelector:selectors.confirmPopup,
         handleFormSubmit: () => {
@@ -91,11 +82,8 @@ const renderCard = (data) => {
       }
     },
    {handleHeart:function(event) {
-      // use try..catch for api's without ".then"
-      // try{
         const cardGridLikes = this._element.querySelector(".card-grid__likes");
         if(event.target.classList.length ===1) {
-          // api.addLike(this._id);
           this._api.addLike(this._id)
             .then(res=> {
               event.target.classList.add("card-grid__icon_active");
@@ -107,7 +95,6 @@ const renderCard = (data) => {
             });
         } else{
           event.target.classList.remove("card-grid__icon_active");
-          // api.removeLike(this._id);
           this._api.removeLike(this._id)
             .then(res=> {
               this._likes.length = this._likes.length - 1;
@@ -120,54 +107,11 @@ const renderCard = (data) => {
     }
   }
   )
-    
-        //put anon function from handle can
-    //note: if use "function" instead of '=>', then 
-    //   this._api and this._element are available from card.js
-    //99999999999999999999999999999999999999999999999999999
-    //see CODE06  ....the below does not work....use 'try..catch' above instead
-    // {handleCan: function() {
-    //   const confirmDeletePopup = new PopupWithForm({
-    //     popupSelector:selectors.confirmPopup,
-    //     handleFormSubmit: () => {
-    //       this._api.removeCard(this._id)
-    //       .then(res => {
-    //         confirmDeletePopup.close();
-    //         this._element.remove();
-    //         confirmDeletePopup.open(this._btn)
-    //       }
-    //   )
-    //      .catch( (err) => {
-    //        console.log('error=getCardList', err);
-    //      })
-    //     }
-    //   })
-    //  }
-    // },
-    //99999999999999999999999999999999999999999999999999999
-
-
-
 
     cardsSection.addItem(cardElement.createCard());
 }
 
-
 let cardsSection;
-  // api.getCardList().then(cardsFromServer => {
-  //   cardsSection = new Section({
-  //     data : cardsFromServer,
-  //     renderer : renderCard,
-  //   },
-  //   selectors.cardSection
-  //   );
-  //   cardsSection.renderItems(cardsFromServer);
-  //   }
-  // )
-    //use catch here instead of in api.js
-  // .catch((err) => {
-  //   console.log(err)
-  // });
 
 //NEW PLACE POPUP
 const  newPlacePopup = new PopupWithForm({
@@ -179,7 +123,6 @@ const  newPlacePopup = new PopupWithForm({
         renderCard(res);
         newPlacePopup.close();
       })
-      //use catch here instead of in api.js
       .catch((err) => {
         console.log(err)
       })
@@ -189,29 +132,10 @@ const  newPlacePopup = new PopupWithForm({
     }
   })
 
-//EDIT PROFILE POPUP
-// const editProfilePopup = new PopupWithForm( {
-//   popupSelector: selectors.profilePopup,
-//   handleFormSubmit: async (newUserData) => {
-//     // handleFormSubmit:  (newUserData) => {
-//       btnEditProfileSave.innerText = "Saving"
-//       console.log('newUserData1=', newUserData);
-      
-//       userInfo.setUserInfo(newUserData.name, newUserData.about)
-//       const name = newUserData.name;
-//       const about = newUserData.about;
-//       const avatar = newUserData.avatar;
-//     await api.addUserInfo( {name, about})
-//     //  api.addUserInfo( {name, about})
-//          editProfilePopup.close()
-//   }
-//   }
-//   );
   const editProfilePopup = new PopupWithForm( {
     popupSelector: selectors.profilePopup,
     handleFormSubmit: (newUserData) => {
       btnEditProfileSave.innerText = "Saving"
-      console.log('newUserData-', newUserData);
       userInfo.setUserInfo(newUserData.name, newUserData.about)
       const name = newUserData.name;
       const about = newUserData.about;
@@ -231,18 +155,14 @@ const  newPlacePopup = new PopupWithForm({
 
   //EDIT AVATAR POPUP
   const editAvatarPopup = new PopupWithForm({
-    // debugger;
     popupSelector: selectors.avatarPopup,
     handleFormSubmit: ( avatarLink  ) => {
       btnEditAvatarSave.innerText = "Saving"
       api.addAvatar(avatarLink)
       .then(res => {
-        // debugger
-          // avatarNew.src = avatarLink;
         renderAvatar(avatarLink);
         editAvatarPopup.close();
       })
-      //use catch here instead of in api.js
       .catch((err) => {
         console.log(err)
       })
@@ -254,7 +174,6 @@ const  newPlacePopup = new PopupWithForm({
 
 function renderAvatar( {avatarLink} ) {
   const avatarNew = document.getElementById("introImage");
-  // console.log('avatarNew.src=', avatarNew.src);
   avatarNew.src = avatarLink;
 }
 
@@ -269,28 +188,15 @@ function fillProfileForm() {
 
 //EVENT LISTENER - PENCIL BUTTON
 buttonPencil.addEventListener("click", () => {
-  // btnEditProfileSave.innerText = "Save"
   fillProfileForm();
   formValidators["formEditProfile"].resetValidation();
-  
-  // Listen for click on save button then CHANGE 'SAVE' to 'SAVING'
-    // btn.addEventListener('click', () => {
-    //     btn.innerText = "Saving"
-    // })
-
   editProfilePopup.open();
 });
 
 //EVENT LISTENER - PLUS BUTTON
 buttonPlus.addEventListener("click", () => {
-  //  btnNewPlaceCreate.innerText = "Create"
    fillProfileForm();
   formValidators["formNewPlace"].resetValidation();
-
-  // Listen for click on create button then CHANGE 'Create' to 'Creating'
-    // btn.addEventListener('click', () => {
-    //     btn.innerText = "Creating"
-    // })
 
   newPlacePopup.open();
 });
@@ -301,25 +207,8 @@ buttonAvatar.addEventListener("click", () => {
   fillProfileForm();
   formValidators["formEditAvatar"].resetValidation();
 
-  // Listen for click on save button then CHANGE 'SAVE' to 'SAVING'
-    // btn.addEventListener('click', () => {
-    //     btn.innerText = "Saving"
-    // })
-
   editAvatarPopup.open();
 });
-
-//-----------------------------------------------
-//  VALIDATION
-//-----------------------------------------------
-// const config = {
-//   formSelector: ".popup__form",
-//   inputSelector: ".popup__container-input",
-//   submitButtonSelector: ".popup__container-button",
-//   inactiveButtonClass: "popup__container-button-disabled",
-//   inputErrorClass: "popup__container-input-type-error",
-//   errorClass: "popup__container-error-visible",
-// };
 
 export const formValidators = {};
 const enableValidation = (config) => {
@@ -331,7 +220,7 @@ const enableValidation = (config) => {
     validator.enableValidation();
   });
 };
-// console.log('test');
+
 enableValidation(config);
 
 

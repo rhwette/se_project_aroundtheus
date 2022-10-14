@@ -24,7 +24,6 @@ export default class PopupWithForm extends Popup {
 
   setInputValues(data) {
     this._inputList.forEach((input) => {
-      // here you insert the `value` by the `name` of the input
       input.value = data[input.name];
     });
   }
@@ -34,8 +33,6 @@ export default class PopupWithForm extends Popup {
     this._popupForm.addEventListener("submit", this._handleSubmit); 
   }
   
- 
-  
   open(btn) {
     super.open();
     this.setEventListeners();
@@ -43,7 +40,6 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    //need to removeEventListener so that multiple cards are not removed
     this._popupForm.removeEventListener("submit", this._handleSubmit);
     this._popupForm.reset();
   }
