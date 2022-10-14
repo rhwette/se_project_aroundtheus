@@ -69,9 +69,11 @@ const renderCard = (data) => {
     selectors.cardTemplate,
     api,
     myOwnerId,
-  {handleCan:  () => {
+  {handleCan: function() {
 //       // use try..catch for api's without ".then"
       //  try {
+        // debugger
+        // console.log('handlecan running')
       const confirmDeletePopup = new PopupWithForm({
       popupSelector:selectors.confirmPopup,
         handleFormSubmit: () => {
@@ -79,16 +81,16 @@ const renderCard = (data) => {
             .then(res=> {
               confirmDeletePopup.close();
               this._element.remove();
-              confirmDeletePopup.open(this._btn);
             })
             .catch( (err) => {
               console.log('error=getCardList', err);
             })
-         }
+          }
         })
+        confirmDeletePopup.open(this._btn);
       }
     },
-   {handleHeart:(event)  => {
+   {handleHeart:function(event) {
       // use try..catch for api's without ".then"
       // try{
         const cardGridLikes = this._element.querySelector(".card-grid__likes");

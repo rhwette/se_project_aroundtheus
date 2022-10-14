@@ -29,8 +29,8 @@ class Card {
     this._cardSelector = cardSelector;
     this._handleCan = handleCan.bind(this);
     // this._handleCan = handleCan;
-    // this.handleHeart = handleHeart.bind(this);
-    this._handleCan = handleCan;
+    this._handleHeart = handleHeart.bind(this);
+    // this._handleCan = handleCan;
     this._handleZoom = handleZoom.bind(this);
   }
  
