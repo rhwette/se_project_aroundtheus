@@ -203,18 +203,21 @@ const  newPlacePopup = new PopupWithForm({
     popupSelector: selectors.profilePopup,
     handleFormSubmit: (newUserData) => {
       btnEditProfileSave.innerText = "Saving"
-      userInfo.setUserInfo(newUserData.name, newUserData.about)
+      //code 20 review 2
+      // userInfo.setUserInfo(newUserData.name, newUserData.about)
       const name = newUserData.name;
       const about = newUserData.about;
       const avatar = newUserData.avatar;
       api.addUserInfo( {name, about} )
       .then(res => {
+        // userInfo.setUserInfo(newUserData.name, newUserData.about)
         editProfilePopup.close();
       })
       .catch( (err) => {
         console.log(err)
       })
       .finally( () => {
+        userInfo.setUserInfo(newUserData.name, newUserData.about)
         btnEditProfileSave.innerText = "Save"
       })
     }
@@ -252,6 +255,9 @@ function fillProfileForm() {
 
 
 //EVENT LISTENERS -----------------------
+
+
+
 
 //EVENT LISTENER - PENCIL BUTTON
 buttonPencil.addEventListener("click", () => {
