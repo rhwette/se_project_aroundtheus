@@ -17,19 +17,27 @@ export default class UserInfo {
   }
   
   setUserInfo(  name, about, avatar, userId  ) {
+    console.log('name=', name);
+    console.log('about=', about);
+    console.log('avatar=', avatar);
+    console.log('userId=', userId);
     // setUserInfo(  name, about, avatar ) {
     this._nameElement.textContent = name;
     this._aboutElement.textContent = about;
-    if(avatar !== undefined) {
+    if(avatar != undefined) {
       this._avatarElement.src = avatar;
-    };
-    // console.log('userId=', userId);
+    } 
+    // else {
+      // const avatarNew = document.getElementById("introImage");
+    // }
     this._userId = userId
-    // console.log('this._userId=', this._userId);
   }
 
-  setUserId(userId) {
-    this._userId = userId;
-    console.log('this._userId=', this._userId);
-  }
+  // setUserId(userId) {
+  //   this._userId = userId;
+  //   console.log('this._userId=', this._userId);
+  // }
 }
+
+
+// const avatarNew = document.getElementById("introImage");

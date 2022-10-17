@@ -53,6 +53,7 @@ const userInfo = new UserInfo(selectors);
 
 Promise.all([api.getUserInfo(), api.getCardList()])
 .then(([userData, cardsFromServer]) => {
+  // debugger
   console.log('userData=', userData);
   console.log('userData.name=', userData.name);
   console.log('userData.about=', userData.about);
@@ -112,6 +113,7 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
           cardElement._api.removeCard(cardElement._id)
             .then(res=> {
               confirmDeletePopup.close();
+              //code 11
               // this._element.remove();
               cardElement._element.remove();
             })
@@ -120,7 +122,8 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
             })
           }
         })
-        // confirmDeletePopup.open(this._btn);
+        // confirmDeletePopup.open(this._btn);.
+        //code 12
         confirmDeletePopup.open(cardElement);
         // confirmDeletePopup.open(cardElement._btn);
         // confirmDeletePopup.open;
@@ -130,11 +133,13 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
         const cardGridLikes = cardElement._element.querySelector(".card-grid__likes");
         if(event.target.classList.length === 1) {
           // this._api.addLike(this._id)
+          //code15
           cardElement._api.addLike(cardElement._id)
 
           
             .then(res=> {
               event.target.classList.add("card-grid__icon_active");
+
               // this._likes.length = this._likes.length + 1;
               cardElement._likes.length = cardElement._likes.length + 1;
               cardGridLikes.textContent = this._likes.length
@@ -149,6 +154,7 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
         } else{
           event.target.classList.remove("card-grid__icon_active");
           // cardElement._likes.length = cardElement._likes.length - 1;
+          //code 17
           // this._api.removeLike(this._id)
           cardElement._api.removeLike(cardElement._id)
             .then(res=> {
@@ -234,8 +240,8 @@ const  newPlacePopup = new PopupWithForm({
   })
 
 function renderAvatar( {avatarLink} ) {
-  const avatarNew = document.getElementById("introImage");
-  avatarNew.src = avatarLink;
+  // const avatarNew = document.getElementById("introImage");
+  userInfo._avatarElement.src = avatarLink;
 }
 
 function fillProfileForm() {
@@ -264,7 +270,8 @@ buttonPlus.addEventListener("click", () => {
 
 //EVENT LISTENER - AVATAR PENCIL BUTTON
 buttonAvatar.addEventListener("click", () => {
-  btnEditAvatarSave.innerText = "Save"
+  //code 22
+  // btnEditAvatarSave.innerText = "Save"
   fillProfileForm();
   formValidators["formEditAvatar"].resetValidation();
 
