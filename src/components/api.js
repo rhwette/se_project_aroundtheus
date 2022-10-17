@@ -1,11 +1,20 @@
 class Api {
-    constructor({ baseUrl, authToken}) {
+    constructor({ baseUrl, authToken, user_Id}) {
+    // constructor({ baseUrl, authToken, owner_Id}) {
+        // constructor({ baseUrl, authToken}) {
         this._baseUrl = baseUrl;
         this._authToken = authToken;
         this._headers = {
             authorization: this._authToken,
             "Content-type": "application/json"
         }
+        // this._owner_Id = owner_Id;
+        this._user_Id = user_Id;
+        console.log('baseUrl', baseUrl);
+        console.log('authToken', authToken);
+        // console.log('owner_Id', owner_Id);
+        console.log('user_Id', user_Id);
+
     }
 
 
@@ -82,7 +91,7 @@ addLike(_id) {
         headers: this._headers
     })
     
-      .then(this._checkResponse)
+    //   .then(this._checkResponse)
 }
 
 // remove a like from a card
@@ -92,7 +101,7 @@ removeLike(_id, name) {
         method: "DELETE",
         headers: this._headers
     })
-    .then(this._checkResponse)
+    // .then(this._checkResponse)
 }
 
 // add new avatar
