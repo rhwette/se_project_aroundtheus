@@ -26,6 +26,26 @@ const popupEditProfileAbout = document.querySelector(
   );
   
 const userInfo = new UserInfo(selectors);
+
+//99999999999999999999999999999999999999999999999
+// const confirmDeletePopup = new PopupWithForm({
+//   popupSelector:selectors.confirmPopup,
+//     handleFormSubmit: () => {
+//       cardElement._api.removeCard(cardElement._id)
+//         .then(res=> {
+//           confirmDeletePopup.close();
+//           cardElement._element.remove();
+//         })
+//         .catch( (err) => {
+//           console.log('error=getCardList', err);
+//         })
+//       }
+//     })
+//     confirmDeletePopup.setEventListeners();
+
+//999999999999999999999999999999999999999999999999
+
+
 //add 'popup' code 02
 // const popup = new Popup();
 
@@ -108,7 +128,7 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
     // userData._id,
     // this._userId,
     userInfo._userId,
-  {handleCan: function() {
+  {handleCan: function()   {
       const confirmDeletePopup = new PopupWithForm({
       popupSelector:selectors.confirmPopup,
         handleFormSubmit: () => {
@@ -177,6 +197,12 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
     }
   }
   )
+
+  //888888888888888888888888888888888888888888888
+
+
+
+  //8888888888888888888888888888888888888888888888
   // let cardsSection;
 // console.log('cardsSection=', cardsSection);
 // console.log('items=', _items);
