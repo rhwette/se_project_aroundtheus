@@ -27,7 +27,7 @@ const popupEditProfileAbout = document.querySelector(
   
 const userInfo = new UserInfo(selectors);
 //add 'popup' code 02
-const popup = new Popup();
+// const popup = new Popup();
 
 // const userId = "3f769460ee50cd15e754d8b8";
 
@@ -128,6 +128,7 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
         })
         // confirmDeletePopup.open(this._btn);.
         //code 12
+        confirmDeletePopup.setEventListeners();
         confirmDeletePopup.open(cardElement);
         // confirmDeletePopup.open(cardElement._btn);
         // confirmDeletePopup.open;
@@ -202,6 +203,8 @@ const  newPlacePopup = new PopupWithForm({
       })
     }
   })
+  
+  newPlacePopup.setEventListeners();
 
   const editProfilePopup = new PopupWithForm( {
     popupSelector: selectors.profilePopup,
@@ -226,6 +229,7 @@ const  newPlacePopup = new PopupWithForm({
       })
     }
   })
+  editProfilePopup.setEventListeners();
 
   //EDIT AVATAR POPUP
   const editAvatarPopup = new PopupWithForm({
@@ -245,6 +249,7 @@ const  newPlacePopup = new PopupWithForm({
       })
     }
   })
+  editAvatarPopup.setEventListeners();
 
 function renderAvatar( {avatarLink} ) {
   // const avatarNew = document.getElementById("introImage");
@@ -263,9 +268,6 @@ function fillProfileForm() {
 
 //EVENT LISTENER - listen for "X" and listen for remote click
 
-//  Code 02  move from popup.js to index.js
-popup.setEventListeners();
-// this.setEventListeners();
 
 
 //EVENT LISTENER - PENCIL BUTTON

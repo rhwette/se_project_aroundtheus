@@ -20,11 +20,12 @@
     <!--INTRO-->
     <section class="intro">
       <div>
-        <img class="intro__image" src="<%=require('./images/blank-image.jpg')%>" alt="jacques cousteau"
-        title="cousteau" id="introImage" />
+        <img class="intro__image" src="<%=require('./images/blank-image.jpg')%>" alt="jacques cousteau" title="cousteau"
+          id="introImage" />
 
         <div>
-          <img class="intro__image-overlay" src="<%=require('./images/pencil.svg')%>" alt="pencil edit button" title="pencilEdit"/>
+          <img class="intro__image-overlay" src="<%=require('./images/pencil.svg')%>" alt="pencil edit button"
+            title="pencilEdit" />
         </div>
       </div>
       <div class="intro__description">
@@ -61,7 +62,8 @@
         <button type="button" class="popup__container-button-close" id="buttonConfirmDeleteClose"><img
             src="<%=require('./images/close.svg')%>" alt="close symbol" /></button>
         <form name="formConfirmDelete" class="popup__form" id="confirmDeleteForm">
-          <button type="click" class="popup__container-button popup__container-button_confirm " id="buttonConfirmDeleteYes">Yes</button>
+          <button type="click" class="popup__container-button popup__container-button_confirm "
+            id="buttonConfirmDeleteYes">Yes</button>
         </form>
       </div>
     </div>
@@ -73,14 +75,15 @@
         <button type="button" class="popup__container-button-close" id="buttonEditAvatarClose"><img
             src="<%=require('./images/close.svg')%>" alt="close symbol" /></button>
         <form name="formEditAvatar" class="popup__form" id="editAvatarForm">
-          <input name="avatarLink" placeholder="Avatar URL" class="popup__container-input popup__container-input-type-link"
-          type="url" id="avatar-input" required />
-        <span id="avatar-input-error"></span>
-          <button type="submit" class="popup__container-button popup__container-button_avatar " id="buttonEditAvatarSave">Save</button>
+          <input name="avatarLink" placeholder="Avatar URL"
+            class="popup__container-input popup__container-input-type-link" type="url" id="avatar-input" required />
+          <span id="avatar-input-error"></span>
+          <button type="submit" class="popup__container-button popup__container-button_avatar "
+            id="buttonEditAvatarSave">Save</button>
         </form>
       </div>
     </div>
-        
+
     <!--POPUP AND FORM for EDIT PROFILE-->
     <div class="popup" id="person-popup-container">
       <div class="popup__container" id="popupEditProfile">
