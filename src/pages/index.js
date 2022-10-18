@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import Section from "../components/Section";
 import PopupWithImage from "../components/PopupWithImage";
 import FormValidator from "../components/FormValidator";
+import Popup from "../components/Popup";
 import PopupWithForm from "../components/PopupWithForm";
 import UserInfo from "../components/UserInfo";
 import Api from "../components/Api.js";
@@ -25,6 +26,9 @@ const popupEditProfileAbout = document.querySelector(
   );
   
 const userInfo = new UserInfo(selectors);
+//add 'popup' code 02
+const popup = new Popup();
+
 // const userId = "3f769460ee50cd15e754d8b8";
 
 //NOTE:  userData contains: name , about, avatar, _id, cohort#
@@ -257,6 +261,11 @@ function fillProfileForm() {
 //EVENT LISTENERS -----------------------
 
 
+//EVENT LISTENER - listen for "X" and listen for remote click
+
+//  Code 02  move from popup.js to index.js
+popup.setEventListeners();
+// this.setEventListeners();
 
 
 //EVENT LISTENER - PENCIL BUTTON
