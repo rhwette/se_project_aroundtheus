@@ -158,15 +158,19 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
     },
    {handleHeart:function(event) {
         const cardGridLikes = cardElement._element.querySelector(".card-grid__likes");
+        console.log('event=', event);
         if(event.target.classList.length === 1) {
           // this._api.addLike(this._id)
           //code15
           cardElement._api.addLike(cardElement._id)
-
-          
             .then(res=> {
-              event.target.classList.add("card-grid__icon_active");
-
+              //code 14 consider an 'if' to check if res is good or not
+              // console.log('res=', res);
+              // console.log('res.ok=', res.ok);
+              // console.log('res.status=', res.status);
+              if ( (res.ok === true) && (res.status === 200) ) {
+                event.target.classList.add("card-grid__icon_active");
+              };
               // this._likes.length = this._likes.length + 1;
               cardElement._likes.length = cardElement._likes.length + 1;
               cardGridLikes.textContent = this._likes.length
@@ -179,13 +183,19 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
             //   cardGridLikes.textContent = this._likes.length
             // // })
         } else{
-          event.target.classList.remove("card-grid__icon_active");
+
           // cardElement._likes.length = cardElement._likes.length - 1;
           //code 17
           // this._api.removeLike(this._id)
-          cardElement._api.removeLike(cardElement._id)
-            .then(res=> {
-              // this._likes.length = this._likes.length - 1;
+          cardElement._api.removeLike(cardElement._idx)
+          .then(res=> {
+            console.log('res=', res);
+            console.log('res.ok=', res.ok);
+            console.log('res.status=', res.status);
+            if ( (res.ok === true) && (res.status === 200) ) {
+              event.target.classList.remove("card-grid__icon_active");
+            };
+            // this._likes.length = this._likes.length - 1;
               cardElement._likes.length = cardElement._likes.length - 1;
               cardGridLikes.textContent = this._likes.length;
             })
