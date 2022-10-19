@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import Section from "../components/Section";
 import PopupWithImage from "../components/PopupWithImage";
 import FormValidator from "../components/FormValidator";
-import Popup from "../components/Popup";
+// import Popup from "../components/Popup";
 import PopupWithForm from "../components/PopupWithForm";
 import UserInfo from "../components/UserInfo";
 import Api from "../components/Api.js";
@@ -148,7 +148,7 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
         })
         // confirmDeletePopup.open(this._btn);.
         //code 12
-        confirmDeletePopup.setEventListeners();
+        // confirmDeletePopup.setEventListeners();
         confirmDeletePopup.open(cardElement);
         // confirmDeletePopup.open(cardElement._btn);
         // confirmDeletePopup.open;
@@ -230,7 +230,7 @@ const  newPlacePopup = new PopupWithForm({
     }
   })
   
-  newPlacePopup.setEventListeners();
+  // newPlacePopup.setEventListeners();
 
   const editProfilePopup = new PopupWithForm( {
     popupSelector: selectors.profilePopup,
@@ -255,7 +255,7 @@ const  newPlacePopup = new PopupWithForm({
       })
     }
   })
-  editProfilePopup.setEventListeners();
+  // editProfilePopup.setEventListeners();
 
   //EDIT AVATAR POPUP
   const editAvatarPopup = new PopupWithForm({
@@ -275,7 +275,7 @@ const  newPlacePopup = new PopupWithForm({
       })
     }
   })
-  editAvatarPopup.setEventListeners();
+  // editAvatarPopup.setEventListeners();
 
 function renderAvatar( {avatarLink} ) {
   // const avatarNew = document.getElementById("introImage");
