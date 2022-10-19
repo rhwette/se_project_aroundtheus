@@ -28,20 +28,21 @@ const popupEditProfileAbout = document.querySelector(
 const userInfo = new UserInfo(selectors);
 
 //99999999999999999999999999999999999999999999999
-// const confirmDeletePopup = new PopupWithForm({
-//   popupSelector:selectors.confirmPopup,
-//     handleFormSubmit: () => {
-//       cardElement._api.removeCard(cardElement._id)
-//         .then(res=> {
-//           confirmDeletePopup.close();
-//           cardElement._element.remove();
-//         })
-//         .catch( (err) => {
-//           console.log('error=getCardList', err);
-//         })
-//       }
-//     })
-//     confirmDeletePopup.setEventListeners();
+const confirmDeletePopup = new PopupWithForm({
+  popupSelector:selectors.confirmPopup,
+    handleFormSubmit: () => {
+      const cardElement = confirmDeletePopup._currentCardElement;
+      cardElement._api.removeCard(cardElement._id)
+        .then(res=> {
+          confirmDeletePopup.close();
+          cardElement._element.remove();
+        })
+        .catch( (err) => {
+          console.log('error=getCardList', err);
+        })
+      }
+    })
+    confirmDeletePopup.setEventListeners();
 
 //999999999999999999999999999999999999999999999999
 
@@ -129,26 +130,27 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
     // this._userId,
     userInfo._userId,
   {handleCan: function()   {
-      const confirmDeletePopup = new PopupWithForm({
-      popupSelector:selectors.confirmPopup,
-        handleFormSubmit: () => {
-          //code 10 review 2
-          // this._api.removeCard(this._id)
-          cardElement._api.removeCard(cardElement._id)
-            .then(res=> {
-              confirmDeletePopup.close();
-              //code 11
-              // this._element.remove();
-              cardElement._element.remove();
-            })
-            .catch( (err) => {
-              console.log('error=getCardList', err);
-            })
-          }
-        })
+      // const confirmDeletePopup = new PopupWithForm({
+      // popupSelector:selectors.confirmPopup,
+      //   handleFormSubmit: () => {
+      //     //code 10 review 2
+      //     // this._api.removeCard(this._id)
+      //     cardElement._api.removeCard(cardElement._id)
+      //       .then(res=> {
+      //         confirmDeletePopup.close();
+      //         //code 11
+      //         // this._element.remove();
+      //         cardElement._element.remove();
+      //       })
+      //       .catch( (err) => {
+      //         console.log('error=getCardList', err);
+      //       })
+      //     }
+      //   })
         // confirmDeletePopup.open(this._btn);.
         //code 12
         // confirmDeletePopup.setEventListeners();
+        confirmDeletePopup._currentCardElement = cardElement;
         confirmDeletePopup.open(cardElement);
         // confirmDeletePopup.open(cardElement._btn);
         // confirmDeletePopup.open;
@@ -230,7 +232,8 @@ const  newPlacePopup = new PopupWithForm({
     }
   })
   
-  // newPlacePopup.setEventListeners();
+  // NOTE....line 234 results in only allowing one card to be added
+  newPlacePopup.setEventListeners();
 
   const editProfilePopup = new PopupWithForm( {
     popupSelector: selectors.profilePopup,
@@ -255,7 +258,8 @@ const  newPlacePopup = new PopupWithForm({
       })
     }
   })
-  // editProfilePopup.setEventListeners();
+  // NOTE....line 260 results in only allowing one card to be added
+  editProfilePopup.setEventListeners();
 
   //EDIT AVATAR POPUP
   const editAvatarPopup = new PopupWithForm({
@@ -275,7 +279,7 @@ const  newPlacePopup = new PopupWithForm({
       })
     }
   })
-  // editAvatarPopup.setEventListeners();
+  editAvatarPopup.setEventListeners();
 
 function renderAvatar( {avatarLink} ) {
   // const avatarNew = document.getElementById("introImage");
@@ -294,7 +298,10 @@ function fillProfileForm() {
 
 //EVENT LISTENER - listen for "X" and listen for remote click
 
-
+// const popup = new Popup(popupSelector);
+// const popup = new Popup(selectors);
+// const popup = new Popup( {selectors} );
+// popup.setEventListeners();
 
 //EVENT LISTENER - PENCIL BUTTON
 buttonPencil.addEventListener("click", () => {
