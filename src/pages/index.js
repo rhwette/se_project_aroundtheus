@@ -170,9 +170,9 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
               // console.log('res.status=', res.status);
               if ( (res.ok === true) && (res.status === 200) ) {
                 event.target.classList.add("card-grid__icon_active");
+                cardElement._likes.length = cardElement._likes.length + 1;
               };
               // this._likes.length = this._likes.length + 1;
-              cardElement._likes.length = cardElement._likes.length + 1;
               cardGridLikes.textContent = this._likes.length
             })
             .catch((err) => {
@@ -187,17 +187,17 @@ const newCardPopup = new PopupWithImage(selectors.previewPopup);
           // cardElement._likes.length = cardElement._likes.length - 1;
           //code 17
           // this._api.removeLike(this._id)
-          cardElement._api.removeLike(cardElement._idx)
+          cardElement._api.removeLike(cardElement._id)
           .then(res=> {
             console.log('res=', res);
             console.log('res.ok=', res.ok);
             console.log('res.status=', res.status);
             if ( (res.ok === true) && (res.status === 200) ) {
               event.target.classList.remove("card-grid__icon_active");
+              cardElement._likes.length = cardElement._likes.length - 1;
             };
             // this._likes.length = this._likes.length - 1;
-              cardElement._likes.length = cardElement._likes.length - 1;
-              cardGridLikes.textContent = this._likes.length;
+              cardGridLikes.textContent = cardElement._likes.length;
             })
             .catch( (err) => {
               console.log('error=', err);
