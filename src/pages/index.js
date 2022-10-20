@@ -108,8 +108,9 @@ Promise.all([api.getUserInfo(), api.getCardList()])
       console.log(err)
       console.log('done2')
     });
-
+// newCardPopup
 const newCardPopup = new PopupWithImage(selectors.previewPopup);
+newCardPopup.setEventListeners();
 
 // const renderCard = (data, userData) => {
   const renderCard = (data) => {
