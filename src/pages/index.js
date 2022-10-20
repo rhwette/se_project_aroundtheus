@@ -76,6 +76,7 @@ const confirmDeletePopup = new PopupWithForm({
   //SHOW LIST OF CARDS FROM SERVER
 //GET USER INFO and CARDS from SERVER using Promise.all
 
+// Promise.all([api.getUserInfo(), api.getCardList()])
 Promise.all([api.getUserInfo(), api.getCardList()])
 .then(([userData, cardsFromServer]) => {
   // debugger
