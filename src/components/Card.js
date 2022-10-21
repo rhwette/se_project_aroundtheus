@@ -30,17 +30,20 @@ class Card {
 
   _setEventListeners() {
     // EVENT LISTENER - HEART
-    this._element
+    // this._element
+    this.element
       .querySelector('.card-grid__icon')
       .addEventListener('click', this._handleHeart);
 
     // EVENT LISTENER - GARBAGE CAN
-    this._element
+    // this._element
+    this.element
       .querySelector('.card-grid__garbage')
       .addEventListener('click', this._handleCan);
 
     // EVENT LISTENER - IMG TAG
-    this._element
+    // this._element
+    this.element
       .querySelector('img')
       .addEventListener('click', this._handleZoom);
   }
@@ -50,11 +53,16 @@ class Card {
     if (this._likes === undefined) {
       this._likes = [];
     }
-    this._element = this._getTemplate();
-    const cardHeart = this._element.querySelector('.card-grid__icon');
-    const cardGridPicture = this._element.querySelector('.card-grid__picture');
-    const cardGridText = this._element.querySelector('.card-grid__text');
-    const cardGridLikes = this._element.querySelector('.card-grid__likes');
+    // this._element = this._getTemplate();
+    this.element = this._getTemplate();
+    // const cardHeart = this._element.querySelector('.card-grid__icon');
+    const cardHeart = this.element.querySelector('.card-grid__icon');
+    // const cardGridPicture = this._element.querySelector('.card-grid__picture');
+    const cardGridPicture = this.element.querySelector('.card-grid__picture');
+    // const cardGridText = this._element.querySelector('.card-grid__text');
+    const cardGridText = this.element.querySelector('.card-grid__text');
+    // const cardGridLikes = this._element.querySelector('.card-grid__likes');
+    const cardGridLikes = this.element.querySelector('.card-grid__likes');
     cardGridPicture.src = this._link;
     cardGridPicture.alt = this._name;
     for (let i = 0; i < this._likes.length; i++) {
@@ -63,7 +71,8 @@ class Card {
       }
     }
 
-    const cardCan = this._element.querySelector('.card-grid__garbage');
+    // const cardCan = this._element.querySelector('.card-grid__garbage');
+    const cardCan = this.element.querySelector('.card-grid__garbage');
     if (this._ownerId != this._userId) {
       cardCan.classList.add('card-grid__garbage-invisible');
     }
@@ -71,7 +80,8 @@ class Card {
     cardGridText.textContent = this._name;
     cardGridLikes.textContent = this._likes.length;
     this._setEventListeners();
-    return this._element;
+    // return this._element;
+    return this.element;
   }
 }
 

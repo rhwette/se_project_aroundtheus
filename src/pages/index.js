@@ -27,12 +27,14 @@ const userInfo = new UserInfo(selectors);
 const confirmDeletePopup = new PopupWithForm({
   popupSelector: selectors.confirmPopup,
   handleFormSubmit: () => {
-    const cardElement = confirmDeletePopup._currentCardElement;
+    // const cardElement = confirmDeletePopup._currentCardElement;
+    const cardElement = confirmDeletePopup.currentCardElement;
     cardElement.api
       .removeCard(cardElement._id)
       .then((res) => {
         confirmDeletePopup.close();
-        cardElement._element.remove();
+        // cardElement._element.remove();
+        cardElement.element.remove();
       })
       .catch((err) => {
         console.log('error=getCardList', err);
@@ -82,14 +84,16 @@ const renderCard = (data) => {
     userInfo._userId,
     {
       handleCan: function () {
-        confirmDeletePopup._currentCardElement = cardElement;
+        // confirmDeletePopup._currentCardElement = cardElement;
+        confirmDeletePopup.currentCardElement = cardElement;
         confirmDeletePopup.open(cardElement);
       },
     },
     {
       handleHeart: function (event) {
         const cardGridLikes =
-          cardElement._element.querySelector('.card-grid__likes');
+          // cardElement._element.querySelector('.card-grid__likes');
+          cardElement.element.querySelector('.card-grid__likes');
         if (event.target.classList.length === 1) {
           // cardElement._api
           cardElement.api
