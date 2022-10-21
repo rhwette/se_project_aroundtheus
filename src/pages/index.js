@@ -42,8 +42,6 @@ const confirmDeletePopup = new PopupWithForm({
     })
     confirmDeletePopup.setEventListeners();
 
-
-
   //SHOW LIST OF CARDS FROM SERVER
 //GET USER INFO and CARDS from SERVER using Promise.all
 
