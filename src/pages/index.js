@@ -28,7 +28,7 @@ const confirmDeletePopup = new PopupWithForm({
   popupSelector: selectors.confirmPopup,
   handleFormSubmit: () => {
     const cardElement = confirmDeletePopup._currentCardElement;
-    cardElement._api
+    cardElement.api
       .removeCard(cardElement._id)
       .then((res) => {
         confirmDeletePopup.close();
@@ -52,7 +52,6 @@ Promise.all([api.getUserInfo(), api.getCardList()])
       userData.avatar,
       userData._id
     );
-
     cardsSection = new Section(
       {
         data: cardsFromServer,
@@ -92,26 +91,24 @@ const renderCard = (data) => {
         const cardGridLikes =
           cardElement._element.querySelector('.card-grid__likes');
         if (event.target.classList.length === 1) {
-          cardElement._api
+          // cardElement._api
+          cardElement.api
             .addLike(cardElement._id)
             .then((res) => {
-              if (res.ok === true && res.status === 200) {
-                event.target.classList.add('card-grid__icon_active');
-                cardElement._likes.length = cardElement._likes.length + 1;
-              }
+              event.target.classList.add('card-grid__icon_active');
+              cardElement._likes.length = cardElement._likes.length + 1;
               cardGridLikes.textContent = this._likes.length;
             })
             .catch((err) => {
               console.log('error=', err);
             });
         } else {
-          cardElement._api
+          // cardElement._api
+          cardElement.api
             .removeLike(cardElement._id)
             .then((res) => {
-              if (res.ok === true && res.status === 200) {
-                event.target.classList.remove('card-grid__icon_active');
-                cardElement._likes.length = cardElement._likes.length - 1;
-              }
+              event.target.classList.remove('card-grid__icon_active');
+              cardElement._likes.length = cardElement._likes.length - 1;
               cardGridLikes.textContent = cardElement._likes.length;
             })
             .catch((err) => {

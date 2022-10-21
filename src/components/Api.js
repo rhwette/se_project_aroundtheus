@@ -1,14 +1,11 @@
 class Api {
-  constructor({ baseUrl, authToken, user_Id }) {
-    // constructor({ baseUrl, authToken, owner_Id}) {
-    // constructor({ baseUrl, authToken}) {
+  constructor({ baseUrl, authToken }) {
     this._baseUrl = baseUrl;
     this._authToken = authToken;
     this._headers = {
       authorization: this._authToken,
       'Content-type': 'application/json',
     };
-    this._user_Id = user_Id;
   }
 
   _checkResponse(res) {

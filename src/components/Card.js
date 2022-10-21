@@ -7,7 +7,7 @@ class Card {
     { handleCan },
     { handleHeart }
   ) {
-    this._api = api;
+    this.api = api;
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
