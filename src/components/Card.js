@@ -1,6 +1,12 @@
-
 class Card {
-    constructor({ data, handleZoom }, cardSelector, api, userId, {handleCan}, {handleHeart}) {
+  constructor(
+    { data, handleZoom },
+    cardSelector,
+    api,
+    userId,
+    { handleCan },
+    { handleHeart }
+  ) {
     this._api = api;
     this._name = data.name;
     this._link = data.link;
@@ -13,12 +19,11 @@ class Card {
     this._handleHeart = handleHeart.bind(this);
     this._handleZoom = handleZoom.bind(this);
   }
- 
 
   _getTemplate() {
     const cardElement = document
       .querySelector(`#${this._cardSelector}`)
-      .content.querySelector(".card-grid__style")
+      .content.querySelector('.card-grid__style')
       .cloneNode(true);
     return cardElement;
   }
@@ -26,41 +31,41 @@ class Card {
   _setEventListeners() {
     // EVENT LISTENER - HEART
     this._element
-      .querySelector(".card-grid__icon")
-      .addEventListener("click", this._handleHeart);
+      .querySelector('.card-grid__icon')
+      .addEventListener('click', this._handleHeart);
 
     // EVENT LISTENER - GARBAGE CAN
     this._element
-      .querySelector(".card-grid__garbage")
-      .addEventListener("click", this._handleCan);
+      .querySelector('.card-grid__garbage')
+      .addEventListener('click', this._handleCan);
 
     // EVENT LISTENER - IMG TAG
     this._element
-      .querySelector("img")
-      .addEventListener("click", this._handleZoom);
+      .querySelector('img')
+      .addEventListener('click', this._handleZoom);
   }
 
   //CREATE CARD
   createCard() {
-    if(this._likes === undefined){
+    if (this._likes === undefined) {
       this._likes = [];
     }
     this._element = this._getTemplate();
-    const cardHeart = this._element.querySelector(".card-grid__icon");
-    const cardGridPicture = this._element.querySelector(".card-grid__picture");
-    const cardGridText = this._element.querySelector(".card-grid__text");
-    const cardGridLikes = this._element.querySelector(".card-grid__likes");
+    const cardHeart = this._element.querySelector('.card-grid__icon');
+    const cardGridPicture = this._element.querySelector('.card-grid__picture');
+    const cardGridText = this._element.querySelector('.card-grid__text');
+    const cardGridLikes = this._element.querySelector('.card-grid__likes');
     cardGridPicture.src = this._link;
     cardGridPicture.alt = this._name;
-    for(let i = 0; i < this._likes.length; i++) {
-          if(this._likes[i]._id === this._userId) {
-        cardHeart.classList.add("card-grid__icon_active");
+    for (let i = 0; i < this._likes.length; i++) {
+      if (this._likes[i]._id === this._userId) {
+        cardHeart.classList.add('card-grid__icon_active');
       }
     }
-    
-    const cardCan = this._element.querySelector(".card-grid__garbage");
-      if (this._ownerId != this._userId) {
-      cardCan.classList.add("card-grid__garbage-invisible");
+
+    const cardCan = this._element.querySelector('.card-grid__garbage');
+    if (this._ownerId != this._userId) {
+      cardCan.classList.add('card-grid__garbage-invisible');
     }
 
     cardGridText.textContent = this._name;
