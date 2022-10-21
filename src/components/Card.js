@@ -11,7 +11,8 @@ class Card {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
-    this._userId = userId;
+    // this._userId = userId;
+    this.userId = userId;
     this._ownerId = data.owner._id;
     this._id = data._id;
     this._cardSelector = cardSelector;
@@ -66,14 +67,16 @@ class Card {
     cardGridPicture.src = this._link;
     cardGridPicture.alt = this._name;
     for (let i = 0; i < this._likes.length; i++) {
-      if (this._likes[i]._id === this._userId) {
+      // if (this._likes[i]._id === this._userId) {
+      if (this._likes[i]._id === this.userId) {
         cardHeart.classList.add('card-grid__icon_active');
       }
     }
 
     // const cardCan = this._element.querySelector('.card-grid__garbage');
     const cardCan = this.element.querySelector('.card-grid__garbage');
-    if (this._ownerId != this._userId) {
+    // if (this._ownerId != this._userId) {
+    if (this._ownerId != this.userId) {
       cardCan.classList.add('card-grid__garbage-invisible');
     }
 

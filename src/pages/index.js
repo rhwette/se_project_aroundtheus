@@ -48,6 +48,7 @@ confirmDeletePopup.setEventListeners();
 
 Promise.all([api.getUserInfo(), api.getCardList()])
   .then(([userData, cardsFromServer]) => {
+    console.log('userInfo=', userInfo);
     userInfo.setUserInfo(
       userData.name,
       userData.about,
@@ -81,7 +82,10 @@ const renderCard = (data) => {
     },
     selectors.cardTemplate,
     api,
-    userInfo._userId,
+    // userInfo._userId,
+    // NOTE....on the server, the userId variable is denoted as 'userId= undefined"
+    //         but it has the value of my user ID
+    userInfo.userId,
     {
       handleCan: function () {
         // confirmDeletePopup._currentCardElement = cardElement;
