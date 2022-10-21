@@ -77,9 +77,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
       method: 'PUT',
       headers: this._headers,
-    });
-
-    //   .then(this._checkResponse)
+    }).then(this._checkResponse);
   }
 
   // remove a like from a card
@@ -88,8 +86,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
       method: 'DELETE',
       headers: this._headers,
-    });
-    // .then(this._checkResponse)
+    }).then(this._checkResponse);
   }
 
   // add new avatar
