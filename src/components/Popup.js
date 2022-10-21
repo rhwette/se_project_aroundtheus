@@ -11,7 +11,6 @@ class Popup {
       this._closePopupWithRemoteClick.bind(this);
     this._closePopupWithEscape = this._closePopupWithEscape.bind(this);
     this.open = this.open.bind(this);
-    // this.setEventListeners = this.setEventListeners.bind(this);
   }
 
   setEventListeners() {
@@ -24,8 +23,6 @@ class Popup {
 
   open() {
     this._popupElement.classList.add("popup_visible");
-    //code 02   move to index.js
-    // this.setEventListeners();
     document.addEventListener("keydown", this._closePopupWithEscape);
   }
 

@@ -1,29 +1,10 @@
-// const buttonConfirm = document.querySelector(".popup__container-button_confirm");
-// const btn = document.getElementById("buttonConfirmDeleteYes");
-
-// const userId = "3f769460ee50cd15e754d8b8";
-
 
 class Card {
     constructor({ data, handleZoom }, cardSelector, api, userId, {handleCan}, {handleHeart}) {
-      // constructor({ data, handleZoom }, cardSelector, api, {handleCan}, {handleHeart}) {
     this._api = api;
     this._name = data.name;
-    // this._btn = btn;
-    // this._about = data.about;
     this._link = data.link;
     this._likes = data.likes;
-    // this._ownerId = data.owner._id;
-    // this._ownerId = data.owner_id;
-    // this._myOwnerId = data.owner_id;
-    // this._myOwnerId = myOwnerId;
-    // this._userId = userData_id;
-    // NOTE: userId is either hard-coded or gotten from server ONE time at the beginning
-    //     see index.js 'api.getUserInfo' line 36-48
-    // NOTE: ownerId = ?? is the owner Id of the card which may or may not = userId
-
-
-    // this._userId = userData._id;
     this._userId = userId;
     this._ownerId = data.owner._id;
     this._id = data._id;
@@ -31,7 +12,6 @@ class Card {
     this._handleCan = handleCan.bind(this);
     this._handleHeart = handleHeart.bind(this);
     this._handleZoom = handleZoom.bind(this);
-    console.log('this._userId=', this._userId);
   }
  
 
@@ -73,19 +53,13 @@ class Card {
     cardGridPicture.src = this._link;
     cardGridPicture.alt = this._name;
     for(let i = 0; i < this._likes.length; i++) {
-            // console.log('this._ownerId=',this._ownerId);
-            // console.log('this._userId=',this._userId);
-        // if(this._likes[i]._id === this._myOwnerId) { 
           if(this._likes[i]._id === this._userId) {
         cardHeart.classList.add("card-grid__icon_active");
       }
     }
     
     const cardCan = this._element.querySelector(".card-grid__garbage");
-    // if (this._ownerId != this._myOwnerId) {
       if (this._ownerId != this._userId) {
-      console.log('this._ownerId=',this._ownerId);
-      console.log('this._userId=',this._userId);
       cardCan.classList.add("card-grid__garbage-invisible");
     }
 

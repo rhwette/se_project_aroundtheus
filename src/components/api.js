@@ -8,13 +8,7 @@ class Api {
             authorization: this._authToken,
             "Content-type": "application/json"
         }
-        // this._owner_Id = owner_Id;
         this._user_Id = user_Id;
-        console.log('baseUrl', baseUrl);
-        console.log('authToken', authToken);
-        // console.log('owner_Id', owner_Id);
-        // console.log('user_Id', user_Id);
-
     }
 
 
