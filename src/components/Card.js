@@ -31,10 +31,19 @@ class Card {
 
   _setEventListeners() {
     // EVENT LISTENER - HEART
-    // this._element
+
+    // NOTE per line 104 suggestion
+    //  recast the listener for the heart
+    // from ............
+    // this.element
+    //   .querySelector('.card-grid__icon')
+    //   .addEventListener('click', this._handleHeart);
+    // to..........
     this.element
       .querySelector('.card-grid__icon')
-      .addEventListener('click', this._handleHeart);
+      .addEventListener('click', () => {
+        this._handleHeart(this);
+      });
 
     // EVENT LISTENER - GARBAGE CAN
     // this._element
