@@ -27,13 +27,11 @@ const userInfo = new UserInfo(selectors);
 const confirmDeletePopup = new PopupWithForm({
   popupSelector: selectors.confirmPopup,
   handleFormSubmit: () => {
-    // const cardElement = confirmDeletePopup._currentCardElement;
     const cardElement = confirmDeletePopup.currentCardElement;
     cardElement.api
       .removeCard(cardElement._id)
       .then((res) => {
         confirmDeletePopup.close();
-        // cardElement._element.remove();
         cardElement.element.remove();
       })
       .catch((err) => {
@@ -48,7 +46,6 @@ confirmDeletePopup.setEventListeners();
 
 Promise.all([api.getUserInfo(), api.getCardList()])
   .then(([userData, cardsFromServer]) => {
-    console.log('userInfo=', userInfo);
     userInfo.setUserInfo(
       userData.name,
       userData.about,
@@ -68,10 +65,11 @@ Promise.all([api.getUserInfo(), api.getCardList()])
     console.log(err);
   });
 
-//  newCardPopup and handleZoom
+//  newCardPopup
 const newCardPopup = new PopupWithImage(selectors.previewPopup);
 newCardPopup.setEventListeners();
 
+//  renderCard, including handleZoom, handleCan, handleHeart
 const renderCard = (data) => {
   const cardElement = new Card(
     {
@@ -82,13 +80,9 @@ const renderCard = (data) => {
     },
     selectors.cardTemplate,
     api,
-    // userInfo._userId,
-    // NOTE....on the server, the userId variable is denoted as 'userId= undefined"
-    //         but it has the value of my user ID
     userInfo.userId,
     {
       handleCan: function () {
-        // confirmDeletePopup._currentCardElement = cardElement;
         confirmDeletePopup.currentCardElement = cardElement;
         confirmDeletePopup.open(cardElement);
       },

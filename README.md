@@ -1,6 +1,6 @@
 # Project Name: Around the U.S.
 
-        Practicum-Yandex, Web-Project 9, Sprint 9, Oct 20, 2022
+        Practicum-Yandex, Web-Project 9, Sprint 9, Oct 23, 2022
         Project 9 final before submit 2
 
 ### Description
@@ -33,5 +33,4 @@
 - add hyperlinks to photos to describe locations
 - privacy statement and "contact us" button in footer
 - link to github page....
-https://github.com/rhwette/se_project_aroundtheus.git
-
+  https://github.com/rhwette/se_project_aroundtheus.git
