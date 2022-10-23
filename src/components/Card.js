@@ -39,6 +39,9 @@ class Card {
     //   .querySelector('.card-grid__icon')
     //   .addEventListener('click', this._handleHeart);
     // to..........
+    // console.log('this=', this);
+    // console.log('this.element=', this.element);
+    // console.log('this.element.classList=', this.element.classList);
     this.element
       .querySelector('.card-grid__icon')
       .addEventListener('click', () => {
