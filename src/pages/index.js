@@ -95,34 +95,25 @@ const renderCard = (data) => {
     },
     {
       handleHeart: function (card) {
-        const cardGridLikes =
-          // cardElement._element.querySelector('.card-grid__likes');
-          card.element.querySelector('.card-grid__likes');
-        if (card.element.classList.length === 1) {
-          console.log('card=', card);
-          console.log('card.element=', card.element);
-          console.log('card.element.classList=', card.element.classList);
-          console.log('card._id=', card._id);
-          console.log('card._ownerId=', card._ownerId);
+        const cardGridLikes = card.element.querySelector('.card-grid__likes');
+        const cardGridHeart = card.element.querySelector('.card-grid__icon');
+        if (cardGridHeart.classList.length === 1) {
           api
             .addLike(card._id)
             .then((res) => {
-              card.element.classList.add('card-grid__icon_active');
-              console.log('card.element=', card.element);
-              console.log('card.element.classList=', card.element.classList);
-              card._likes.length = card._likes.length + 1;
-              cardGridLikes.textContent = this._likes.length;
+              cardGridHeart.classList.add('card-grid__icon_active');
+              card._likes = res.likes;
+              cardGridLikes.textContent = card._likes.length;
             })
             .catch((err) => {
               console.log('error=', err);
             });
         } else {
-          // cardElement._api
           api
             .removeLike(card._id)
             .then((res) => {
-              card.target.classList.remove('card-grid__icon_active');
-              card._likes.length = card._likes.length - 1;
+              cardGridHeart.classList.remove('card-grid__icon_active');
+              card._likes = res.likes;
               cardGridLikes.textContent = card._likes.length;
             })
             .catch((err) => {
