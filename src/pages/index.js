@@ -89,15 +89,13 @@ const renderCard = (data) => {
     },
     {
       handleHeart: function (card) {
-        const cardGridLikes = card.element.querySelector('.card-grid__likes');
-        const cardGridHeart = card.element.querySelector('.card-grid__icon');
-        if (cardGridHeart.classList.length === 1) {
+        if (card.cardGridHeart.classList.length === 1) {
           api
             .addLike(card._id)
             .then((res) => {
-              cardGridHeart.classList.add('card-grid__icon_active');
-              card._likes = res.likes;
-              cardGridLikes.textContent = card._likes.length;
+              card.cardGridHeart.classList.add('card-grid__icon_active');
+              card.likes = res.likes;
+              card.cardGridLikes.textContent = card.likes.length;
             })
             .catch((err) => {
               console.log('error=', err);
@@ -106,9 +104,9 @@ const renderCard = (data) => {
           api
             .removeLike(card._id)
             .then((res) => {
-              cardGridHeart.classList.remove('card-grid__icon_active');
-              card._likes = res.likes;
-              cardGridLikes.textContent = card._likes.length;
+              card.cardGridHeart.classList.remove('card-grid__icon_active');
+              card.likes = res.likes;
+              card.cardGridLikes.textContent = card.likes.length;
             })
             .catch((err) => {
               console.log('error=', err);
@@ -127,7 +125,7 @@ let cardsSection;
 const newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
   handleFormSubmit: (newCardInfo) => {
-    btnNewPlaceCreate.innerText = 'Creating';
+    btnNewPlaceCreate.innerText = 'Creating...';
     api
       .addCard(newCardInfo)
       .then((res) => {
@@ -148,7 +146,7 @@ newPlacePopup.setEventListeners();
 const editProfilePopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (newUserData) => {
-    btnEditProfileSave.innerText = 'Saving';
+    btnEditProfileSave.innerText = 'Saving...';
     const name = newUserData.name;
     const about = newUserData.about;
     const avatar = newUserData.avatar;
@@ -172,7 +170,7 @@ editProfilePopup.setEventListeners();
 const editAvatarPopup = new PopupWithForm({
   popupSelector: selectors.avatarPopup,
   handleFormSubmit: (avatarLink) => {
-    btnEditAvatarSave.innerText = 'Saving';
+    btnEditAvatarSave.innerText = 'Saving...';
     api
       .addAvatar(avatarLink)
       .then((res) => {
@@ -191,6 +189,7 @@ editAvatarPopup.setEventListeners();
 
 function renderAvatar({ avatarLink }) {
   userInfo._avatarElement.src = avatarLink;
+  console.log('avatarLink=', avatarLink);
 }
 
 function fillProfileForm() {

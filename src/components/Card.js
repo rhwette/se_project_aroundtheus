@@ -1,3 +1,6 @@
+// const cardGridLikes = card.element.querySelector('.card-grid__likes');
+// const cardGridHeart = card.element.querySelector('.card-grid__icon');
+
 class Card {
   constructor(
     { data, handleZoom },
@@ -10,7 +13,7 @@ class Card {
     this.api = api;
     this._name = data.name;
     this._link = data.link;
-    this._likes = data.likes;
+    this.likes = data.likes;
     this.userId = userId;
     this._ownerId = data.owner._id;
     this._id = data._id;
@@ -18,6 +21,10 @@ class Card {
     this._handleCan = handleCan.bind(this);
     this._handleHeart = handleHeart.bind(this);
     this._handleZoom = handleZoom.bind(this);
+    // this.cardGridLikes = null;
+    // this.cardGridHeart = null;
+    // this.cardGridLikes = card.element.querySelector('.card-grid__likes');
+    // this.cardGridHeart = card.element.querySelector('.card-grid__icon');
   }
 
   _getTemplate() {
@@ -49,19 +56,20 @@ class Card {
 
   //CREATE CARD
   createCard() {
-    if (this._likes === undefined) {
-      this._likes = [];
+    if (this.likes === undefined) {
+      this.likes = [];
     }
     this.element = this._getTemplate();
-    const cardHeart = this.element.querySelector('.card-grid__icon');
+    // const cardHeart = this.element.querySelector('.card-grid__icon');
     const cardGridPicture = this.element.querySelector('.card-grid__picture');
     const cardGridText = this.element.querySelector('.card-grid__text');
-    const cardGridLikes = this.element.querySelector('.card-grid__likes');
+    this.cardGridLikes = this.element.querySelector('.card-grid__likes');
+    this.cardGridHeart = this.element.querySelector('.card-grid__icon');
     cardGridPicture.src = this._link;
     cardGridPicture.alt = this._name;
-    for (let i = 0; i < this._likes.length; i++) {
-      if (this._likes[i]._id === this.userId) {
-        cardHeart.classList.add('card-grid__icon_active');
+    for (let i = 0; i < this.likes.length; i++) {
+      if (this.likes[i]._id === this.userId) {
+        this.cardGridHeart.classList.add('card-grid__icon_active');
       }
     }
 
@@ -71,7 +79,7 @@ class Card {
     }
 
     cardGridText.textContent = this._name;
-    cardGridLikes.textContent = this._likes.length;
+    this.cardGridLikes.textContent = this.likes.length;
     this._setEventListeners();
     return this.element;
   }
