@@ -46,12 +46,19 @@ confirmDeletePopup.setEventListeners();
 
 Promise.all([api.getUserInfo(), api.getCardList()])
   .then(([userData, cardsFromServer]) => {
-    userInfo.setUserInfo(
-      userData.name,
-      userData.about,
-      userData.avatar,
-      userData._id
-    );
+    // userInfo.setUserInfo(
+    //   userData.name,
+    //   userData.about,
+    //   userData.avatar,
+    //   userData._id
+    // );
+    // from Max video
+    userInfo.setUserInfo({
+      name: userData.name,
+      about: userData.about,
+      avatar: userData.avatar,
+      user_id: userData._id,
+    });
     cardsSection = new Section(
       {
         data: cardsFromServer,
@@ -153,7 +160,14 @@ const editProfilePopup = new PopupWithForm({
     api
       .addUserInfo({ name, about })
       .then((res) => {
-        userInfo.setUserInfo(res.name, res.about, res.avatar, res._id);
+        // userInfo.setUserInfo(res.name, res.about, res.avatar, res._id);
+        //from Max video
+        userInfo.setUserInfo({
+          name: res.name,
+          about: res.about,
+          avatar: res.avatar,
+          user_id: res._id,
+        });
         editProfilePopup.close();
       })
       .catch((err) => {
@@ -187,9 +201,14 @@ const editAvatarPopup = new PopupWithForm({
 });
 editAvatarPopup.setEventListeners();
 
+// function renderAvatar({ avatarLink }) {
+//   userInfo._avatarElement.src = avatarLink;
+//   // console.log('avatarLink=', avatarLink);
+// }
+
+// from Max video
 function renderAvatar({ avatarLink }) {
-  userInfo._avatarElement.src = avatarLink;
-  console.log('avatarLink=', avatarLink);
+  userInfo.setUserInfo({ avatar: avatarLink });
 }
 
 function fillProfileForm() {

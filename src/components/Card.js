@@ -1,6 +1,3 @@
-// const cardGridLikes = card.element.querySelector('.card-grid__likes');
-// const cardGridHeart = card.element.querySelector('.card-grid__icon');
-
 class Card {
   constructor(
     { data, handleZoom },
@@ -21,10 +18,6 @@ class Card {
     this._handleCan = handleCan.bind(this);
     this._handleHeart = handleHeart.bind(this);
     this._handleZoom = handleZoom.bind(this);
-    // this.cardGridLikes = null;
-    // this.cardGridHeart = null;
-    // this.cardGridLikes = card.element.querySelector('.card-grid__likes');
-    // this.cardGridHeart = card.element.querySelector('.card-grid__icon');
   }
 
   _getTemplate() {
@@ -60,7 +53,6 @@ class Card {
       this.likes = [];
     }
     this.element = this._getTemplate();
-    // const cardHeart = this.element.querySelector('.card-grid__icon');
     const cardGridPicture = this.element.querySelector('.card-grid__picture');
     const cardGridText = this.element.querySelector('.card-grid__text');
     this.cardGridLikes = this.element.querySelector('.card-grid__likes');

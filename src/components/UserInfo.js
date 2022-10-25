@@ -16,12 +16,20 @@ export default class UserInfo {
     return userInfo;
   }
 
-  setUserInfo(name, about, avatar, userId) {
-    this._nameElement.textContent = name;
-    this._aboutElement.textContent = about;
-    if (avatar != undefined) {
-      this._avatarElement.src = avatar;
-    }
-    this.userId = userId;
+  // setUserInfo(name, about, avatar, userId) {
+  //   this._nameElement.textContent = name;
+  //   this._aboutElement.textContent = about;
+  //   if (avatar != undefined) {
+  //     this._avatarElement.src = avatar;
+  //   }
+  //   this.userId = userId;
+  // }
+
+  //from Max video
+  setUserInfo({ name, about, avatar, userId }) {
+    if (name) this._nameElement.textContent = name;
+    if (about) this._aboutElement.textContent = about;
+    if (avatar) this._avatarElement.src = avatar;
+    if (userId) this.userId = userId;
   }
 }
