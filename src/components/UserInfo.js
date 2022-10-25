@@ -25,7 +25,7 @@ export default class UserInfo {
   //   this.userId = userId;
   // }
 
-  //from Max video
+  //from Max video     https://share.cleanshot.com/7dAMUZ
   setUserInfo({ name, about, avatar, userId }) {
     if (name) this._nameElement.textContent = name;
     if (about) this._aboutElement.textContent = about;

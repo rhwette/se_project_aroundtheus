@@ -52,7 +52,7 @@ Promise.all([api.getUserInfo(), api.getCardList()])
     //   userData.avatar,
     //   userData._id
     // );
-    // from Max video
+    // from Max video     https://share.cleanshot.com/7dAMUZ
     userInfo.setUserInfo({
       name: userData.name,
       about: userData.about,
@@ -161,7 +161,7 @@ const editProfilePopup = new PopupWithForm({
       .addUserInfo({ name, about })
       .then((res) => {
         // userInfo.setUserInfo(res.name, res.about, res.avatar, res._id);
-        //from Max video
+        //from Max video     https://share.cleanshot.com/7dAMUZ
         userInfo.setUserInfo({
           name: res.name,
           about: res.about,
@@ -206,7 +206,7 @@ editAvatarPopup.setEventListeners();
 //   // console.log('avatarLink=', avatarLink);
 // }
 
-// from Max video
+// from Max video     https://share.cleanshot.com/7dAMUZ
 function renderAvatar({ avatarLink }) {
   userInfo.setUserInfo({ avatar: avatarLink });
 }
