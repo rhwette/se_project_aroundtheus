@@ -30,12 +30,10 @@ class Card {
     return cardElement;
   }
 
-  // put the addLike method inside the Card.js class
   addLike() {
     this.cardGridHeart.classList.add('card-grid__icon_active');
   }
 
-  // put the removeLike method inside the Card.js class
   removeLike() {
     this.cardGridHeart.classList.remove('card-grid__icon_active');
   }
@@ -73,8 +71,6 @@ class Card {
     cardGridPicture.alt = this._name;
     for (let i = 0; i < this.likes.length; i++) {
       if (this.likes[i]._id === this.userId) {
-        //move to the 'addLike' method above
-        // this.cardGridHeart.classList.add('card-grid__icon_active');
         this.addLike();
       }
     }

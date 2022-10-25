@@ -93,8 +93,6 @@ const renderCard = (data) => {
           api
             .addLike(card._id)
             .then((res) => {
-              // move to 'addLike' method inside Card.js
-              // card.cardGridHeart.classList.add('card-grid__icon_active');
               card.addLike();
               card.likes = res.likes;
               card.cardGridLikes.textContent = card.likes.length;
@@ -106,8 +104,6 @@ const renderCard = (data) => {
           api
             .removeLike(card._id)
             .then((res) => {
-              // move to 'removeLike' method inside Card.js
-              // card.cardGridHeart.classList.remove('card-grid__icon_active');
               card.removeLike();
               card.likes = res.likes;
               card.cardGridLikes.textContent = card.likes.length;
