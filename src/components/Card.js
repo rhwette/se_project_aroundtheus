@@ -18,6 +18,8 @@ class Card {
     this._handleCan = handleCan.bind(this);
     this._handleHeart = handleHeart.bind(this);
     this._handleZoom = handleZoom.bind(this);
+    this.addLike = this.addLike.bind(this);
+    this.removeLike = this.removeLike.bind(this);
   }
 
   _getTemplate() {
@@ -26,6 +28,16 @@ class Card {
       .content.querySelector('.card-grid__style')
       .cloneNode(true);
     return cardElement;
+  }
+
+  // put the addLike method inside the Card.js class
+  addLike() {
+    this.cardGridHeart.classList.add('card-grid__icon_active');
+  }
+
+  // put the removeLike method inside the Card.js class
+  removeLike() {
+    this.cardGridHeart.classList.remove('card-grid__icon_active');
   }
 
   _setEventListeners() {
@@ -61,7 +73,9 @@ class Card {
     cardGridPicture.alt = this._name;
     for (let i = 0; i < this.likes.length; i++) {
       if (this.likes[i]._id === this.userId) {
-        this.cardGridHeart.classList.add('card-grid__icon_active');
+        //move to the 'addLike' method above
+        // this.cardGridHeart.classList.add('card-grid__icon_active');
+        this.addLike();
       }
     }
 
