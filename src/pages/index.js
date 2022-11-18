@@ -143,6 +143,7 @@ const newPlacePopup = new PopupWithForm({
 
 newPlacePopup.setEventListeners();
 
+//EDIT PROFILE POPUP
 const editProfilePopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (newUserData) => {
