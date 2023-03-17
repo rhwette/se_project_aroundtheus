@@ -33,6 +33,7 @@ const confirmDeletePopup = new PopupWithForm({
       .then((res) => {
         confirmDeletePopup.close();
         cardElement.element.remove();
+        console.log('card has been removed');
       })
       .catch((err) => {
         console.log('error=getCardList', err);
@@ -125,6 +126,7 @@ let cardsSection;
 const newPlacePopup = new PopupWithForm({
   popupSelector: selectors.placePopup,
   handleFormSubmit: (newCardInfo) => {
+    console.log('xxxxxxx=', newCardInfo);
     btnNewPlaceCreate.innerText = 'Creating...';
     api
       .addCard(newCardInfo)
@@ -161,6 +163,8 @@ const editProfilePopup = new PopupWithForm({
           userId: res._id,
         });
         editProfilePopup.close();
+        console.log('res=', res);
+        console.log('userId  =', res._id);
       })
       .catch((err) => {
         console.log(err);
@@ -173,6 +177,7 @@ const editProfilePopup = new PopupWithForm({
 editProfilePopup.setEventListeners();
 
 //EDIT AVATAR POPUP
+
 const editAvatarPopup = new PopupWithForm({
   popupSelector: selectors.avatarPopup,
   handleFormSubmit: (avatarLink) => {

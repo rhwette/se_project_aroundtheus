@@ -13,6 +13,7 @@ export default class UserInfo {
       userAvatar: this._avatarElement.src,
       userId: this.userId,
     };
+    console.log('userInfo.userId inside UserInfo=', userInfo.userId);
     return userInfo;
   }
 
